@@ -778,3 +778,12 @@ pre.prompt {
   max-width: 44rem;
   color: var(--muted);
 }
+
+.credit .heart {
+  color: var(--accent);
+}
+
+.foot-links .credit {
+  grid-column: 1 / -1;
+  margin: 0;
+}

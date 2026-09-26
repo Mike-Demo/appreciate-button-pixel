@@ -3,6 +3,14 @@
 A running record of the significant changes to this repository, newest first.
 Each entry is written so it can seed a PR description.
 
+## 2026-09-27 — Credit the author in every footer
+
+- "Built with ♥ by Medhat Dawoud", linking to https://medhat.dev, in the
+  footer of the landing page, the leaderboard, every generated page (through
+  the shared layout) and the dashboard, which gets a footer for it.
+- Tests: an integration test for the credit on each kind of page, and the
+  e2e crawl checks it on every public page.
+
 ## 2026-09-27 — Be found for "clap button", "applause button" and "like button"
 
 - **Why:** the landing page had no canonical URL, social tags, structured

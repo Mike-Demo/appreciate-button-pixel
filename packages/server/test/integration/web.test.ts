@@ -156,6 +156,17 @@ describe('web pages', () => {
     ).not.toThrow();
   });
 
+  it.each(['/', '/leaderboard', '/dashboard', '/guides/hugo'])(
+    'credits the author in the footer of %s',
+    async (url) => {
+      const { app } = await context();
+
+      expect((await get(app, url)).body).toMatch(
+        /<p class="credit">[\s\S]*<a href="https:\/\/medhat\.dev">Medhat Dawoud<\/a>/,
+      );
+    },
+  );
+
   it('keeps the dashboard out of search results', async () => {
     const { app } = await context();
 

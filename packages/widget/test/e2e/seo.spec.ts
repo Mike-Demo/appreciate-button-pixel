@@ -28,6 +28,7 @@ interface PageFacts {
   canonical: string | null;
   ogImage: string | null;
   h1s: number;
+  credit: string | null;
   jsonLd: unknown[];
   links: string[];
   problems: string[];
@@ -48,6 +49,7 @@ async function visit(page: Page, path: string): Promise<PageFacts> {
       canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? null,
       ogImage: meta('meta[property="og:image"]'),
       h1s: document.querySelectorAll('h1').length,
+      credit: document.querySelector<HTMLAnchorElement>('footer .credit a')?.href ?? null,
       jsonLd: Array.from(
         document.querySelectorAll('script[type="application/ld+json"]'),
         (script) => JSON.parse(script.textContent ?? '') as unknown,
@@ -101,6 +103,7 @@ test('every page linked from the home page is whole, distinct and says where it 
     expect(facts.description?.length ?? 0, where).toBeGreaterThan(50);
     expect(facts.canonical, where).toBe(`${SITE_ORIGIN}${where}`);
     expect(facts.ogImage, where).toBe(`${SITE_ORIGIN}/img/og.png`);
+    expect(facts.credit, where).toBe('https://medhat.dev/');
   }
   const all = [...pages.values()];
   expect(new Set(all.map((facts) => facts.title)).size).toBe(all.length);
