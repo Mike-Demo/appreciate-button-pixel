@@ -3,13 +3,55 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Appreciator — a tiny appreciate button for any site</title>
+    <title>Appreciator — open-source clap &amp; like button for any website</title>
     <meta
       name="description"
-      content="A self-hostable appreciate button: one script tag, an SVG that fills up as visitors click, counts per page, no cookies. Open source."
+      content="Add a Medium-style clap, applause or like button to any website with one script tag. Counts per page, several claps per reader, no cookies. Free, open source and self-hostable."
     />
+    <link rel="canonical" href="https://appreciator.medhat.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Appreciator" />
+    <meta
+      property="og:title"
+      content="Appreciator — open-source clap &amp; like button for any website"
+    />
+    <meta
+      property="og:description"
+      content="Add a Medium-style clap, applause or like button to any website with one script tag. Counts per page, several claps per reader, no cookies. Free, open source and self-hostable."
+    />
+    <meta property="og:url" content="https://appreciator.medhat.dev/" />
+    <meta property="og:image" content="https://appreciator.medhat.dev/img/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Appreciator: an open-source clap and like button" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="img/heart.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://appreciator.medhat.dev/#website",
+            "url": "https://appreciator.medhat.dev/",
+            "name": "Appreciator"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://appreciator.medhat.dev/#software",
+            "name": "Appreciator",
+            "description": "An embeddable clap, applause and like button for any website: one script tag, counts per page, several claps per reader, no cookies. Hosted or self-hosted.",
+            "url": "https://appreciator.medhat.dev/",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "license": "https://opensource.org/licenses/MIT",
+            "sameAs": ["https://github.com/medhatdawoud/appreciator"]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="top">
@@ -19,6 +61,7 @@
       </a>
       <nav class="nav">
         <a href="#install">Install</a>
+        <a href="guides/">Guides</a>
         <a href="#customise">Customise</a>
         <a href="#how">How it works</a>
         <a href="#multiple">Multiple buttons</a>
@@ -34,11 +77,12 @@
     <main>
       <section class="hero">
         <div class="hero-text">
-          <p class="eyebrow">Open source · self-hosted · one tag</p>
-          <h1>A tiny <em>appreciate</em> button for any page.</h1>
+          <p class="eyebrow">Clap · applause · like button · open source · one tag</p>
+          <h1>A tiny <em>clap</em> button for any page.</h1>
           <p class="lead">
-            Visitors click an icon that fills up as they go. Counts are kept per page, capped per
-            visitor, and stored on a server you run. No cookies, no accounts, no tracking pixels.
+            A Medium-style clap, applause or like button for your blog or site. Visitors click an
+            icon that fills up as they go. Counts are kept per page and capped per visitor, on the
+            hosted instance or a server you run. No cookies, no accounts, no tracking pixels.
           </p>
           <div class="cta-row">
             <a
@@ -116,6 +160,23 @@
           <pre class="prompt"><code data-agent-prompt>Loading the prompt…</code></pre>
           <button class="copy" type="button" data-copy="[data-agent-prompt]">Copy</button>
         </div>
+      </section>
+
+      <section id="works-with" class="section">
+        <h2>Works with your platform</h2>
+        <p>
+          Step-by-step guides with the exact file to edit, for a like or clap button on every post:
+        </p>
+        <ul class="guide-list">
+          <li><a href="guides/html">Plain HTML</a></li>
+          <li><a href="guides/wordpress">WordPress</a></li>
+          <li><a href="guides/ghost">Ghost</a></li>
+          <li><a href="guides/hugo">Hugo</a></li>
+          <li><a href="guides/jekyll">Jekyll and GitHub Pages</a></li>
+          <li><a href="guides/eleventy">Eleventy</a></li>
+          <li><a href="guides/astro">Astro</a></li>
+          <li><a href="guides/nextjs">Next.js and React</a></li>
+        </ul>
       </section>
 
       <section id="customise" class="section">
@@ -361,6 +422,44 @@ appreciator-button {
           </article>
         </div>
       </section>
+
+      <section id="faq" class="section">
+        <h2>Questions</h2>
+        <div class="faq">
+          <h3>Is it like Medium's clap button?</h3>
+          <p>
+            Yes: readers can clap several times, and each clap fills the icon a little more. Medium
+            allows 50 claps per story; here you choose the limit per button, from 1 to 1,000.
+            <a href="alternatives/medium-claps">More on Medium claps</a>.
+          </p>
+          <h3>Can it be a plain like button?</h3>
+          <p>
+            Set a button to one click per visitor and it is a classic like button. See the
+            <a href="like-button">like button</a> page.
+          </p>
+          <h3>Does it use cookies?</h3>
+          <p>
+            No. Visitors are told apart by a keyed hash of IP address and browser, which is never
+            stored as is. The widget keeps a small cache of counts in <code>localStorage</code> so
+            the page does not flash.
+          </p>
+          <h3>Do I need to run a server?</h3>
+          <p>
+            No. Sign in with GitHub on the hosted instance and create a button. If you would rather
+            keep the data yourself, the same server runs anywhere with Node.js and MySQL.
+          </p>
+          <h3>I used the Applause Button. Can I switch?</h3>
+          <p>
+            Its free hosted service no longer runs. Replacing its tags with one Appreciator tag is
+            most of the move. <a href="alternatives/applause-button">How to switch</a>.
+          </p>
+          <h3>Does it work with single-page apps?</h3>
+          <p>
+            Yes. The button notices client-side navigation and loads the new page's count by itself,
+            in React, Next.js, Astro and the rest.
+          </p>
+        </div>
+      </section>
     </main>
 
     <footer class="foot">
@@ -376,6 +475,11 @@ appreciator-button {
         <a data-readme-link href="https://github.com/medhatdawoud/appreciator#readme"
           >Read the docs</a
         >
+      </p>
+      <p>
+        <a href="clap-button">Clap button</a> · <a href="applause-button">Applause button</a> ·
+        <a href="like-button">Like button</a> · <a href="guides/">Guides</a> ·
+        <a href="alternatives/">Compare</a>
       </p>
     </footer>
 

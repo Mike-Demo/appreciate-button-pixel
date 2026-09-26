@@ -767,3 +767,14 @@ pre.prompt {
   font-weight: 600;
   color: var(--text);
 }
+
+.faq h3 {
+  margin: 1.5rem 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.faq p {
+  margin: 0;
+  max-width: 44rem;
+  color: var(--muted);
+}

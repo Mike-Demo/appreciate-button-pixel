@@ -1,8 +1,9 @@
 import { readFile } from 'node:fs/promises';
 
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 import { API_ORIGIN, FIXTURE_PATH, type E2eFixture } from './constants.js';
+import { watchProblems } from './problems.js';
 
 /**
  * Every demo slot on the page: the hero, the three variants, the four count
@@ -15,36 +16,6 @@ let fixture: E2eFixture;
 test.beforeAll(async () => {
   fixture = JSON.parse(await readFile(FIXTURE_PATH, 'utf8')) as E2eFixture;
 });
-
-interface PageProblems {
-  console: string[];
-  csp: () => Promise<string[]>;
-}
-
-/**
- * Collects everything that would betray a broken page: console errors,
- * uncaught exceptions, and Content-Security-Policy violations, which the
- * browser reports as an event rather than an error.
- */
-async function watchProblems(page: Page): Promise<PageProblems> {
-  const problems: string[] = [];
-  page.on('console', (message) => {
-    if (message.type() === 'error') problems.push(message.text());
-  });
-  page.on('pageerror', (error) => problems.push(error.message));
-  await page.addInitScript(() => {
-    const violations: string[] = [];
-    (window as unknown as { __cspViolations: string[] }).__cspViolations = violations;
-    document.addEventListener('securitypolicyviolation', (event) => {
-      violations.push(`${event.violatedDirective} blocked ${event.blockedURI || 'inline'}`);
-    });
-  });
-  return {
-    console: problems,
-    csp: () =>
-      page.evaluate(() => (window as unknown as { __cspViolations: string[] }).__cspViolations),
-  };
-}
 
 test('renders the live demo under the server CSP with nothing refused', async ({ page }) => {
   const problems = await watchProblems(page);
