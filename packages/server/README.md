@@ -45,7 +45,7 @@ npm run dev -w @appreciator/server       # tsx watch on src/server.ts
 | `WIDGET_BUNDLE_PATH`    | no          | `../widget/dist/widget.js`                    | Built widget bundle served at `GET /widget.js`. Relative paths resolve against the process working directory.                                                         |
 | `GITHUB_CLIENT_ID`      | no          | —                                             | OAuth app client id for "Sign in with GitHub". Set with `GITHUB_CLIENT_SECRET` and `SESSION_SECRET`, or not at all.                                                   |
 | `GITHUB_CLIENT_SECRET`  | no          | —                                             | OAuth app client secret.                                                                                                                                              |
-| `GITHUB_ALLOWED_LOGINS` | no          | —                                             | Comma-separated GitHub logins allowed to sign in, case-insensitive. Empty means nobody.                                                                               |
+| `GITHUB_ALLOWED_LOGINS` | no          | —                                             | Comma-separated GitHub logins allowed to sign in, case-insensitive. `*` allows every GitHub account. Empty means nobody.                                              |
 | `SESSION_SECRET`        | with GitHub | —                                             | HMAC key for session cookies, at least 32 characters. Required when the GitHub variables are set. `openssl rand -hex 32`.                                             |
 | `GITHUB_OAUTH_URL`      | no          | `https://github.com`                          | Base of GitHub's OAuth endpoints (GitHub Enterprise).                                                                                                                 |
 | `GITHUB_API_URL`        | no          | `https://api.github.com`                      | Base of GitHub's REST API.                                                                                                                                            |
@@ -371,9 +371,9 @@ in-memory and per process.
 
 ## Sign in with GitHub
 
-The dashboard signs people in with GitHub. There is no open signup: only the
-logins in `GITHUB_ALLOWED_LOGINS` get an account, and with it empty nobody can
-sign in. Sign-in is off until `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` and
+The dashboard signs people in with GitHub. Only the logins in
+`GITHUB_ALLOWED_LOGINS` get an account, and with it empty nobody can sign in;
+`*` in the list opens sign-in to every GitHub account. Sign-in is off until `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` and
 `SESSION_SECRET` are all set; setting the GitHub variables without a session
 secret of at least 32 characters fails the start.
 

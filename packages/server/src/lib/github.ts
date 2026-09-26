@@ -150,8 +150,14 @@ export async function fetchUser(
   };
 }
 
-/** GitHub logins are case-insensitive, so the comparison is too. */
+/** The allowlist entry that lets any GitHub account sign in, for an instance open to everyone. */
+export const ANY_LOGIN = '*';
+
+/**
+ * GitHub logins are case-insensitive, so the comparison is too. `*` in the
+ * list allows every login; an empty list allows none.
+ */
 export function isLoginAllowed(login: string, allowlist: readonly string[]): boolean {
   const candidate = login.toLowerCase();
-  return allowlist.some((allowed) => allowed.toLowerCase() === candidate);
+  return allowlist.some((allowed) => allowed === ANY_LOGIN || allowed.toLowerCase() === candidate);
 }

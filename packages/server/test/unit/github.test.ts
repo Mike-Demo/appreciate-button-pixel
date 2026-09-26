@@ -162,4 +162,15 @@ describe('isLoginAllowed', () => {
   it('refuses everyone when the allowlist is empty', () => {
     expect(isLoginAllowed('octocat', [])).toBe(false);
   });
+
+  it('lets everyone in when the allowlist has *, alone or among logins', () => {
+    expect(isLoginAllowed('octocat', ['*'])).toBe(true);
+    expect(isLoginAllowed('Anyone-At-All', ['*'])).toBe(true);
+    expect(isLoginAllowed('someone', ['octocat', '*'])).toBe(true);
+  });
+
+  it('treats * only as a whole entry, never as a pattern inside a login', () => {
+    expect(isLoginAllowed('octocat', ['octo*'])).toBe(false);
+    expect(isLoginAllowed('octo*', ['octocat'])).toBe(false);
+  });
 });

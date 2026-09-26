@@ -455,6 +455,9 @@ pointing at your instance:
 - **Adding people**: append their GitHub login to `GITHUB_ALLOWED_LOGINS` and
   redeploy. Removing a login stops new sign-ins; existing sessions last up to
   seven days unless you rotate `SESSION_SECRET`.
+- **Open to everyone**: set `GITHUB_ALLOWED_LOGINS=*` and any GitHub account
+  can sign in and create sites (at most 20 each) and buttons. Their sites
+  appear on the leaderboard unless they opt out.
 
 ## Using the dashboard
 
@@ -739,7 +742,7 @@ dashboard, authenticated by the session cookie instead of a bearer key.
 | `TRUST_PROXY`                         | production  | `false`                                       | `true` behind a proxy you control (Coolify), `false` when directly reachable.                                 |
 | `GITHUB_CLIENT_ID`                    | for sign-in | —                                             | OAuth app client id.                                                                                          |
 | `GITHUB_CLIENT_SECRET`                | for sign-in | —                                             | OAuth app client secret.                                                                                      |
-| `GITHUB_ALLOWED_LOGINS`               | for sign-in | —                                             | Comma-separated GitHub logins that may sign in. Empty means nobody.                                           |
+| `GITHUB_ALLOWED_LOGINS`               | for sign-in | —                                             | Comma-separated GitHub logins that may sign in. `*` means anyone; empty means nobody.                         |
 | `SESSION_SECRET`                      | for sign-in | —                                             | HMAC key for session cookies, ≥32 chars.                                                                      |
 | `MANAGEMENT_SECRET`                   | no          | —                                             | Bearer key for scripts; a tenant named `default` is provisioned for it on start.                              |
 | `DEMO_BUTTON`                         | no          | `true`                                        | Provision the landing page's demo button.                                                                     |

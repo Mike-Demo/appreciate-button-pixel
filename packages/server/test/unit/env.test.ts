@@ -134,6 +134,12 @@ describe('sign-in configuration', () => {
     expect(config.githubAllowedLogins).toEqual(['medhatdawoud', 'octocat']);
   });
 
+  it('keeps * in the allowlist, for an instance open to every GitHub account', () => {
+    const config = loadAppConfig({ ...baseEnv, ...github, GITHUB_ALLOWED_LOGINS: ' * ' });
+
+    expect(config.githubAllowedLogins).toEqual(['*']);
+  });
+
   it('defaults the GitHub endpoints and accepts overrides without a trailing slash', () => {
     expect(loadAppConfig(baseEnv)).toMatchObject({
       githubOAuthUrl: 'https://github.com',
