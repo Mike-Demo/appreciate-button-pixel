@@ -1,0 +1,227 @@
+<!doctype html>
+<!-- Generated from site-pages/clap-button.html by npm run site:pages. Edit that file, not this one. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clap button for your website or blog, Medium-style — Appreciator</title>
+    <meta
+      name="description"
+      content="Add a Medium-style clap button to any website or blog with one script tag. Readers clap several times, counts are kept per page, no cookies. Free and open source."
+    />
+    <link rel="canonical" href="https://appreciator.medhat.dev/clap-button" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Appreciator" />
+    <meta
+      property="og:title"
+      content="Clap button for your website or blog, Medium-style — Appreciator"
+    />
+    <meta
+      property="og:description"
+      content="Add a Medium-style clap button to any website or blog with one script tag. Readers clap several times, counts are kept per page, no cookies. Free and open source."
+    />
+    <meta property="og:url" content="https://appreciator.medhat.dev/clap-button" />
+    <meta property="og:image" content="https://appreciator.medhat.dev/img/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Appreciator: an open-source clap and like button" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="./img/heart.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://appreciator.medhat.dev/clap-button",
+            "url": "https://appreciator.medhat.dev/clap-button",
+            "name": "Clap button for your website or blog, Medium-style — Appreciator",
+            "description": "Add a Medium-style clap button to any website or blog with one script tag. Readers clap several times, counts are kept per page, no cookies. Free and open source.",
+            "isPartOf": { "@id": "https://appreciator.medhat.dev/#website" },
+            "about": { "@id": "https://appreciator.medhat.dev/#software" },
+            "breadcrumb": { "@id": "https://appreciator.medhat.dev/clap-button#breadcrumb" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://appreciator.medhat.dev/clap-button#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Appreciator",
+                "item": "https://appreciator.medhat.dev/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Clap button",
+                "item": "https://appreciator.medhat.dev/clap-button"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="./">
+        <img src="./img/heart.svg" alt="" width="24" height="24" />
+        <span>Appreciator</span>
+      </a>
+      <nav class="nav">
+        <a href="./guides/">Guides</a>
+        <a href="./alternatives/">Compare</a>
+        <a href="./leaderboard" data-leaderboard-link>Most appreciated</a>
+        <a class="nav-github" data-repo-link href="https://github.com/medhatdawoud/appreciator">
+          <img src="./img/github.svg" alt="" width="18" height="18" />
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="./">Appreciator</a></li>
+          <li aria-current="page">Clap button</li>
+        </ol>
+      </nav>
+      <section class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Clap button · open source · one tag</p>
+          <h1>A clap button for your website, the way Medium does it.</h1>
+          <p class="lead">
+            Readers clap as many times as they liked the post, up to a limit you set. Each clap
+            fills the icon a little more, and the count is kept for every page on its own. It works
+            on any site that can take a script tag: a static blog, WordPress, Ghost, or a React app.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" data-signin-link hidden href="#">Sign in with GitHub</a>
+            <a class="btn btn-secondary" href="./guides/">Pick your platform</a>
+          </div>
+        </div>
+        <div class="hero-demo card" data-demo>
+          <p class="demo-label">Clap for this page. Up to ten times.</p>
+          <div class="demo-slot" data-demo-slot="clap-button" data-label="Clap for this page"></div>
+          <p class="demo-hint">
+            Each clap is counted on the server, and the tenth fills the icon. Reload: your claps are
+            still counted, because the limit is kept on the server, not in your browser.
+          </p>
+        </div>
+        <div class="hero-demo card" data-demo-missing hidden>
+          <p class="demo-label">No instance connected</p>
+          <p class="demo-hint">
+            This copy of the page is not connected to a server, so the demo is off.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Add the clap button</h2>
+        <p>
+          Sign in with GitHub, add your site and create a button. You get a key starting with
+          <code>pk_</code>. Put this where the claps should appear, at the end of your post
+          template:
+        </p>
+        <div class="code-block">
+          <pre><code data-instance-snippet id="clap-snippet">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+          <button class="copy" type="button" data-copy="#clap-snippet">Copy</button>
+        </div>
+        <p>
+          One button covers the whole blog: claps are counted per page (its address without the
+          query string), so every post gets its own count without setting anything up. The
+          <a href="./guides/">guides</a> show exactly where the tag goes on each platform.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>How claps work here</h2>
+        <ul class="points">
+          <li>
+            <strong>Several claps per reader.</strong> Ten by default, anything from 1 to 1,000 per
+            button. At one it is a plain like button.
+          </li>
+          <li>
+            <strong>The limit holds.</strong> Readers are told apart by a keyed hash of their IP
+            address and browser, never stored as is. Clearing cookies or storage does not give more
+            claps.
+          </li>
+          <li>
+            <strong>No cookies, no accounts, no tracking.</strong> Nothing to put in a cookie
+            banner.
+          </li>
+          <li>
+            <strong>Your icon.</strong> A heart by default, or any SVG you upload: a hand, a star,
+            your logo. It starts gray and fills with colour from the bottom as the claps add up.
+          </li>
+          <li>
+            <strong>Your data.</strong> Use the hosted instance, or run your own server with MySQL.
+            The code is MIT licensed.
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Coming from Medium?</h2>
+        <p>
+          Medium lets each reader clap up to 50 times, and only for stories on Medium. Here the
+          claps live on your own site and the limit is yours to choose.
+          <a href="./alternatives/medium-claps">How it compares to Medium claps</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot foot-links">
+      <div>
+        <p class="foot-title">The button</p>
+        <ul>
+          <li><a href="./clap-button">Clap button</a></li>
+          <li><a href="./applause-button">Applause button</a></li>
+          <li><a href="./like-button">Like button</a></li>
+          <li><a href="./leaderboard">Most appreciated sites</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Guides</p>
+        <ul>
+          <li><a href="./guides/html">Plain HTML</a></li>
+          <li><a href="./guides/wordpress">WordPress</a></li>
+          <li><a href="./guides/ghost">Ghost</a></li>
+          <li><a href="./guides/hugo">Hugo</a></li>
+          <li><a href="./guides/jekyll">Jekyll</a></li>
+          <li><a href="./guides/eleventy">Eleventy</a></li>
+          <li><a href="./guides/astro">Astro</a></li>
+          <li><a href="./guides/nextjs">Next.js and React</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Compare</p>
+        <ul>
+          <li><a href="./alternatives/applause-button">Applause Button alternative</a></li>
+          <li><a href="./alternatives/lyket">Lyket alternative</a></li>
+          <li><a href="./alternatives/medium-claps">Medium claps on your own site</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Project</p>
+        <ul>
+          <li>
+            <a data-repo-link href="https://github.com/medhatdawoud/appreciator"
+              >Source on GitHub</a
+            >
+          </li>
+          <li>
+            <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+              >Self-host it</a
+            >
+          </li>
+          <li>Open source under the MIT licence</li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="./landing.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!--
+title: Add a like or clap button to a Ghost blog — Appreciator
+description: Ghost has no like button. Add one to every Ghost post with Code injection and one line in your theme's post.hbs, or an HTML card per post.
+crumb: Ghost
+-->
+<h1>Add a like button to a Ghost blog</h1>
+<p class="lead">
+  Ghost has no like or clap button of its own. Load the script once with Code injection, then place
+  the button in your theme, or in the posts you choose.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>1. Load the script on every page</h2>
+  <p>
+    In Ghost Admin, go to <strong>Settings → Code injection</strong> and add this to
+    <strong>Site footer</strong>:
+  </p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="ghost-script">&lt;script src="https://appreciator.medhat.dev/widget.js" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#ghost-script">Copy</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>2a. Under every post: edit the theme</h2>
+  <p>
+    Download your theme (<strong>Settings → Design → Change theme</strong>), open
+    <code>post.hbs</code>, and add the element right after <code>{{ content }}</code>:
+  </p>
+  <div class="code-block">
+    <pre><code id="ghost-element">&lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY"&gt;&lt;/appreciator-button&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#ghost-element">Copy</button>
+  </div>
+  <p>Zip the theme again and upload it on the same screen.</p>
+</section>
+
+<section class="section">
+  <h2>2b. On chosen posts: an HTML card</h2>
+  <p>
+    No theme to edit: in the post editor, add an <strong>HTML</strong> card where the button should
+    go and paste the same element. Each post counts separately.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Check it</h2>
+  <p>
+    Open a post on the live site. If the button shows an error, add your blog's address to the
+    button's allowed origins. A local Ghost install runs at <code>http://localhost:2368</code>.
+  </p>
+</section>

@@ -1,0 +1,87 @@
+<!--
+title: Like button for blogs and static sites, without cookies — Appreciator
+description: A like button for any blog or static site, including Hugo, Jekyll, Astro and GitHub Pages. No backend to build, no cookies, one like per reader or several. Open source.
+crumb: Like button
+-->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Like button · for static sites too · one tag</p>
+    <h1>A like button for your blog, with nothing to build.</h1>
+    <p class="lead">
+      Static sites have nowhere to keep a count. Appreciator keeps it for you: add one tag to your
+      post template and every post gets a heart readers can click, with its own count.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" data-signin-link hidden href="#">Sign in with GitHub</a>
+      <a class="btn btn-secondary" href="{{root}}guides/">Pick your platform</a>
+    </div>
+  </div>
+  <div class="hero-demo card" data-demo>
+    <p class="demo-label">Like this page.</p>
+    <div class="demo-slot" data-demo-slot="like-button" data-label="Like this page"></div>
+    <p class="demo-hint">
+      This demo takes ten likes per reader, so you can see the heart fill. Set a button to one and
+      it behaves like a classic like button.
+    </p>
+  </div>
+  <div class="hero-demo card" data-demo-missing hidden>
+    <p class="demo-label">No instance connected</p>
+    <p class="demo-hint">This copy of the page is not connected to a server, so the demo is off.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Works where your blog does</h2>
+  <p>Step-by-step guides, each with the file to edit and the snippet to paste:</p>
+  <ul class="guide-list">
+    <li><a href="{{root}}guides/hugo">Hugo</a></li>
+    <li><a href="{{root}}guides/jekyll">Jekyll and GitHub Pages</a></li>
+    <li><a href="{{root}}guides/eleventy">Eleventy</a></li>
+    <li><a href="{{root}}guides/astro">Astro</a></li>
+    <li><a href="{{root}}guides/nextjs">Next.js and React</a></li>
+    <li><a href="{{root}}guides/ghost">Ghost</a></li>
+    <li><a href="{{root}}guides/wordpress">WordPress</a></li>
+    <li><a href="{{root}}guides/html">Plain HTML</a></li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Why this like button</h2>
+  <ul class="points">
+    <li>
+      <strong>No cookies and no consent banner for it.</strong> Readers are recognised by a keyed
+      hash of IP address and browser, which is never stored as is.
+    </li>
+    <li>
+      <strong>Likes can't be farmed.</strong> The limit per reader is enforced on the server, so
+      reloading or clearing storage gives nothing extra.
+    </li>
+    <li>
+      <strong>Small.</strong> About 9 KB, no dependencies, drawn in a shadow root so your styles and
+      its styles never clash.
+    </li>
+    <li>
+      <strong>Yours to style.</strong> Colours per state, your own SVG, the count on any side, and
+      CSS variables to size it.
+    </li>
+    <li>
+      <strong>Fits single-page apps.</strong> It notices client-side navigation and loads the new
+      page's count on its own.
+    </li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>The snippet</h2>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="like-snippet">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#like-snippet">Copy</button>
+  </div>
+  <p>
+    Get the key by signing in with GitHub and creating a button for your site. Prefer to keep the
+    data yourself?
+    <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+      >Self-host it</a
+    >.
+  </p>
+</section>

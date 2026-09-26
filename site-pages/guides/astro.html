@@ -1,0 +1,44 @@
+<!--
+title: Add a like or clap button to an Astro blog — Appreciator
+description: Add a like or clap button to every post of an Astro site: an is:inline script and the appreciator-button element in your blog post layout. Works with view transitions.
+crumb: Astro
+-->
+<h1>Add a like button to an Astro blog</h1>
+<p class="lead">
+  Put the script and the element in the layout your posts use. The button is a plain custom element,
+  so it needs no integration or client directive.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>1. Open the post layout</h2>
+  <p>
+    In the official blog template it is <code>src/layouts/BlogPost.astro</code>; in your project, it
+    is the layout your post pages or content collection entries render with.
+  </p>
+</section>
+
+<section class="section">
+  <h2>2. Add the script and the element after the slot</h2>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="astro-tag">&lt;slot /&gt;
+
+&lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY"&gt;&lt;/appreciator-button&gt;
+&lt;script is:inline src="https://appreciator.medhat.dev/widget.js" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#astro-tag">Copy</button>
+  </div>
+  <p>
+    <code>is:inline</code> tells Astro to leave the script as it is instead of bundling it. With
+    view transitions, the button notices the navigation and loads the new post's count by itself;
+    loading the script again is harmless.
+  </p>
+</section>
+
+<section class="section">
+  <h2>3. Check it</h2>
+  <p>
+    Run <code>npm run dev</code> and open a post at <code>http://localhost:4321</code>, after adding
+    that address to the button's allowed origins.
+  </p>
+</section>

@@ -31,9 +31,13 @@ describe('web pages', () => {
     expect(headers['content-security-policy']).toBe(CSP);
   }
 
-  /** The CSP forbids inline script and style, so the markup must not rely on any. */
+  /**
+   * The CSP forbids inline script and style, so the markup must not rely on
+   * any. Structured data (`application/ld+json`) is the one inline script
+   * allowed: it is data, which the browser never runs.
+   */
   function expectNoInlineCode(html: string): void {
-    expect(html).not.toMatch(/<script(?![^>]*\bsrc=)/i);
+    expect(html).not.toMatch(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")/i);
     expect(html).not.toMatch(/<style[\s>]/i);
     expect(html).not.toMatch(/\sstyle=/i);
     expect(html).not.toMatch(/\son[a-z]+=/i);
@@ -68,6 +72,8 @@ describe('web pages', () => {
     ['/web/dashboard.css', 'text/css; charset=utf-8'],
     ['/web/dashboard.js', 'application/javascript; charset=utf-8'],
     ['/robots.txt', 'text/plain; charset=utf-8'],
+    ['/sitemap.xml', 'application/xml; charset=utf-8'],
+    ['/img/og.png', 'image/png'],
   ])('serves the asset at %s checked on every load, with security headers', async (url, type) => {
     const { app } = await context();
 
@@ -113,6 +119,41 @@ describe('web pages', () => {
     expect(clean.headers['content-type']).toBe('text/html; charset=utf-8');
     expect(clean.headers['cache-control']).toBe('no-store');
     expect(clean.body).toBe((await get(app, '/index.html')).body);
+  });
+
+  it.each(['/clap-button', '/guides/', '/guides/hugo', '/alternatives/applause-button'])(
+    'serves the generated page at %s like the hand-written ones',
+    async (url) => {
+      const { app } = await context();
+
+      const response = await get(app, url);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.headers['content-type']).toBe('text/html; charset=utf-8');
+      expect(response.headers['cache-control']).toBe('no-store');
+      expectSecurityHeaders(response.headers);
+      expect(response.body).toContain(
+        `<link rel="canonical" href="https://appreciator.medhat.dev${url}" />`,
+      );
+      expectNoInlineCode(response.body);
+    },
+  );
+
+  it('sends a folder of pages asked for without its slash to the folder', async () => {
+    const { app } = await context();
+
+    const response = await get(app, '/guides');
+
+    expect(response.statusCode).toBe(301);
+    expect(response.headers.location).toBe('/guides/');
+  });
+
+  it('refuses inline script that is not structured data', () => {
+    expect(() => expectNoInlineCode('<script>alert(1)</script>')).toThrow();
+    expect(() => expectNoInlineCode('<script type="module">alert(1)</script>')).toThrow();
+    expect(() =>
+      expectNoInlineCode('<script type="application/ld+json">{}</script>'),
+    ).not.toThrow();
   });
 
   it('keeps the dashboard out of search results', async () => {

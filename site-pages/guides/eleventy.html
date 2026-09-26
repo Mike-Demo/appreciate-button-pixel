@@ -1,0 +1,44 @@
+<!--
+title: Add a like or clap button to an Eleventy (11ty) blog — Appreciator
+description: Add a like or clap button to every post of an Eleventy (11ty) site by adding one tag to the post layout in _includes. Works with Nunjucks, Liquid and other template languages.
+crumb: Eleventy
+-->
+<h1>Add a like button to an Eleventy blog</h1>
+<p class="lead">
+  In Eleventy, the button goes in the layout your posts use, so every post gets one with its own
+  count.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>1. Find the post layout</h2>
+  <p>
+    Layouts live in the includes folder, <code>_includes/</code> by default. A post names its layout
+    in its front matter (<code>layout: layouts/post.njk</code>), often through a directory data file
+    such as <code>posts/posts.json</code>. The official base blog uses
+    <code>_includes/layouts/post.njk</code>.
+  </p>
+</section>
+
+<section class="section">
+  <h2>2. Add the tag after the content</h2>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="eleventy-tag">{{ content | safe }}
+
+&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#eleventy-tag">Copy</button>
+  </div>
+  <p>
+    That is Nunjucks; in a Liquid layout the content line is <code>{{ content }}</code>. The tag is
+    the same in every template language.
+  </p>
+</section>
+
+<section class="section">
+  <h2>3. Check it</h2>
+  <p>
+    Run <code>npx @11ty/eleventy --serve</code> and open a post at
+    <code>http://localhost:8080</code>, after adding that address to the button's allowed origins.
+  </p>
+</section>

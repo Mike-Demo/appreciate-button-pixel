@@ -12,7 +12,9 @@
     "migrate": "tsx src/db/migrate.ts",
     "create-tenant": "tsx src/create-tenant.ts",
     "test:unit": "vitest run --dir test/unit",
-    "test:integration": "vitest run --dir test/integration"
+    "test:integration": "vitest run --dir test/integration",
+    "site:pages": "tsx scripts/site-pages.ts",
+    "site:og-image": "tsx scripts/og-image.ts"
   },
   "dependencies": {
     "@appreciator/shared": "*",
@@ -23,6 +25,7 @@
     "mysql2": "^3.24.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/node": "^24.9.2",
     "tsx": "^4.20.6",
     "typescript": "^5.7.2",

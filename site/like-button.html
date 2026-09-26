@@ -1,0 +1,228 @@
+<!doctype html>
+<!-- Generated from site-pages/like-button.html by npm run site:pages. Edit that file, not this one. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Like button for blogs and static sites, without cookies — Appreciator</title>
+    <meta
+      name="description"
+      content="A like button for any blog or static site, including Hugo, Jekyll, Astro and GitHub Pages. No backend to build, no cookies, one like per reader or several. Open source."
+    />
+    <link rel="canonical" href="https://appreciator.medhat.dev/like-button" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Appreciator" />
+    <meta
+      property="og:title"
+      content="Like button for blogs and static sites, without cookies — Appreciator"
+    />
+    <meta
+      property="og:description"
+      content="A like button for any blog or static site, including Hugo, Jekyll, Astro and GitHub Pages. No backend to build, no cookies, one like per reader or several. Open source."
+    />
+    <meta property="og:url" content="https://appreciator.medhat.dev/like-button" />
+    <meta property="og:image" content="https://appreciator.medhat.dev/img/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Appreciator: an open-source clap and like button" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="./img/heart.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://appreciator.medhat.dev/like-button",
+            "url": "https://appreciator.medhat.dev/like-button",
+            "name": "Like button for blogs and static sites, without cookies — Appreciator",
+            "description": "A like button for any blog or static site, including Hugo, Jekyll, Astro and GitHub Pages. No backend to build, no cookies, one like per reader or several. Open source.",
+            "isPartOf": { "@id": "https://appreciator.medhat.dev/#website" },
+            "about": { "@id": "https://appreciator.medhat.dev/#software" },
+            "breadcrumb": { "@id": "https://appreciator.medhat.dev/like-button#breadcrumb" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://appreciator.medhat.dev/like-button#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Appreciator",
+                "item": "https://appreciator.medhat.dev/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Like button",
+                "item": "https://appreciator.medhat.dev/like-button"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="./">
+        <img src="./img/heart.svg" alt="" width="24" height="24" />
+        <span>Appreciator</span>
+      </a>
+      <nav class="nav">
+        <a href="./guides/">Guides</a>
+        <a href="./alternatives/">Compare</a>
+        <a href="./leaderboard" data-leaderboard-link>Most appreciated</a>
+        <a class="nav-github" data-repo-link href="https://github.com/medhatdawoud/appreciator">
+          <img src="./img/github.svg" alt="" width="18" height="18" />
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="./">Appreciator</a></li>
+          <li aria-current="page">Like button</li>
+        </ol>
+      </nav>
+      <section class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Like button · for static sites too · one tag</p>
+          <h1>A like button for your blog, with nothing to build.</h1>
+          <p class="lead">
+            Static sites have nowhere to keep a count. Appreciator keeps it for you: add one tag to
+            your post template and every post gets a heart readers can click, with its own count.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" data-signin-link hidden href="#">Sign in with GitHub</a>
+            <a class="btn btn-secondary" href="./guides/">Pick your platform</a>
+          </div>
+        </div>
+        <div class="hero-demo card" data-demo>
+          <p class="demo-label">Like this page.</p>
+          <div class="demo-slot" data-demo-slot="like-button" data-label="Like this page"></div>
+          <p class="demo-hint">
+            This demo takes ten likes per reader, so you can see the heart fill. Set a button to one
+            and it behaves like a classic like button.
+          </p>
+        </div>
+        <div class="hero-demo card" data-demo-missing hidden>
+          <p class="demo-label">No instance connected</p>
+          <p class="demo-hint">
+            This copy of the page is not connected to a server, so the demo is off.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Works where your blog does</h2>
+        <p>Step-by-step guides, each with the file to edit and the snippet to paste:</p>
+        <ul class="guide-list">
+          <li><a href="./guides/hugo">Hugo</a></li>
+          <li><a href="./guides/jekyll">Jekyll and GitHub Pages</a></li>
+          <li><a href="./guides/eleventy">Eleventy</a></li>
+          <li><a href="./guides/astro">Astro</a></li>
+          <li><a href="./guides/nextjs">Next.js and React</a></li>
+          <li><a href="./guides/ghost">Ghost</a></li>
+          <li><a href="./guides/wordpress">WordPress</a></li>
+          <li><a href="./guides/html">Plain HTML</a></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Why this like button</h2>
+        <ul class="points">
+          <li>
+            <strong>No cookies and no consent banner for it.</strong> Readers are recognised by a
+            keyed hash of IP address and browser, which is never stored as is.
+          </li>
+          <li>
+            <strong>Likes can't be farmed.</strong> The limit per reader is enforced on the server,
+            so reloading or clearing storage gives nothing extra.
+          </li>
+          <li>
+            <strong>Small.</strong> About 9 KB, no dependencies, drawn in a shadow root so your
+            styles and its styles never clash.
+          </li>
+          <li>
+            <strong>Yours to style.</strong> Colours per state, your own SVG, the count on any side,
+            and CSS variables to size it.
+          </li>
+          <li>
+            <strong>Fits single-page apps.</strong> It notices client-side navigation and loads the
+            new page's count on its own.
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>The snippet</h2>
+        <div class="code-block">
+          <pre><code data-instance-snippet id="like-snippet">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+          <button class="copy" type="button" data-copy="#like-snippet">Copy</button>
+        </div>
+        <p>
+          Get the key by signing in with GitHub and creating a button for your site. Prefer to keep
+          the data yourself?
+          <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+            >Self-host it</a
+          >.
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot foot-links">
+      <div>
+        <p class="foot-title">The button</p>
+        <ul>
+          <li><a href="./clap-button">Clap button</a></li>
+          <li><a href="./applause-button">Applause button</a></li>
+          <li><a href="./like-button">Like button</a></li>
+          <li><a href="./leaderboard">Most appreciated sites</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Guides</p>
+        <ul>
+          <li><a href="./guides/html">Plain HTML</a></li>
+          <li><a href="./guides/wordpress">WordPress</a></li>
+          <li><a href="./guides/ghost">Ghost</a></li>
+          <li><a href="./guides/hugo">Hugo</a></li>
+          <li><a href="./guides/jekyll">Jekyll</a></li>
+          <li><a href="./guides/eleventy">Eleventy</a></li>
+          <li><a href="./guides/astro">Astro</a></li>
+          <li><a href="./guides/nextjs">Next.js and React</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Compare</p>
+        <ul>
+          <li><a href="./alternatives/applause-button">Applause Button alternative</a></li>
+          <li><a href="./alternatives/lyket">Lyket alternative</a></li>
+          <li><a href="./alternatives/medium-claps">Medium claps on your own site</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Project</p>
+        <ul>
+          <li>
+            <a data-repo-link href="https://github.com/medhatdawoud/appreciator"
+              >Source on GitHub</a
+            >
+          </li>
+          <li>
+            <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+              >Self-host it</a
+            >
+          </li>
+          <li>Open source under the MIT licence</li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="./landing.js"></script>
+  </body>
+</html>

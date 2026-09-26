@@ -1,0 +1,56 @@
+<!--
+title: Add a like or clap button to your site: guides by platform — Appreciator
+description: Step-by-step guides to add a like, clap or applause button to WordPress, Ghost, Hugo, Jekyll, Eleventy, Astro, Next.js and plain HTML sites, with the exact file to edit.
+crumb: Guides
+-->
+<h1>Add the button to your site</h1>
+<p class="lead">
+  Every guide shows the file to edit and the snippet to paste. It is the same script tag everywhere;
+  what changes is where your platform keeps the template for a single post.
+</p>
+
+<ul class="guide-cards">
+  <li class="card">
+    <h2><a href="{{root}}guides/html">Plain HTML</a></h2>
+    <p>Any page you write by hand or generate yourself.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/wordpress">WordPress</a></h2>
+    <p>Block themes in the Site Editor, or any theme with a few lines of PHP.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/ghost">Ghost</a></h2>
+    <p>Code injection for the script, then your theme's post template or an HTML card.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/hugo">Hugo</a></h2>
+    <p>Override your theme's single-page template with one line after the content.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/jekyll">Jekyll and GitHub Pages</a></h2>
+    <p>Add it to <code>_layouts/post.html</code>, even when the layout comes from a theme gem.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/eleventy">Eleventy</a></h2>
+    <p>Put it in the post layout under <code>_includes/</code>.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/astro">Astro</a></h2>
+    <p>An inline script and the element in your blog post layout.</p>
+  </li>
+  <li class="card">
+    <h2><a href="{{root}}guides/nextjs">Next.js and React</a></h2>
+    <p>Load the script once with <code>next/script</code> and render the element in JSX.</p>
+  </li>
+</ul>
+
+{{before}}
+
+<section class="section">
+  <h2>Using a coding agent?</h2>
+  <p>
+    Claude Code, Cursor and similar agents can do the edit for you. The
+    <a href="{{root}}#install">install section</a> has a short prompt to paste into one; it asks for
+    your key and puts the tag in your post template.
+  </p>
+</section>

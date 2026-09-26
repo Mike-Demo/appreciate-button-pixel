@@ -1,0 +1,53 @@
+<!--
+title: Add a like or clap button to a Hugo site — Appreciator
+description: Add a like or clap button to every post of a Hugo site by overriding your theme's single-page template. Works on any host, including GitHub Pages and Netlify.
+crumb: Hugo
+-->
+<h1>Add a like button to a Hugo site</h1>
+<p class="lead">
+  Hugo builds static pages, so the count has to live somewhere else. Add the tag to the template
+  that renders a single post and every post gets a button with its own count.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>1. Find the single-post template</h2>
+  <p>
+    It is the template that prints <code>{{ .Content }}</code> for one page. Depending on your Hugo
+    version and theme, it is one of:
+  </p>
+  <ul class="points">
+    <li><code>layouts/_default/single.html</code></li>
+    <li><code>layouts/single.html</code> or <code>layouts/page.html</code> (newer themes)</li>
+    <li><code>layouts/posts/single.html</code>, when posts have their own template</li>
+  </ul>
+  <p>
+    If it comes from a theme under <code>themes/</code>, copy it to the same path in your project's
+    own <code>layouts/</code> folder. Hugo uses your copy instead, and updating the theme will not
+    undo the change.
+  </p>
+</section>
+
+<section class="section">
+  <h2>2. Add the tag after the content</h2>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="hugo-tag">{{ .Content }}
+
+&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#hugo-tag">Copy</button>
+  </div>
+  <p>
+    Hugo copies it into every post as it is. To keep the key in one place, put it in your site
+    configuration under <code>params</code> and write <code>{{ site.Params.appreciatorKey }}</code>
+    in the template instead.
+  </p>
+</section>
+
+<section class="section">
+  <h2>3. Check it</h2>
+  <p>
+    Run <code>hugo server</code> and open a post at <code>http://localhost:1313</code>. Add that
+    address to the button's allowed origins to try it locally, next to your live address.
+  </p>
+</section>

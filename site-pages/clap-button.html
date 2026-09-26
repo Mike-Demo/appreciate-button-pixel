@@ -1,0 +1,83 @@
+<!--
+title: Clap button for your website or blog, Medium-style — Appreciator
+description: Add a Medium-style clap button to any website or blog with one script tag. Readers clap several times, counts are kept per page, no cookies. Free and open source.
+crumb: Clap button
+-->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Clap button · open source · one tag</p>
+    <h1>A clap button for your website, the way Medium does it.</h1>
+    <p class="lead">
+      Readers clap as many times as they liked the post, up to a limit you set. Each clap fills the
+      icon a little more, and the count is kept for every page on its own. It works on any site that
+      can take a script tag: a static blog, WordPress, Ghost, or a React app.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" data-signin-link hidden href="#">Sign in with GitHub</a>
+      <a class="btn btn-secondary" href="{{root}}guides/">Pick your platform</a>
+    </div>
+  </div>
+  <div class="hero-demo card" data-demo>
+    <p class="demo-label">Clap for this page. Up to ten times.</p>
+    <div class="demo-slot" data-demo-slot="clap-button" data-label="Clap for this page"></div>
+    <p class="demo-hint">
+      Each clap is counted on the server, and the tenth fills the icon. Reload: your claps are still
+      counted, because the limit is kept on the server, not in your browser.
+    </p>
+  </div>
+  <div class="hero-demo card" data-demo-missing hidden>
+    <p class="demo-label">No instance connected</p>
+    <p class="demo-hint">This copy of the page is not connected to a server, so the demo is off.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Add the clap button</h2>
+  <p>
+    Sign in with GitHub, add your site and create a button. You get a key starting with
+    <code>pk_</code>. Put this where the claps should appear, at the end of your post template:
+  </p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="clap-snippet">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#clap-snippet">Copy</button>
+  </div>
+  <p>
+    One button covers the whole blog: claps are counted per page (its address without the query
+    string), so every post gets its own count without setting anything up. The
+    <a href="{{root}}guides/">guides</a> show exactly where the tag goes on each platform.
+  </p>
+</section>
+
+<section class="section">
+  <h2>How claps work here</h2>
+  <ul class="points">
+    <li>
+      <strong>Several claps per reader.</strong> Ten by default, anything from 1 to 1,000 per
+      button. At one it is a plain like button.
+    </li>
+    <li>
+      <strong>The limit holds.</strong> Readers are told apart by a keyed hash of their IP address
+      and browser, never stored as is. Clearing cookies or storage does not give more claps.
+    </li>
+    <li>
+      <strong>No cookies, no accounts, no tracking.</strong> Nothing to put in a cookie banner.
+    </li>
+    <li>
+      <strong>Your icon.</strong> A heart by default, or any SVG you upload: a hand, a star, your
+      logo. It starts gray and fills with colour from the bottom as the claps add up.
+    </li>
+    <li>
+      <strong>Your data.</strong> Use the hosted instance, or run your own server with MySQL. The
+      code is MIT licensed.
+    </li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Coming from Medium?</h2>
+  <p>
+    Medium lets each reader clap up to 50 times, and only for stories on Medium. Here the claps live
+    on your own site and the limit is yours to choose.
+    <a href="{{root}}alternatives/medium-claps">How it compares to Medium claps</a>.
+  </p>
+</section>

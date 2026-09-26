@@ -1,0 +1,251 @@
+<!doctype html>
+<!-- Generated from site-pages/alternatives/applause-button.html by npm run site:pages. Edit that file, not this one. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Applause Button alternative: the hosted service is gone, now what? — Appreciator</title>
+    <meta
+      name="description"
+      content="The free hosted Applause Button service no longer runs. Compare self-hosting its server with Appreciator, a hosted or self-hosted clap button, and see what moving over takes."
+    />
+    <link rel="canonical" href="https://appreciator.medhat.dev/alternatives/applause-button" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Appreciator" />
+    <meta
+      property="og:title"
+      content="Applause Button alternative: the hosted service is gone, now what? — Appreciator"
+    />
+    <meta
+      property="og:description"
+      content="The free hosted Applause Button service no longer runs. Compare self-hosting its server with Appreciator, a hosted or self-hosted clap button, and see what moving over takes."
+    />
+    <meta property="og:url" content="https://appreciator.medhat.dev/alternatives/applause-button" />
+    <meta property="og:image" content="https://appreciator.medhat.dev/img/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Appreciator: an open-source clap and like button" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../img/heart.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://appreciator.medhat.dev/alternatives/applause-button",
+            "url": "https://appreciator.medhat.dev/alternatives/applause-button",
+            "name": "Applause Button alternative: the hosted service is gone, now what? — Appreciator",
+            "description": "The free hosted Applause Button service no longer runs. Compare self-hosting its server with Appreciator, a hosted or self-hosted clap button, and see what moving over takes.",
+            "isPartOf": { "@id": "https://appreciator.medhat.dev/#website" },
+            "about": { "@id": "https://appreciator.medhat.dev/#software" },
+            "breadcrumb": {
+              "@id": "https://appreciator.medhat.dev/alternatives/applause-button#breadcrumb"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://appreciator.medhat.dev/alternatives/applause-button#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Appreciator",
+                "item": "https://appreciator.medhat.dev/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Compare",
+                "item": "https://appreciator.medhat.dev/alternatives/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Applause Button",
+                "item": "https://appreciator.medhat.dev/alternatives/applause-button"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="../">
+        <img src="../img/heart.svg" alt="" width="24" height="24" />
+        <span>Appreciator</span>
+      </a>
+      <nav class="nav">
+        <a href="../guides/">Guides</a>
+        <a href="../alternatives/">Compare</a>
+        <a href="../leaderboard" data-leaderboard-link>Most appreciated</a>
+        <a class="nav-github" data-repo-link href="https://github.com/medhatdawoud/appreciator">
+          <img src="../img/github.svg" alt="" width="18" height="18" />
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../">Appreciator</a></li>
+          <li><a href="../alternatives/">Compare</a></li>
+          <li aria-current="page">Applause Button</li>
+        </ol>
+      </nav>
+      <h1>An alternative to the Applause Button</h1>
+      <p class="lead">
+        The <a href="https://github.com/ColinEberhardt/applause-button">Applause Button</a> by Colin
+        Eberhardt made the Medium-style clap easy to add to any site. Its README now says the free
+        and hosted version "is no longer operational". If your claps stopped counting, here are the
+        options.
+      </p>
+      <p class="footnote">As of September 2026. Sources are linked in the text.</p>
+
+      <section class="section">
+        <h2>Your options</h2>
+        <ol class="steps">
+          <li>
+            <strong>Host its server yourself.</strong> The README points to
+            <a href="https://github.com/ColinEberhardt/applause-button-server"
+              >applause-button-server</a
+            >
+            and keeps the button as it is.
+          </li>
+          <li>
+            <strong>Use a community server.</strong> The README mentions one run by a community
+            member, <code>applause.chabouis.fr</code>.
+          </li>
+          <li>
+            <strong>Switch to Appreciator.</strong> Sign in on the hosted instance and create a
+            button, or
+            <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+              >run your own</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2>Side by side</h2>
+        <div class="table-scroll">
+          <table class="table compare">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Applause Button</th>
+                <th scope="col">Appreciator</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Hosted service</th>
+                <td>The free one no longer runs</td>
+                <td>Yes, sign in with GitHub</td>
+              </tr>
+              <tr>
+                <th scope="row">Self-hosting</th>
+                <td>Yes, a separate server project</td>
+                <td>Yes, one Node.js server and MySQL, Docker image included</td>
+              </tr>
+              <tr>
+                <th scope="row">Embed</th>
+                <td><code>&lt;applause-button&gt;</code> element, a script and a stylesheet</td>
+                <td>One script tag, or the <code>&lt;appreciator-button&gt;</code> element</td>
+              </tr>
+              <tr>
+                <th scope="row">Claps per reader</th>
+                <td>One, or several with the <code>multiclap</code> attribute</td>
+                <td>Set per button, 1 to 1,000, enforced on the server</td>
+              </tr>
+              <tr>
+                <th scope="row">Dashboard</th>
+                <td>None documented</td>
+                <td>Sites, buttons, counts per page, allowed origins</td>
+              </tr>
+              <tr>
+                <th scope="row">Icon</th>
+                <td>Its clapping-hands icon, in a <code>color</code> you choose</td>
+                <td>A heart or your own SVG, coloured per state</td>
+              </tr>
+              <tr>
+                <th scope="row">Licence</th>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Moving over</h2>
+        <p>Replace the Applause Button's script, stylesheet and element with one tag:</p>
+        <div class="code-block">
+          <pre><code data-instance-snippet id="applause-move">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+          <button class="copy" type="button" data-copy="#applause-move">Copy</button>
+        </div>
+        <p>
+          Counts start from zero: the old claps were stored by the Applause Button's server, and
+          there is no import from it. The <a href="../guides/">guides</a> show where the tag goes on
+          each platform.
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot foot-links">
+      <div>
+        <p class="foot-title">The button</p>
+        <ul>
+          <li><a href="../clap-button">Clap button</a></li>
+          <li><a href="../applause-button">Applause button</a></li>
+          <li><a href="../like-button">Like button</a></li>
+          <li><a href="../leaderboard">Most appreciated sites</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Guides</p>
+        <ul>
+          <li><a href="../guides/html">Plain HTML</a></li>
+          <li><a href="../guides/wordpress">WordPress</a></li>
+          <li><a href="../guides/ghost">Ghost</a></li>
+          <li><a href="../guides/hugo">Hugo</a></li>
+          <li><a href="../guides/jekyll">Jekyll</a></li>
+          <li><a href="../guides/eleventy">Eleventy</a></li>
+          <li><a href="../guides/astro">Astro</a></li>
+          <li><a href="../guides/nextjs">Next.js and React</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Compare</p>
+        <ul>
+          <li><a href="../alternatives/applause-button">Applause Button alternative</a></li>
+          <li><a href="../alternatives/lyket">Lyket alternative</a></li>
+          <li><a href="../alternatives/medium-claps">Medium claps on your own site</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-title">Project</p>
+        <ul>
+          <li>
+            <a data-repo-link href="https://github.com/medhatdawoud/appreciator"
+              >Source on GitHub</a
+            >
+          </li>
+          <li>
+            <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+              >Self-host it</a
+            >
+          </li>
+          <li>Open source under the MIT licence</li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="../landing.js"></script>
+  </body>
+</html>

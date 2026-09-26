@@ -1,0 +1,72 @@
+<!--
+title: Applause button for any website, free and self-hostable — Appreciator
+description: An applause button readers click to show they enjoyed a page. One script tag, counts per page, several claps per reader, no cookies. Hosted or self-hosted, MIT licensed.
+crumb: Applause button
+-->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Applause button · open source · one tag</p>
+    <h1>An applause button for every page of your site.</h1>
+    <p class="lead">
+      Give readers a way to applaud what they read. They click an icon that fills up with each clap,
+      you see which pages people enjoyed, and there is no account, cookie or tracking pixel
+      involved.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" data-signin-link hidden href="#">Sign in with GitHub</a>
+      <a class="btn btn-secondary" href="{{root}}guides/">Pick your platform</a>
+    </div>
+  </div>
+  <div class="hero-demo card" data-demo>
+    <p class="demo-label">Applaud this page.</p>
+    <div class="demo-slot" data-demo-slot="applause-button" data-label="Applaud this page"></div>
+    <p class="demo-hint">
+      A short burst and a quiet pop with every clap, a chime when you reach the tenth.
+    </p>
+  </div>
+  <div class="hero-demo card" data-demo-missing hidden>
+    <p class="demo-label">No instance connected</p>
+    <p class="demo-hint">This copy of the page is not connected to a server, so the demo is off.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Add applause in one line</h2>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="applause-snippet">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#applause-snippet">Copy</button>
+  </div>
+  <p>
+    The tag draws the button right where it sits. To place it yourself, or to put several on one
+    page, load the script once and use the element:
+  </p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="applause-element">&lt;script src="https://appreciator.medhat.dev/widget.js" async&gt;&lt;/script&gt;
+&lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY"&gt;&lt;/appreciator-button&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#applause-element">Copy</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>What you can set for each button</h2>
+  <ul class="points">
+    <li>How many claps each reader can give, from 1 to 1,000.</li>
+    <li>The icon: a heart, or your own SVG, recoloured for rest, hover, click and full.</li>
+    <li>What flies out on a click: copies of the icon, short dashes, or nothing.</li>
+    <li>Where the count sits, a thank-you message for readers who gave every clap, and sound.</li>
+    <li>Which sites may show it, so nobody else can use your key.</li>
+  </ul>
+  <p>
+    Every site's total can be shown as a badge, and sites are ranked on the
+    <a href="{{root}}leaderboard">most appreciated</a> board unless their owner opts out.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Used the Applause Button before?</h2>
+  <p>
+    Its free hosted service is no longer running. Appreciator does the same job with a hosted
+    instance and a dashboard, and swapping one tag for another is most of the move.
+    <a href="{{root}}alternatives/applause-button">How to move over</a>.
+  </p>
+</section>

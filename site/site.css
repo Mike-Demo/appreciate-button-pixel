@@ -677,3 +677,93 @@ pre.prompt {
   overflow-wrap: anywhere;
   max-width: 32rem;
 }
+
+/* The site's content pages: keyword pages, guides and comparisons. */
+.crumbs ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.crumbs li + li::before {
+  content: '›';
+  margin-right: 0.35rem;
+}
+
+.crumbs a {
+  color: var(--muted);
+}
+
+.page > h1 {
+  margin-top: 2rem;
+}
+
+.page > .lead,
+.page .section > p {
+  max-width: 44rem;
+}
+
+.guide-cards {
+  list-style: none;
+  margin: 2rem 0 2.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+}
+
+.guide-cards .card {
+  padding: 1rem 1.2rem;
+}
+
+.guide-cards h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.guide-cards p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.guide-list {
+  columns: 2 12rem;
+  padding-left: 1.2rem;
+}
+
+.compare th[scope='row'] {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.compare td {
+  min-width: 11rem;
+}
+
+.foot-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 1.5rem;
+}
+
+.foot-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.foot-links li {
+  margin: 0.2rem 0;
+}
+
+.foot-links .foot-title {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--text);
+}

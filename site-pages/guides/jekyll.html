@@ -1,0 +1,46 @@
+<!--
+title: Add a like or clap button to Jekyll and GitHub Pages — Appreciator
+description: Add a like or clap button to every post of a Jekyll blog, including GitHub Pages sites and theme gems like Minima, by adding one tag to _layouts/post.html.
+crumb: Jekyll
+-->
+<h1>Add a like button to a Jekyll blog</h1>
+<p class="lead">
+  GitHub Pages and other static hosts can't store a count, so Appreciator stores it. One tag in your
+  post layout and every post has a button.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>1. Open the post layout</h2>
+  <p>
+    Posts are rendered by <code>_layouts/post.html</code>. If your site has no such file, the layout
+    comes from a theme gem such as Minima. Copy it into your site first:
+  </p>
+  <div class="code-block">
+    <pre><code id="jekyll-copy">mkdir -p _layouts
+cp "$(bundle info --path minima)/_layouts/post.html" _layouts/post.html</code></pre>
+    <button class="copy" type="button" data-copy="#jekyll-copy">Copy</button>
+  </div>
+  <p>Replace <code>minima</code> with your theme's name. Jekyll uses your copy from then on.</p>
+</section>
+
+<section class="section">
+  <h2>2. Add the tag after the content</h2>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="jekyll-tag">{{ content }}
+
+&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#jekyll-tag">Copy</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>3. Check it</h2>
+  <p>
+    Run <code>bundle exec jekyll serve</code> and open a post at <code>http://127.0.0.1:4000</code>.
+    Allowed origins are compared exactly, so allow <code>http://127.0.0.1:4000</code> as the browser
+    shows it; <code>localhost</code> would be a different origin. On GitHub Pages, your live origin
+    is <code>https://&lt;user&gt;.github.io</code>, or your custom domain.
+  </p>
+</section>

@@ -1,0 +1,99 @@
+<!--
+title: Applause Button alternative: the hosted service is gone, now what? — Appreciator
+description: The free hosted Applause Button service no longer runs. Compare self-hosting its server with Appreciator, a hosted or self-hosted clap button, and see what moving over takes.
+crumb: Applause Button
+-->
+<h1>An alternative to the Applause Button</h1>
+<p class="lead">
+  The <a href="https://github.com/ColinEberhardt/applause-button">Applause Button</a> by Colin
+  Eberhardt made the Medium-style clap easy to add to any site. Its README now says the free and
+  hosted version "is no longer operational". If your claps stopped counting, here are the options.
+</p>
+<p class="footnote">As of September 2026. Sources are linked in the text.</p>
+
+<section class="section">
+  <h2>Your options</h2>
+  <ol class="steps">
+    <li>
+      <strong>Host its server yourself.</strong> The README points to
+      <a href="https://github.com/ColinEberhardt/applause-button-server">applause-button-server</a>
+      and keeps the button as it is.
+    </li>
+    <li>
+      <strong>Use a community server.</strong> The README mentions one run by a community member,
+      <code>applause.chabouis.fr</code>.
+    </li>
+    <li>
+      <strong>Switch to Appreciator.</strong> Sign in on the hosted instance and create a button, or
+      <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+        >run your own</a
+      >.
+    </li>
+  </ol>
+</section>
+
+<section class="section">
+  <h2>Side by side</h2>
+  <div class="table-scroll">
+    <table class="table compare">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Applause Button</th>
+          <th scope="col">Appreciator</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Hosted service</th>
+          <td>The free one no longer runs</td>
+          <td>Yes, sign in with GitHub</td>
+        </tr>
+        <tr>
+          <th scope="row">Self-hosting</th>
+          <td>Yes, a separate server project</td>
+          <td>Yes, one Node.js server and MySQL, Docker image included</td>
+        </tr>
+        <tr>
+          <th scope="row">Embed</th>
+          <td><code>&lt;applause-button&gt;</code> element, a script and a stylesheet</td>
+          <td>One script tag, or the <code>&lt;appreciator-button&gt;</code> element</td>
+        </tr>
+        <tr>
+          <th scope="row">Claps per reader</th>
+          <td>One, or several with the <code>multiclap</code> attribute</td>
+          <td>Set per button, 1 to 1,000, enforced on the server</td>
+        </tr>
+        <tr>
+          <th scope="row">Dashboard</th>
+          <td>None documented</td>
+          <td>Sites, buttons, counts per page, allowed origins</td>
+        </tr>
+        <tr>
+          <th scope="row">Icon</th>
+          <td>Its clapping-hands icon, in a <code>color</code> you choose</td>
+          <td>A heart or your own SVG, coloured per state</td>
+        </tr>
+        <tr>
+          <th scope="row">Licence</th>
+          <td>MIT</td>
+          <td>MIT</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Moving over</h2>
+  <p>Replace the Applause Button's script, stylesheet and element with one tag:</p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="applause-move">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#applause-move">Copy</button>
+  </div>
+  <p>
+    Counts start from zero: the old claps were stored by the Applause Button's server, and there is
+    no import from it. The <a href="{{root}}guides/">guides</a> show where the tag goes on each
+    platform.
+  </p>
+</section>

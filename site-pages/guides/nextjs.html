@@ -1,0 +1,80 @@
+<!--
+title: Add a like or clap button to Next.js and React — Appreciator
+description: Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciator-button element in JSX. Counts follow client-side navigation.
+crumb: Next.js and React
+-->
+<h1>Add a like button to Next.js and React</h1>
+<p class="lead">
+  The button is a custom element, so React renders it like any tag. Load the script once for the app
+  and put the element in your post page.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>1. Load the script once</h2>
+  <p>In the App Router, add it to <code>app/layout.tsx</code>:</p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="next-layout">import Script from 'next/script';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body&gt;
+        {children}
+        &lt;Script src="https://appreciator.medhat.dev/widget.js" strategy="afterInteractive" /&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+    <button class="copy" type="button" data-copy="#next-layout">Copy</button>
+  </div>
+  <p>
+    With the Pages Router, put the same <code>Script</code> in <code>pages/_app.tsx</code>. In a
+    React app without Next.js, such as Vite, add a plain
+    <code>&lt;script src="…/widget.js" async&gt;&lt;/script&gt;</code> to <code>index.html</code>.
+  </p>
+</section>
+
+<section class="section">
+  <h2>2. Render the element in the post page</h2>
+  <div class="code-block">
+    <pre><code id="next-element">&lt;article&gt;
+  {/* the post */}
+  &lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY" /&gt;
+&lt;/article&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#next-element">Copy</button>
+  </div>
+  <p>With TypeScript, declare the element once, for example in <code>appreciator.d.ts</code>:</p>
+  <div class="code-block">
+    <pre><code id="next-types">import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'appreciator-button': DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;;
+    }
+  }
+}</code></pre>
+    <button class="copy" type="button" data-copy="#next-types">Copy</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Things to know</h2>
+  <ul class="points">
+    <li>
+      Client-side navigation needs nothing extra: the button notices the new address and loads that
+      page's count.
+    </li>
+    <li>
+      <code>afterInteractive</code> loads the script after hydration, so the button's own attributes
+      never differ from what the server rendered.
+    </li>
+    <li>
+      Listen for <code>appreciator:change</code> and the other events on the element to react to
+      clicks in your own code.
+    </li>
+    <li>Allow <code>http://localhost:3000</code> to try it with <code>next dev</code>.</li>
+  </ul>
+</section>

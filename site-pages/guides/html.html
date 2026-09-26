@@ -1,0 +1,49 @@
+<!--
+title: Add a like button to a plain HTML page — Appreciator
+description: Add a clap or like button to a hand-written HTML page with one script tag, or place it yourself with the appreciator-button element. No build step, no backend.
+crumb: Plain HTML
+-->
+<h1>Add a like button to a plain HTML page</h1>
+<p class="lead">
+  One script tag, pasted where the button should appear. Nothing to install and nothing to build.
+</p>
+
+{{before}}
+
+<section class="section">
+  <h2>Paste the tag</h2>
+  <p>Put it at the end of the article, or wherever the button belongs:</p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="html-tag">&lt;script src="https://appreciator.medhat.dev/widget.js" data-key="pk_YOUR_BUTTON_KEY" async&gt;&lt;/script&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#html-tag">Copy</button>
+  </div>
+  <p>
+    The script draws the button right after itself. Each page gets its own count, taken from its
+    address without the query string or fragment, so the same tag can go on every page.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Or place the element yourself</h2>
+  <p>
+    Load the script once, for example in the <code>&lt;head&gt;</code>, and put the element where
+    you want it. This is also how to show several buttons on one page: give each a
+    <code>data-item</code> so they count separately.
+  </p>
+  <div class="code-block">
+    <pre><code data-instance-snippet id="html-element">&lt;script src="https://appreciator.medhat.dev/widget.js" async&gt;&lt;/script&gt;
+
+&lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY"&gt;&lt;/appreciator-button&gt;</code></pre>
+    <button class="copy" type="button" data-copy="#html-element">Copy</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Check it</h2>
+  <p>
+    Open the page in a browser. The button appears gray with a count of 0; click it and the count
+    goes up. If it shows an error instead, the page's origin is missing from the button's allowed
+    origins. Opening the file straight from disk (<code>file://</code>) does not work: serve it, for
+    example with <code>npx serve</code>, and allow that address.
+  </p>
+</section>
