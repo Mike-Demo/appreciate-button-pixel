@@ -787,3 +787,21 @@ pre.prompt {
   grid-column: 1 / -1;
   margin: 0;
 }
+
+/* The home page's footer: about and credit on the left, links on the right. */
+.foot-split {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+}
+
+.foot-split .foot-end {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .foot-split .foot-end {
+    text-align: left;
+  }
+}
