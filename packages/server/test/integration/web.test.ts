@@ -67,6 +67,7 @@ describe('web pages', () => {
     ['/img/heart.svg', 'image/svg+xml'],
     ['/web/dashboard.css', 'text/css; charset=utf-8'],
     ['/web/dashboard.js', 'application/javascript; charset=utf-8'],
+    ['/robots.txt', 'text/plain; charset=utf-8'],
   ])('serves the asset at %s checked on every load, with security headers', async (url, type) => {
     const { app } = await context();
 
@@ -103,6 +104,26 @@ describe('web pages', () => {
     expect(response.body.length).toBeGreaterThan(0);
   });
 
+  it('serves a page by its clean URL, without .html, as GitHub Pages does', async () => {
+    const { app } = await context();
+
+    const clean = await get(app, '/index');
+
+    expect(clean.statusCode).toBe(200);
+    expect(clean.headers['content-type']).toBe('text/html; charset=utf-8');
+    expect(clean.headers['cache-control']).toBe('no-store');
+    expect(clean.body).toBe((await get(app, '/index.html')).body);
+  });
+
+  it('keeps the dashboard out of search results', async () => {
+    const { app } = await context();
+
+    expect((await get(app, '/dashboard')).body).toContain(
+      '<meta name="robots" content="noindex" />',
+    );
+    expect((await get(app, '/robots.txt')).body).toMatch(/^Disallow: \/dashboard$/m);
+  });
+
   it('serves the same bytes under /site/ as at the root', async () => {
     const { app } = await context();
 
@@ -118,7 +139,11 @@ describe('web pages', () => {
     '/web/../package.json',
     '/web/nope.js',
     '/README.md',
+    '/README',
     '/nope',
+    '/img',
+    '/img/',
+    '/..%2fpackage',
   ])('answers the usual 404 for %s', async (url) => {
     const { app } = await context();
 

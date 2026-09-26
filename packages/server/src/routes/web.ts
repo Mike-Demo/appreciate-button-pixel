@@ -26,12 +26,19 @@ const SITE_DIR =
     existsSync(dir),
   ) ?? resolve(HERE, '..', 'site');
 
-/** The only kinds of file the pages are made of; anything else in the folders (READMEs) is not served. */
+/**
+ * The only kinds of file the pages are made of, plus what search engines and
+ * link previews ask for (robots.txt, the sitemap, the preview image); anything
+ * else in the folders (READMEs) is not served.
+ */
 const CONTENT_TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
   '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
 };
 
 /**
@@ -102,6 +109,26 @@ const webConfigSchema = {
 
 interface FileParams {
   '*': string;
+}
+
+/**
+ * The file behind a clean URL, resolved the way GitHub Pages resolves it, so
+ * the same relative links work on both: `guides/` is `guides/index.html`,
+ * `clap-button` is `clap-button.html`, and a path with an extension is that
+ * file.
+ */
+function pageFile(requested: string): string {
+  if (requested.endsWith('/')) return `${requested}index.html`;
+  return extname(requested) === '' ? `${requested}.html` : requested;
+}
+
+/**
+ * Whether `requested` names a folder of pages, such as `guides`, reached
+ * without its trailing slash. Checked inside the folder only.
+ */
+function isPageFolder(dir: string, requested: string): boolean {
+  const index = resolve(dir, requested, 'index.html');
+  return index.startsWith(dir + sep) && existsSync(index);
 }
 
 /**
@@ -196,8 +223,18 @@ export async function webRoutes(app: FastifyInstance): Promise<void> {
     sendFile(reply, WEB_DIR, request.params['*']),
   );
   // Last resort for GET: every other route is matched first, and a path that
-  // names no file in `site/` gets the same 404 as any unknown route.
-  app.get<{ Params: FileParams }>('/*', (request, reply) =>
-    sendFile(reply, SITE_DIR, request.params['*']),
-  );
+  // names no file in `site/` gets the same 404 as any unknown route. A folder
+  // of pages asked for without its slash is sent to it with one, as GitHub
+  // Pages does, so its relative links resolve inside it.
+  app.get<{ Params: FileParams }>('/*', (request, reply) => {
+    const requested = request.params['*'];
+    if (
+      extname(requested) === '' &&
+      !requested.endsWith('/') &&
+      isPageFolder(SITE_DIR, requested)
+    ) {
+      return reply.redirect(`/${requested}/`, 301);
+    }
+    return sendFile(reply, SITE_DIR, pageFile(requested));
+  });
 }

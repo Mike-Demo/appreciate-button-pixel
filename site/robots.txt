@@ -1,0 +1,8 @@
+# Everything public is open to crawlers. The dashboard, sign-in and API are
+# not pages for search results.
+User-agent: *
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /v1/
+
+Sitemap: https://appreciator.medhat.dev/sitemap.xml
