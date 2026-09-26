@@ -1,5 +1,9 @@
 # Appreciator
 
+An open-source clap, applause and like button for any website, Medium-style:
+try it at **[appreciator.medhat.dev](https://appreciator.medhat.dev)**, with
+[guides for WordPress, Ghost, Hugo, Jekyll, Eleventy, Astro and Next.js](https://appreciator.medhat.dev/guides/).
+
 A self-hostable "appreciate" button for any website, with a landing page, a
 GitHub-sign-in dashboard for creating buttons, and a public leaderboard of the
 most appreciated sites. Visitors click an SVG icon that starts gray and fills

@@ -3,6 +3,41 @@
 A running record of the significant changes to this repository, newest first.
 Each entry is written so it can seed a PR description.
 
+## 2026-09-27 — Be found for "clap button", "applause button" and "like button"
+
+- **Why:** the landing page had no canonical URL, social tags, structured
+  data, sitemap or robots.txt, two copies (the instance and GitHub Pages)
+  competed with each other, and it never said "applause", "like button" or
+  any platform name. Research showed the openings: the Applause Button's free
+  hosted service no longer runs, and "like button for Hugo/Ghost/…" searches
+  are won by one guide per platform.
+- **Pages:** `/clap-button`, `/applause-button` and `/like-button`, each
+  with a live demo; guides for plain HTML, WordPress, Ghost, Hugo, Jekyll,
+  Eleventy, Astro and Next.js; and dated, sourced comparisons with the
+  Applause Button, Lyket and Medium claps. They are generated from
+  `site-pages/` by one layout (`npm run site:pages`), with a canonical URL
+  on appreciator.medhat.dev, Open Graph and Twitter tags, a rendered preview
+  image, breadcrumbs and JSON-LD each, and listed in `sitemap.xml`.
+- **Landing page:** keyword title and description, canonical and social
+  tags, structured data for the site and the software, a "Works with your
+  platform" section and plain-text questions and answers. The leaderboard
+  gets the same tags.
+- **Server:** serves `.txt`, `.xml` and `.png` from the site, resolves clean
+  URLs as GitHub Pages does (`/guides/hugo`, `/guides/`), and redirects a
+  folder asked for without its slash. `robots.txt` keeps the dashboard,
+  sign-in and API out of search results; the dashboard says `noindex`.
+- **Sign-in:** `GITHUB_ALLOWED_LOGINS=*` opens the instance to every GitHub
+  account, so people arriving from search can create a button.
+- **Tests:** integration tests for the file types, clean URLs, the redirect
+  and the generated pages; unit tests for the generator, including one that
+  fails when the committed pages are out of date; an e2e crawl of every page
+  linked from the home page and of the sitemap, the keyword page demo, and
+  the guides' snippets.
+- **Not in code:** verifying the site in Google Search Console and Bing and
+  submitting the sitemap, setting `GITHUB_ALLOWED_LOGINS=*` in production,
+  and getting links from elsewhere (awesome lists, Show HN, a dev.to post,
+  the forum threads asking for a like button).
+
 ## 2026-09-26 — A tighter burst in the clicked colour, and a quiet full button
 
 - The burst starts outside the icon, or outside the ring when there is one:

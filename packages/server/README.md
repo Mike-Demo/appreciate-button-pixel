@@ -520,13 +520,17 @@ dashboard page is public and only its API calls carry the session cookie.
 | `GET /dashboard`   | `src/web/dashboard.html`                                         |
 | `GET /site/<file>` | anything under `site/`, for the dashboard's shared styles/images |
 | `GET /web/<file>`  | anything under `src/web/`                                        |
-| `GET /<file>`      | anything under `site/`                                           |
+| `GET /<file>`      | anything under `site/`, and its pages by clean URL               |
 
 The last one exists because the landing page links its assets relatively (it
 is also deployed to GitHub Pages under a path prefix), so served at `/` they
-resolve to `/site.css` and `/img/heart.svg`.
+resolve to `/site.css` and `/img/heart.svg`. It resolves clean URLs the way
+GitHub Pages does, so the site's other pages work at the same addresses on
+both: `/clap-button` is `site/clap-button.html`, `/guides/` is
+`site/guides/index.html`, and `/guides` redirects to `/guides/` (301).
 
-Only `.html`, `.css`, `.js` and `.svg` files are served, paths are resolved
+Only `.html`, `.css`, `.js`, `.svg`, `.png`, `.txt` (for `robots.txt`) and
+`.xml` (for the sitemap) files are served, paths are resolved
 and checked to stay inside their folder, and anything else answers the usual
 `404 not_found`. Pages are `Cache-Control: no-store`; assets are
 `no-cache` with an `ETag`, so a browser checks them on every load and gets a
