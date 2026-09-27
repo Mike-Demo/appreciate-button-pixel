@@ -1,4 +1,4 @@
-import type { ButtonPublicConfig, ButtonState } from '@appreciator/shared';
+import type { ButtonPublicConfig, ButtonState } from '@appreciate-button/shared';
 
 import { PAINT_EXEMPT, REST_OPACITY } from './element.js';
 import { parseSafeSvg } from './sanitize-svg.js';

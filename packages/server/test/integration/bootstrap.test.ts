@@ -89,7 +89,7 @@ describe('ensureManagementTenant', () => {
 
 describe('ensureDemoButton', () => {
   let context: TestContext;
-  const settings = { demoAllowedOrigins: ['https://appreciator.test'], defaultMaxClicks: 10 };
+  const settings = { demoAllowedOrigins: ['https://appreciate-button.test'], defaultMaxClicks: 10 };
 
   beforeAll(async () => {
     context = await createTestContext(SIGN_IN_CONFIG);
@@ -139,7 +139,7 @@ describe('ensureDemoButton', () => {
       name: DEMO_BUTTON_NAME,
       svg_source: DEFAULT_SVG_SOURCE,
     });
-    expect(origins(buttons[0]?.allowed_origins)).toEqual(['https://appreciator.test']);
+    expect(origins(buttons[0]?.allowed_origins)).toEqual(['https://appreciate-button.test']);
   });
 
   it('converges on one tenant and one button when several starts race', async () => {
@@ -175,7 +175,7 @@ describe('ensureDemoButton', () => {
     const allowed = await context.app.inject({
       method: 'GET',
       url: `/v1/buttons/${demo.publicKey}/config`,
-      headers: { origin: 'https://appreciator.test' },
+      headers: { origin: 'https://appreciate-button.test' },
     });
     const refused = await context.app.inject({
       method: 'GET',
@@ -242,10 +242,10 @@ describe('GET /web/config.json', () => {
     expect(response.headers['cache-control']).toBe('no-store');
     expect(response.headers['content-type']).toMatch(/^application\/json/);
     expect(response.json()).toEqual({
-      apiUrl: 'https://appreciator.test',
+      apiUrl: 'https://appreciate-button.test',
       demoKey: demo?.public_key,
       signInEnabled: true,
-      repoUrl: 'https://github.com/medhatdawoud/appreciator',
+      repoUrl: 'https://github.com/medhatdawoud/appreciate-button',
       leaderboardEnabled: true,
       defaultIcon: { svgSource: DEFAULT_SVG_SOURCE, colors: DEFAULT_COLORS },
       defaultThanksMessage: DEFAULT_THANKS_MESSAGE,

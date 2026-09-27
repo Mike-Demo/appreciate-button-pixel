@@ -1,6 +1,6 @@
 /**
  * The prompt that asks a coding agent (Claude Code, Cursor, …) to add an
- * Appreciator button to a project. One copy of the wording for both places
+ * Appreciate Button to a project. One copy of the wording for both places
  * that offer it: the landing page, which knows only the instance, and the
  * dashboard, which knows the button.
  *
@@ -18,12 +18,12 @@
 
   /**
    * @param {object} options
-   * @param {string} options.apiUrl The instance, e.g. https://appreciator.example.com
+   * @param {string} options.apiUrl The instance, e.g. https://appreciate-button.example.com
    * @param {string} [options.publicKey] The button's key, when known.
    * @param {string} [options.embedSnippet] The button's one-tag embed, when known.
    * @param {string} [options.elementSnippet] Its script plus element, when known.
    */
-  function appreciatorAgentPrompt({ apiUrl, publicKey, embedSnippet, elementSnippet }) {
+  function appreciateButtonAgentPrompt({ apiUrl, publicKey, embedSnippet, elementSnippet }) {
     const api = apiUrl.replace(/\/+$/, '');
     const knowsKey = typeof publicKey === 'string' && publicKey !== '';
     const key = knowsKey ? publicKey : PLACEHOLDER_KEY;
@@ -31,12 +31,12 @@
       embedSnippet ?? `<script src="${api}/widget.js" data-key="${key}" async></script>`;
     const element =
       elementSnippet ??
-      `<script src="${api}/widget.js" async></script>\n<appreciator-button data-key="${key}"></appreciator-button>`;
+      `<script src="${api}/widget.js" async></script>\n<appreciate-button data-key="${key}"></appreciate-button>`;
     const askKey = knowsKey
       ? ''
       : `First ask me for my button's key (it starts with pk_) and use it in place of ${PLACEHOLDER_KEY} below.\n\n`;
 
-    return `Add the Appreciator "appreciate" button to the posts on this site.
+    return `Add the Appreciate Button (a clap or like button) to the posts on this site.
 
 It is a ready-made embed, like an analytics tag: there is nothing to install, configure, download or inspect, so do not fetch the script or call the server, and no tests are needed for it.
 
@@ -53,6 +53,6 @@ If it is not clear which template renders a single post, ask me. If the site set
 When done, tell me which files you changed. That is all.`;
   }
 
-  appreciatorAgentPrompt.PLACEHOLDER_KEY = PLACEHOLDER_KEY;
-  window.appreciatorAgentPrompt = appreciatorAgentPrompt;
+  appreciateButtonAgentPrompt.PLACEHOLDER_KEY = PLACEHOLDER_KEY;
+  window.appreciateButtonAgentPrompt = appreciateButtonAgentPrompt;
 })();

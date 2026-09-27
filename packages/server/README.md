@@ -1,4 +1,4 @@
-# @appreciator/server
+# @appreciate-button/server
 
 Fastify + MySQL API behind the appreciation button: a management API for
 configuring buttons, and public endpoints the embedded widget calls to read and
@@ -14,45 +14,45 @@ From the repository root:
 
 ```bash
 npm install
-npm run build -w @appreciator/shared   # the server imports its built types
+npm run build -w @appreciate-button/shared   # the server imports its built types
 docker compose up -d mysql
 ```
 
 Then, with the environment below exported:
 
 ```bash
-npm run migrate -w @appreciator/server   # apply pending migrations
-npm run dev -w @appreciator/server       # tsx watch on src/server.ts
+npm run migrate -w @appreciate-button/server   # apply pending migrations
+npm run dev -w @appreciate-button/server       # tsx watch on src/server.ts
 ```
 
 ## Configuration
 
-| Variable                | Required    | Default                                       | Description                                                                                                                                                           |
-| ----------------------- | ----------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`          | yes         | —                                             | MySQL connection string, e.g. `mysql://appreciator:appreciator@127.0.0.1:3306/appreciator`.                                                                           |
-| `VISITOR_HASH_SECRET`   | yes         | —                                             | HMAC key for visitor hashing, at least 32 characters. `openssl rand -hex 32`.                                                                                         |
-| `MANAGEMENT_SECRET`     | no          | —                                             | Management API key, at least 32 characters. A tenant for it is provisioned on startup. `openssl rand -hex 32`.                                                        |
-| `PORT`                  | no          | `3000`                                        | HTTP port.                                                                                                                                                            |
-| `HOST`                  | no          | `0.0.0.0`                                     | Bind address.                                                                                                                                                         |
-| `DEFAULT_MAX_CLICKS`    | no          | `10`                                          | Per-visitor cap for buttons created without an explicit `maxClicks`.                                                                                                  |
-| `PUBLIC_BASE_URL`       | no          | `http://localhost:$PORT`                      | Absolute http(s) base URL of this server: written into the embed snippet, the GitHub callback URL, and the only origin cookie-authenticated writes are accepted from. |
-| `RATE_LIMIT_MAX`        | no          | `60`                                          | Writes allowed per IP per window: clicks and resets on the public routes (and the auth and leaderboard budgets).                                                      |
-| `RATE_LIMIT_READ_MAX`   | no          | `600`                                         | Public-route reads (`/config`, `/state`, preflights) allowed per IP per window, counted apart from writes.                                                            |
-| `RATE_LIMIT_WINDOW`     | no          | `1 minute`                                    | Rate limit window.                                                                                                                                                    |
-| `WIDGET_RATE_LIMIT_MAX` | no          | `300`                                         | `GET /widget.js` requests allowed per IP per `RATE_LIMIT_WINDOW`, counted separately from the public routes.                                                          |
-| `TRUST_PROXY`           | no          | `false`                                       | Derive the client IP from `X-Forwarded-For`. Only enable behind a proxy you control.                                                                                  |
-| `LOG_LEVEL`             | no          | `info`                                        | Pino level.                                                                                                                                                           |
-| `WIDGET_BUNDLE_PATH`    | no          | `../widget/dist/widget.js`                    | Built widget bundle served at `GET /widget.js`. Relative paths resolve against the process working directory.                                                         |
-| `GITHUB_CLIENT_ID`      | no          | —                                             | OAuth app client id for "Sign in with GitHub". Set with `GITHUB_CLIENT_SECRET` and `SESSION_SECRET`, or not at all.                                                   |
-| `GITHUB_CLIENT_SECRET`  | no          | —                                             | OAuth app client secret.                                                                                                                                              |
-| `GITHUB_ALLOWED_LOGINS` | no          | —                                             | Comma-separated GitHub logins allowed to sign in, case-insensitive. `*` allows every GitHub account. Empty means nobody.                                              |
-| `SESSION_SECRET`        | with GitHub | —                                             | HMAC key for session cookies, at least 32 characters. Required when the GitHub variables are set. `openssl rand -hex 32`.                                             |
-| `GITHUB_OAUTH_URL`      | no          | `https://github.com`                          | Base of GitHub's OAuth endpoints (GitHub Enterprise).                                                                                                                 |
-| `GITHUB_API_URL`        | no          | `https://api.github.com`                      | Base of GitHub's REST API.                                                                                                                                            |
-| `DEMO_BUTTON`           | no          | `true`                                        | Provision the landing page's demo button at startup.                                                                                                                  |
-| `DEMO_ALLOWED_ORIGINS`  | no          | origin of `PUBLIC_BASE_URL`                   | Comma-separated `allowedOrigins` for the demo button.                                                                                                                 |
-| `REPO_URL`              | no          | `https://github.com/medhatdawoud/appreciator` | Source repository linked from the web UI.                                                                                                                             |
-| `LEADERBOARD`           | no          | `true`                                        | Serve `GET /v1/leaderboard`, which publishes every tenant's name and click total.                                                                                     |
+| Variable                | Required    | Default                                             | Description                                                                                                                                                           |
+| ----------------------- | ----------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`          | yes         | —                                                   | MySQL connection string, e.g. `mysql://appreciator:appreciator@127.0.0.1:3306/appreciator`.                                                                           |
+| `VISITOR_HASH_SECRET`   | yes         | —                                                   | HMAC key for visitor hashing, at least 32 characters. `openssl rand -hex 32`.                                                                                         |
+| `MANAGEMENT_SECRET`     | no          | —                                                   | Management API key, at least 32 characters. A tenant for it is provisioned on startup. `openssl rand -hex 32`.                                                        |
+| `PORT`                  | no          | `3000`                                              | HTTP port.                                                                                                                                                            |
+| `HOST`                  | no          | `0.0.0.0`                                           | Bind address.                                                                                                                                                         |
+| `DEFAULT_MAX_CLICKS`    | no          | `10`                                                | Per-visitor cap for buttons created without an explicit `maxClicks`.                                                                                                  |
+| `PUBLIC_BASE_URL`       | no          | `http://localhost:$PORT`                            | Absolute http(s) base URL of this server: written into the embed snippet, the GitHub callback URL, and the only origin cookie-authenticated writes are accepted from. |
+| `RATE_LIMIT_MAX`        | no          | `60`                                                | Writes allowed per IP per window: clicks and resets on the public routes (and the auth and leaderboard budgets).                                                      |
+| `RATE_LIMIT_READ_MAX`   | no          | `600`                                               | Public-route reads (`/config`, `/state`, preflights) allowed per IP per window, counted apart from writes.                                                            |
+| `RATE_LIMIT_WINDOW`     | no          | `1 minute`                                          | Rate limit window.                                                                                                                                                    |
+| `WIDGET_RATE_LIMIT_MAX` | no          | `300`                                               | `GET /widget.js` requests allowed per IP per `RATE_LIMIT_WINDOW`, counted separately from the public routes.                                                          |
+| `TRUST_PROXY`           | no          | `false`                                             | Derive the client IP from `X-Forwarded-For`. Only enable behind a proxy you control.                                                                                  |
+| `LOG_LEVEL`             | no          | `info`                                              | Pino level.                                                                                                                                                           |
+| `WIDGET_BUNDLE_PATH`    | no          | `../widget/dist/widget.js`                          | Built widget bundle served at `GET /widget.js`. Relative paths resolve against the process working directory.                                                         |
+| `GITHUB_CLIENT_ID`      | no          | —                                                   | OAuth app client id for "Sign in with GitHub". Set with `GITHUB_CLIENT_SECRET` and `SESSION_SECRET`, or not at all.                                                   |
+| `GITHUB_CLIENT_SECRET`  | no          | —                                                   | OAuth app client secret.                                                                                                                                              |
+| `GITHUB_ALLOWED_LOGINS` | no          | —                                                   | Comma-separated GitHub logins allowed to sign in, case-insensitive. `*` allows every GitHub account. Empty means nobody.                                              |
+| `SESSION_SECRET`        | with GitHub | —                                                   | HMAC key for session cookies, at least 32 characters. Required when the GitHub variables are set. `openssl rand -hex 32`.                                             |
+| `GITHUB_OAUTH_URL`      | no          | `https://github.com`                                | Base of GitHub's OAuth endpoints (GitHub Enterprise).                                                                                                                 |
+| `GITHUB_API_URL`        | no          | `https://api.github.com`                            | Base of GitHub's REST API.                                                                                                                                            |
+| `DEMO_BUTTON`           | no          | `true`                                              | Provision the landing page's demo button at startup.                                                                                                                  |
+| `DEMO_ALLOWED_ORIGINS`  | no          | origin of `PUBLIC_BASE_URL`                         | Comma-separated `allowedOrigins` for the demo button.                                                                                                                 |
+| `REPO_URL`              | no          | `https://github.com/medhatdawoud/appreciate-button` | Source repository linked from the web UI.                                                                                                                             |
+| `LEADERBOARD`           | no          | `true`                                              | Serve `GET /v1/leaderboard`, which publishes every tenant's name and click total.                                                                                     |
 
 Changing `VISITOR_HASH_SECRET` invalidates every stored visitor hash: existing
 visitors get a fresh allowance, and their old rows become unreachable.
@@ -82,7 +82,7 @@ because the stored hash is only as strong as the secret.
 **The CLI**, for additional tenants:
 
 ```bash
-npm run create-tenant -w @appreciator/server -- --name "Some Name"
+npm run create-tenant -w @appreciate-button/server -- --name "Some Name"
 ```
 
 It prints the plaintext secret **once**. It cannot be recovered afterwards; a
@@ -148,15 +148,15 @@ back to a built-in heart icon (see `src/lib/default-icon.ts`) and `maxClicks`
 to `DEFAULT_MAX_CLICKS`. The response's `embedSnippet` is the one-tag embed:
 
 ```html
-<script src="https://appreciator.example.com/widget.js" data-key="pk_…" async></script>
+<script src="https://appreciate-button.example.com/widget.js" data-key="pk_…" async></script>
 ```
 
 Its `elementSnippet` is the same button as a script, loaded once per page,
 plus an element to place wherever the button should appear:
 
 ```html
-<script src="https://appreciator.example.com/widget.js" async></script>
-<appreciator-button data-key="pk_…"></appreciator-button>
+<script src="https://appreciate-button.example.com/widget.js" async></script>
+<appreciate-button data-key="pk_…"></appreciate-button>
 ```
 
 Every `ButtonConfig` — each entry of `GET /v1/buttons` and the `PATCH`
@@ -208,7 +208,7 @@ returned in every `ButtonConfig` and by `/config`.
 `burstStyle` (`icons`, the default and the value every button had before
 migration 017, `dashes` or `none`) is what flies out of the button on a click.
 With `none` nothing flies, and the click still counts, sounds and fires
-`appreciator:burst`. It is returned in every `ButtonConfig` and by `/config`.
+`appreciate:burst`. It is returned in every `ButtonConfig` and by `/config`.
 
 `svgSource` and `svgSources` in the same request answer
 `400 conflicting_icon`. A button created with `svgSources` still stores the
@@ -380,9 +380,9 @@ secret of at least 32 characters fails the start.
 To enable it, register an OAuth app under GitHub → Settings → Developer
 settings → OAuth Apps:
 
-- **Homepage URL**: `PUBLIC_BASE_URL`, e.g. `https://appreciator.example.com`.
+- **Homepage URL**: `PUBLIC_BASE_URL`, e.g. `https://appreciate-button.example.com`.
 - **Authorization callback URL**: `${PUBLIC_BASE_URL}/auth/github/callback`,
-  e.g. `https://appreciator.example.com/auth/github/callback`.
+  e.g. `https://appreciate-button.example.com/auth/github/callback`.
 
 Then set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from the app,
 `SESSION_SECRET` to `openssl rand -hex 32`, and `GITHUB_ALLOWED_LOGINS` to the
@@ -398,7 +398,7 @@ its account; the stored login and avatar are refreshed on every sign-in.
 | `POST` | `/auth/logout`          | `204`, clears the session (CSRF rules below)                                    |
 | `GET`  | `/auth/me`              | → `Account`, or `401 unauthenticated`                                           |
 
-`/auth/github` sets a signed `appreciator_oauth_state` cookie valid for ten
+`/auth/github` sets a signed `appreciate_button_oauth_state` cookie valid for ten
 minutes and sends its random value to GitHub as `state`; the callback refuses
 any `state` that does not match it with `400 invalid_state`, which is what
 stops a callback URL crafted on another site from signing a browser into the
@@ -410,7 +410,7 @@ at `warn` with the login. These routes share a per-IP rate limit of
 
 ### Sessions and CSRF
 
-The session is a stateless cookie, `appreciator_session`: a base64url JSON
+The session is a stateless cookie, `appreciate_button_session`: a base64url JSON
 payload of the account id and an expiry seven days out, and an HMAC-SHA256 of
 it keyed by `SESSION_SECRET`, compared in constant time. It is `HttpOnly`,
 `SameSite=Lax`, `Path=/`, and `Secure` when `PUBLIC_BASE_URL` is `https://`.
@@ -419,7 +419,7 @@ rotating `SESSION_SECRET`, which signs everyone out. A session for an account
 that no longer exists reads as signed out.
 
 Every cookie-authenticated request other than `GET`, `HEAD` and `OPTIONS` must
-carry `X-Requested-With: appreciator`, and its `Origin` (or, when a browser
+carry `X-Requested-With: appreciate-button`, and its `Origin` (or, when a browser
 omits that, its `Referer`) must be the origin of `PUBLIC_BASE_URL`. Anything
 else is refused with `403 csrf`. The dashboard is therefore served from the
 same origin as this API.
@@ -490,10 +490,10 @@ page and dashboard read to boot:
 
 ```json
 {
-  "apiUrl": "https://appreciator.example.com",
+  "apiUrl": "https://appreciate-button.example.com",
   "demoKey": "pk_…",
   "signInEnabled": true,
-  "repoUrl": "https://github.com/medhatdawoud/appreciator",
+  "repoUrl": "https://github.com/medhatdawoud/appreciate-button",
   "leaderboardEnabled": true,
   "defaultIcon": { "svgSource": "<svg …>", "colors": { "default": "#6b7280", "…": "…" } }
 }
@@ -644,16 +644,16 @@ publishes by name and which the owner is sharing the badge to show.
 Unit tests cover the pure helpers in `src/lib/` and need nothing running:
 
 ```bash
-npm run test:unit -w @appreciator/server
+npm run test:unit -w @appreciate-button/server
 ```
 
 Integration tests run against the real MySQL from the repository's
 `docker-compose.yml`, with no database or HTTP doubles. They create and migrate
-an `appreciator_test` schema and truncate it between tests:
+an `appreciate_button_test` schema and truncate it between tests:
 
 ```bash
 docker compose up -d mysql
-npm run test:integration -w @appreciator/server
+npm run test:integration -w @appreciate-button/server
 ```
 
 They connect as `root` by default, because the compose file only grants the

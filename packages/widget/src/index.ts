@@ -1,9 +1,9 @@
-import { AppreciatorButton, setDefaultApi, type MountOptions } from './element.js';
+import { AppreciateButton, setDefaultApi, type MountOptions } from './element.js';
 import { apiBaseFromScriptSrc, autoMount } from './embed.js';
 
 export { ApiClient, ApiError } from './api.js';
 export {
-  AppreciatorButton,
+  AppreciateButton,
   BURST_MS,
   BURST_PARTICLES,
   PULSE_MS,
@@ -18,19 +18,19 @@ export type { StateIconConfig } from './preview.js';
 export type { ErrorDetail, MountOptions } from './element.js';
 export type { VisualState } from './state.js';
 
-export const TAG_NAME = 'appreciator-button';
+export const TAG_NAME = 'appreciate-button';
 
 /** Registers the custom element. Safe to call more than once. */
 export function define(tagName: string = TAG_NAME): void {
   if (customElements.get(tagName) === undefined) {
-    customElements.define(tagName, AppreciatorButton);
+    customElements.define(tagName, AppreciateButton);
   }
 }
 
 /** Creates a button, appends it to `target` and returns it. */
-export function mount(target: Element, options: MountOptions): AppreciatorButton {
+export function mount(target: Element, options: MountOptions): AppreciateButton {
   define();
-  const element = new AppreciatorButton();
+  const element = new AppreciateButton();
   if (options.api !== undefined) element.dataset.api = options.api;
   element.dataset.key = options.key;
   if (options.item !== undefined) element.dataset.item = options.item;

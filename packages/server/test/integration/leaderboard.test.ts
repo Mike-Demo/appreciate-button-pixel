@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-import type { LeaderboardResponse } from '@appreciator/shared';
+import type { LeaderboardResponse } from '@appreciate-button/shared';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { insertButton } from '../../src/db/buttons.js';
@@ -134,12 +134,12 @@ describe('GET /v1/leaderboard', () => {
   it('leaves out the landing-page demo, but not a dashboard site named "demo"', async () => {
     const { app, pool } = await context();
     const demo = await ensureDemoButton(pool, {
-      demoAllowedOrigins: ['https://appreciator.test'],
+      demoAllowedOrigins: ['https://appreciate-button.test'],
       defaultMaxClicks: 10,
     });
     await execute(pool, 'INSERT INTO items (button_id, item_key, total_count) VALUES (?, ?, ?)', [
       demo.buttonId,
-      'https://appreciator.test',
+      'https://appreciate-button.test',
       99,
     ]);
     const account = await seedAccount(pool);
@@ -333,7 +333,7 @@ describe('GET /v1/leaderboard', () => {
     it('is an empty list, not an error, when signed out or with a forged cookie', async () => {
       const { app } = await context(SIGN_IN_CONFIG);
 
-      for (const headers of [{}, { cookie: 'appreciator_session=forged.value' }]) {
+      for (const headers of [{}, { cookie: 'appreciate_button_session=forged.value' }]) {
         const response = await app.inject({ method: 'GET', url: '/v1/leaderboard/mine', headers });
         expect(response.statusCode).toBe(200);
         expect(response.json()).toEqual({ siteIds: [] });

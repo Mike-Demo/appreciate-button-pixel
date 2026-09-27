@@ -28,7 +28,7 @@ async function open(page: Page): Promise<Widget> {
     item: `e2e-states-${randomUUID()}`,
   });
   await page.goto(`http://127.0.0.1:${PAGE_PORT}/?${params.toString()}`);
-  const host = page.locator('appreciator-button');
+  const host = page.locator('appreciate-button');
   const icons = Object.fromEntries(
     STATES.map((state) => [state, host.locator(`svg[data-for="${state}"]`)]),
   ) as Record<State, Locator>;

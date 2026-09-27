@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import type { ButtonColors, ButtonState } from '@appreciator/shared';
+import type { ButtonColors, ButtonState } from '@appreciate-button/shared';
 import { DOMParser, XMLSerializer, onErrorStopParsing } from '@xmldom/xmldom';
 import type { Document, Element } from '@xmldom/xmldom';
 
@@ -161,9 +161,9 @@ export function normalizeSvgSource(source: string, sourceLabel = 'input SVG'): s
 }
 
 /**
- * The four CSS color values accepted by the `appreciator` server's `POST /v1/buttons` (a hex
+ * The four CSS color values accepted by the Appreciate Button server's `POST /v1/buttons` (a hex
  * literal, a bare keyword, or an rgb()/rgba() call) -- duplicated here (rather than imported from
- * `@appreciator/server`, which this package must not depend on) so bad input is rejected with a
+ * `@appreciate-button/server`, which this package must not depend on) so bad input is rejected with a
  * clear message before it reaches the server instead of after.
  */
 const COLOR_PATTERN = /^(#[0-9A-Fa-f]{3,8}|[A-Za-z]{1,32}|rgba?\([0-9.,%\s]{1,40}\))$/;

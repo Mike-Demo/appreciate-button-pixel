@@ -27,8 +27,8 @@ jobs:
           --health-retries 10
 
     env:
-      TEST_DATABASE_URL: mysql://root:appreciator@127.0.0.1:3306/appreciator_test
-      E2E_DATABASE_URL: mysql://root:appreciator@127.0.0.1:3306/appreciator_e2e
+      TEST_DATABASE_URL: mysql://root:appreciator@127.0.0.1:3306/appreciate_button_test
+      E2E_DATABASE_URL: mysql://root:appreciator@127.0.0.1:3306/appreciate_button_e2e
 
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build -w @appreciator/shared
+      - run: npm run build -w @appreciate-button/shared
 
       - run: npm run lint
       - run: npm run format

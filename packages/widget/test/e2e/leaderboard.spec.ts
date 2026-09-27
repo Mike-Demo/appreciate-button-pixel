@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
-import type { LeaderboardResponse } from '@appreciator/shared';
+import type { LeaderboardResponse } from '@appreciate-button/shared';
 import { expect, test } from '@playwright/test';
 
 import { API_ORIGIN, FIXTURE_PATH, PAGE_ORIGIN, type E2eFixture } from './constants.js';
@@ -31,7 +31,7 @@ test('lists the e2e site with every click counted, and never the demo', async ({
     item: `e2e-board-${randomUUID()}`,
   });
   await page.goto(`${PAGE_ORIGIN}/?${params.toString()}`);
-  const widget = page.locator('appreciator-button');
+  const widget = page.locator('appreciate-button');
   await expect(widget).toHaveAttribute('data-state', 'default');
   for (let i = 0; i < CLICKS; i += 1) {
     await widget.locator('button').click();
@@ -40,7 +40,7 @@ test('lists the e2e site with every click counted, and never the demo', async ({
   // The count above is optimistic; the leaderboard only sees settled clicks.
   await page.evaluate(() =>
     (
-      document.querySelector('appreciator-button') as unknown as { whenIdle(): Promise<void> }
+      document.querySelector('appreciate-button') as unknown as { whenIdle(): Promise<void> }
     ).whenIdle(),
   );
 
@@ -64,14 +64,14 @@ test('links a site to its most-clicked public page, shown under its name', async
     item: pageUrl,
   });
   await page.goto(`${PAGE_ORIGIN}/?${params.toString()}`);
-  const widget = page.locator('appreciator-button');
+  const widget = page.locator('appreciate-button');
   await expect(widget).toHaveAttribute('data-state', 'default');
   // Enough to outweigh whatever the page-origin counters hold: those are
   // 127.0.0.1, which never becomes a link, so one click is already enough.
   await widget.locator('button').click();
   await page.evaluate(() =>
     (
-      document.querySelector('appreciator-button') as unknown as { whenIdle(): Promise<void> }
+      document.querySelector('appreciate-button') as unknown as { whenIdle(): Promise<void> }
     ).whenIdle(),
   );
 
@@ -106,7 +106,10 @@ test("offers a site's owner, and only its owner, a way to its settings", async (
         (
           await fetch(path, {
             method: 'POST',
-            headers: { 'content-type': 'application/json', 'x-requested-with': 'appreciator' },
+            headers: {
+              'content-type': 'application/json',
+              'x-requested-with': 'appreciate-button',
+            },
             body: JSON.stringify(body),
           })
         ).json();
@@ -118,10 +121,10 @@ test("offers a site's owner, and only its owner, a way to its settings", async (
   );
   const visitor = await owner.newPage();
   await visitor.goto(`${PAGE_ORIGIN}/?${new URLSearchParams({ api: API_ORIGIN, key: publicKey })}`);
-  await visitor.locator('appreciator-button button').click();
+  await visitor.locator('appreciate-button button').click();
   await visitor.evaluate(() =>
     (
-      document.querySelector('appreciator-button') as unknown as { whenIdle(): Promise<void> }
+      document.querySelector('appreciate-button') as unknown as { whenIdle(): Promise<void> }
     ).whenIdle(),
   );
   await visitor.close();
@@ -160,7 +163,7 @@ test("offers a site's owner, and only its owner, a way to its settings", async (
     (id) =>
       fetch(`/v1/sites/${id}`, {
         method: 'DELETE',
-        headers: { 'x-requested-with': 'appreciator' },
+        headers: { 'x-requested-with': 'appreciate-button' },
       }),
     siteId,
   );

@@ -1,4 +1,4 @@
-import type { Site } from '@appreciator/shared';
+import type { Site } from '@appreciate-button/shared';
 
 import type { Executor } from './pool.js';
 import { queryOne, queryRows } from './pool.js';

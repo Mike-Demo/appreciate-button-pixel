@@ -12,7 +12,7 @@
  * A source page is an HTML fragment that starts with a front block:
  *
  *   <!--
- *   title: Clap button for any website — Appreciator
+ *   title: Clap button for any website — Appreciate Button
  *   description: One sentence for search results.
  *   crumb: Clap button
  *   -->
@@ -119,7 +119,7 @@ function escapeHtml(text: string): string {
  * (`guides/` for `guides/hugo`) when there is one.
  */
 export function breadcrumbs(page: Page, pages: readonly Page[]): { name: string; path: string }[] {
-  const trail = [{ name: 'Appreciator', path: '' }];
+  const trail = [{ name: 'Appreciate Button', path: '' }];
   const slash = page.path.indexOf('/');
   if (slash !== -1 && slash !== page.path.length - 1) {
     const folder = page.path.slice(0, slash + 1);

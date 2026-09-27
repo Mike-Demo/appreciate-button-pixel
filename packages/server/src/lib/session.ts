@@ -13,13 +13,13 @@ declare module 'fastify' {
   }
 }
 
-export const SESSION_COOKIE = 'appreciator_session';
+export const SESSION_COOKIE = 'appreciate_button_session';
 
 const SESSION_TTL_SECONDS = 7 * 24 * 60 * 60;
 
 /** The header a cookie-authenticated write must carry, and the value it must have. */
 export const CSRF_HEADER = 'x-requested-with';
-export const CSRF_HEADER_VALUE = 'appreciator';
+export const CSRF_HEADER_VALUE = 'appreciate-button';
 
 /** Methods that must not change state, and so need no CSRF check. */
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);

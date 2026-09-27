@@ -1,8 +1,8 @@
-import type { ClickCounts } from '@appreciator/shared';
+import type { ClickCounts } from '@appreciate-button/shared';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
-  AppreciatorButton,
+  AppreciateButton,
   BURST_MS,
   PULSE_MS,
   ROLL_MS,
@@ -22,41 +22,41 @@ import {
 const API = 'https://api.test';
 const KEY = `pk_${'a'.repeat(32)}`;
 
-function shadow(element: AppreciatorButton): ShadowRoot {
+function shadow(element: AppreciateButton): ShadowRoot {
   const root = element.shadowRoot;
   if (root === null) throw new Error('expected a shadow root');
   return root;
 }
 
-function innerButton(element: AppreciatorButton): HTMLButtonElement {
+function innerButton(element: AppreciateButton): HTMLButtonElement {
   const button = shadow(element).querySelector('button');
   if (button === null) throw new Error('expected an inner button');
   return button;
 }
 
 /** The number the count is showing, or rolling to. */
-function countText(element: AppreciatorButton): string {
+function countText(element: AppreciateButton): string {
   return shadow(element).querySelector('[part="count"] > span:not(.roll-out)')?.textContent ?? '';
 }
 
-function recordEvents(element: AppreciatorButton, name: string): unknown[] {
+function recordEvents(element: AppreciateButton, name: string): unknown[] {
   const details: unknown[] = [];
   element.addEventListener(name, (event) => details.push((event as CustomEvent).detail));
   return details;
 }
 
-async function mountReady(item = 'article-1'): Promise<AppreciatorButton> {
+async function mountReady(item = 'article-1'): Promise<AppreciateButton> {
   const element = mount(document.body, { api: API, key: KEY, item });
   await element.whenReady();
   return element;
 }
 
-async function clickAndSettle(element: AppreciatorButton, times = 1): Promise<void> {
+async function clickAndSettle(element: AppreciateButton, times = 1): Promise<void> {
   for (let i = 0; i < times; i += 1) innerButton(element).click();
   await element.whenIdle();
 }
 
-describe('AppreciatorButton', () => {
+describe('AppreciateButton', () => {
   let server: FakeServer;
 
   beforeEach(() => {
@@ -91,9 +91,9 @@ describe('AppreciatorButton', () => {
   });
 
   it('initialises once when upgraded with attributes already present', async () => {
-    document.body.innerHTML = `<appreciator-button data-api="${API}" data-key="${KEY}" data-item="x"></appreciator-button>`;
-    const element = document.querySelector('appreciator-button');
-    if (!(element instanceof AppreciatorButton)) throw new Error('element not upgraded');
+    document.body.innerHTML = `<appreciate-button data-api="${API}" data-key="${KEY}" data-item="x"></appreciate-button>`;
+    const element = document.querySelector('appreciate-button');
+    if (!(element instanceof AppreciateButton)) throw new Error('element not upgraded');
 
     await element.whenReady();
 
@@ -112,7 +112,7 @@ describe('AppreciatorButton', () => {
 
   it('shows the click optimistically, then adopts the server counts', async () => {
     const element = await mountReady();
-    const changes = recordEvents(element, 'appreciator:change');
+    const changes = recordEvents(element, 'appreciate:change');
     const release = server.hold();
 
     innerButton(element).click();
@@ -132,9 +132,9 @@ describe('AppreciatorButton', () => {
     });
     expect(countText(element)).toBe('1');
     expect(changes).toEqual([server.counts()]);
-    expect(JSON.parse(localStorage.getItem(`appreciator:counts:${KEY}:article-1`) ?? '')).toEqual(
-      server.counts(),
-    );
+    expect(
+      JSON.parse(localStorage.getItem(`appreciate-button:counts:${KEY}:article-1`) ?? ''),
+    ).toEqual(server.counts());
   });
 
   it('returns to the default state once the pulse ends', async () => {
@@ -151,7 +151,7 @@ describe('AppreciatorButton', () => {
   it('sends rapid clicks one at a time and stops at the cap', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
     const element = await mountReady();
-    const maxed = recordEvents(element, 'appreciator:maxed');
+    const maxed = recordEvents(element, 'appreciate:maxed');
 
     innerButton(element).click();
     innerButton(element).click();
@@ -186,7 +186,7 @@ describe('AppreciatorButton', () => {
 
   it('rolls back a failed click by re-reading the server state', async () => {
     const element = await mountReady();
-    const errors = recordEvents(element, 'appreciator:error');
+    const errors = recordEvents(element, 'appreciate:error');
     server.failNextClick(500);
 
     await clickAndSettle(element);
@@ -222,8 +222,8 @@ describe('AppreciatorButton', () => {
 
   it('reports missing attributes', async () => {
     const errors: unknown[] = [];
-    const element = new AppreciatorButton();
-    element.addEventListener('appreciator:error', (event) =>
+    const element = new AppreciateButton();
+    element.addEventListener('appreciate:error', (event) =>
       errors.push((event as CustomEvent).detail),
     );
     document.body.append(element);
@@ -278,7 +278,7 @@ describe('AppreciatorButton', () => {
   });
 
   describe('per-state icons', () => {
-    function iconStates(element: AppreciatorButton): (string | null)[] {
+    function iconStates(element: AppreciateButton): (string | null)[] {
       return Array.from(shadow(element).querySelectorAll('[part="icon"] > svg'), (svg) =>
         svg.getAttribute('data-for'),
       );
@@ -337,13 +337,13 @@ describe('AppreciatorButton', () => {
   });
 
   describe('progress fill', () => {
-    function layers(element: AppreciatorButton): (string | null)[] {
+    function layers(element: AppreciateButton): (string | null)[] {
       return Array.from(shadow(element).querySelectorAll('[part="icon"] > svg'), (svg) =>
         svg.getAttribute('data-layer'),
       );
     }
 
-    function progress(element: AppreciatorButton): { attribute: string | null; variable: string } {
+    function progress(element: AppreciateButton): { attribute: string | null; variable: string } {
       return {
         attribute: element.getAttribute('data-progress'),
         variable: element.style.getPropertyValue('--appr-progress'),
@@ -399,7 +399,7 @@ describe('AppreciatorButton', () => {
   });
 
   describe('burst', () => {
-    function particles(element: AppreciatorButton): Element[] {
+    function particles(element: AppreciateButton): Element[] {
       return Array.from(shadow(element).querySelectorAll('[part="burst"] > svg'));
     }
 
@@ -428,7 +428,7 @@ describe('AppreciatorButton', () => {
     it('plays on every counted click, then stops', async () => {
       vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
       const element = await mountReady();
-      const bursts = recordEvents(element, 'appreciator:burst');
+      const bursts = recordEvents(element, 'appreciate:burst');
 
       innerButton(element).click();
       expect(element.hasAttribute('data-burst')).toBe(true);
@@ -518,7 +518,7 @@ describe('AppreciatorButton', () => {
       vi.unstubAllGlobals();
       server = installFakeServer(sampleConfig({ burstStyle: 'none' }));
       const element = await mountReady();
-      const bursts = recordEvents(element, 'appreciator:burst');
+      const bursts = recordEvents(element, 'appreciate:burst');
 
       await clickAndSettle(element);
 
@@ -543,7 +543,7 @@ describe('AppreciatorButton', () => {
       const element = await mountReady();
       await clickAndSettle(element, 3);
       await vi.advanceTimersByTimeAsync(BURST_MS);
-      const bursts = recordEvents(element, 'appreciator:burst');
+      const bursts = recordEvents(element, 'appreciate:burst');
 
       innerButton(element).click();
       await element.whenIdle();
@@ -569,7 +569,7 @@ describe('AppreciatorButton', () => {
   });
 
   describe('loading through throttling', () => {
-    function iconCount(element: AppreciatorButton): number {
+    function iconCount(element: AppreciateButton): number {
       return shadow(element).querySelectorAll('[part="icon"] > svg').length;
     }
 
@@ -673,7 +673,7 @@ describe('AppreciatorButton', () => {
   });
 
   describe('count roll', () => {
-    function spans(element: AppreciatorButton): { text: string | null; roll: string }[] {
+    function spans(element: AppreciateButton): { text: string | null; roll: string }[] {
       return Array.from(shadow(element).querySelectorAll('[part="count"] > span'), (span) => ({
         text: span.textContent,
         roll: span.className,
@@ -790,7 +790,7 @@ describe('AppreciatorButton', () => {
       return server.requests.map((request) => request.url).filter((url) => url.includes('/state'));
     }
 
-    async function mountOnPage(): Promise<AppreciatorButton> {
+    async function mountOnPage(): Promise<AppreciateButton> {
       const element = mount(document.body, { api: API, key: KEY });
       await element.whenReady();
       return element;
@@ -965,7 +965,7 @@ describe('AppreciatorButton', () => {
         readonly: true,
       });
       await element.whenReady();
-      const bursts = recordEvents(element, 'appreciator:burst');
+      const bursts = recordEvents(element, 'appreciate:burst');
 
       expect(element.dataset.readonly).toBe('');
       expect(countText(element)).toBe('0');
@@ -1019,7 +1019,7 @@ describe('AppreciatorButton', () => {
   });
 
   describe('the thank-you message', () => {
-    function thanks(element: AppreciatorButton): HTMLElement {
+    function thanks(element: AppreciateButton): HTMLElement {
       const part = shadow(element).querySelector<HTMLElement>('[part="thanks"]');
       if (part === null) throw new Error('expected a thanks part');
       return part;
@@ -1090,7 +1090,7 @@ describe('AppreciatorButton', () => {
     });
 
     it('goes away when a preview starts over', async () => {
-      const element = document.createElement('appreciator-button') as AppreciatorButton;
+      const element = document.createElement('appreciate-button') as AppreciateButton;
       document.body.append(element);
       await element.preview(sampleConfig({ thanksMessage: 'Cheers.' }));
       await clickAndSettle(element, 3);
@@ -1128,8 +1128,8 @@ describe('AppreciatorButton', () => {
   describe('preview()', () => {
     async function previewed(
       overrides: Parameters<typeof sampleConfig>[0] = {},
-    ): Promise<AppreciatorButton> {
-      const element = document.createElement('appreciator-button') as AppreciatorButton;
+    ): Promise<AppreciateButton> {
+      const element = document.createElement('appreciate-button') as AppreciateButton;
       document.body.append(element);
       await element.preview(sampleConfig(overrides));
       return element;
@@ -1137,7 +1137,7 @@ describe('AppreciatorButton', () => {
 
     it('draws the button from the config alone, with no key and no requests', async () => {
       const ready = [] as unknown[];
-      document.body.addEventListener('appreciator:ready', (event) =>
+      document.body.addEventListener('appreciate:ready', (event) =>
         ready.push((event as CustomEvent).detail),
       );
 
@@ -1154,8 +1154,8 @@ describe('AppreciatorButton', () => {
     it('settles clicks locally up to the cap, then only bursts', async () => {
       vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
       const element = await previewed();
-      const maxed = recordEvents(element, 'appreciator:maxed');
-      const bursts = recordEvents(element, 'appreciator:burst');
+      const maxed = recordEvents(element, 'appreciate:maxed');
+      const bursts = recordEvents(element, 'appreciate:burst');
 
       await clickAndSettle(element, 5);
       await vi.advanceTimersByTimeAsync(PULSE_MS);

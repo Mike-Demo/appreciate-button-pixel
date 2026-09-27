@@ -68,7 +68,7 @@ export const DEMO_TENANT_NAME = 'demo';
 export const DEMO_BUTTON_NAME = 'Landing demo';
 
 /** MySQL named lock that serialises concurrent demo bootstraps. */
-const DEMO_LOCK_NAME = 'appreciator_demo_bootstrap';
+const DEMO_LOCK_NAME = 'appreciate_button_demo_bootstrap';
 const DEMO_LOCK_TIMEOUT_SECONDS = 10;
 
 export interface DemoButtonResult {

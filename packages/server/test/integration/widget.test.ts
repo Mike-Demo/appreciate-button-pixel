@@ -4,12 +4,12 @@ import { join } from 'node:path';
 
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import type { CreateButtonResponse } from '@appreciator/shared';
+import type { CreateButtonResponse } from '@appreciate-button/shared';
 
 import { type AppConfig, loadAppConfig } from '../../src/env.js';
 import { closeTestContext, createTestContext, seedTenant, type TestContext } from './helpers.js';
 
-const BUNDLE_SOURCE = 'globalThis.__appreciator_widget__ = "fixture bundle";\n';
+const BUNDLE_SOURCE = 'globalThis.__appreciate_button_widget__ = "fixture bundle";\n';
 
 /**
  * The widget package does not exist yet and is not a dependency of these
@@ -31,7 +31,7 @@ describe('GET /widget.js', () => {
   }
 
   beforeEach(async () => {
-    tempDir = await mkdtemp(join(tmpdir(), 'appreciator-widget-'));
+    tempDir = await mkdtemp(join(tmpdir(), 'appreciate-button-widget-'));
     bundlePath = join(tempDir, 'widget.js');
     await writeFile(bundlePath, BUNDLE_SOURCE, 'utf8');
   });
@@ -96,7 +96,7 @@ describe('GET /widget.js', () => {
       BUNDLE_SOURCE,
     );
 
-    const rebuilt = 'globalThis.__appreciator_widget__ = "rebuilt";\n';
+    const rebuilt = 'globalThis.__appreciate_button_widget__ = "rebuilt";\n';
     await writeFile(bundlePath, rebuilt, 'utf8');
     // Nudge mtime forward: the two writes can otherwise land in the same
     // filesystem timestamp tick, which would make this test flaky rather than

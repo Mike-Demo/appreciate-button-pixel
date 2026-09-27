@@ -93,8 +93,8 @@ button.link {
   min-height: 9rem;
 }
 
-.row-preview appreciator-button {
-  --appreciator-size: 1.75rem;
+.row-preview appreciate-button {
+  --appreciate-size: 1.75rem;
 }
 
 /* The name and its actions share the top line, so the snippets below take
@@ -274,8 +274,8 @@ button.link {
   min-height: 15rem;
 }
 
-.try-stage appreciator-button {
-  --appreciator-size: 3rem;
+.try-stage appreciate-button {
+  --appreciate-size: 3rem;
 }
 
 .burst-style,

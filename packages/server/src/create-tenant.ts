@@ -13,7 +13,7 @@ import { generateSecretKey, hashSecretKey } from './lib/auth.js';
  * plaintext is written to stdout and then dropped: it cannot be recovered, and
  * a lost key means creating a new tenant.
  *
- *   npm run create-tenant -w @appreciator/server -- --name "Some Name"
+ *   npm run create-tenant -w @appreciate-button/server -- --name "Some Name"
  */
 const MAX_NAME_LENGTH = 255;
 

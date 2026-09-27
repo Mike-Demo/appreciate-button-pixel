@@ -85,7 +85,7 @@ describe('site pages', () => {
   describe('breadcrumbs and structured data', () => {
     it('leads from the home page through the folder page', () => {
       expect(breadcrumbs(hugo, [guides, hugo])).toEqual([
-        { name: 'Appreciator', path: '' },
+        { name: 'Appreciate Button', path: '' },
         { name: 'Guides', path: 'guides/' },
         { name: 'Hugo', path: 'guides/hugo' },
       ]);

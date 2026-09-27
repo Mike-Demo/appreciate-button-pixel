@@ -8,7 +8,7 @@ import type {
   BurstStyle,
   CountPosition,
   UrlNormalization,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 
 import { generatePublicKey } from '../lib/auth.js';
 import { DEFAULT_THANKS_MESSAGE } from '../lib/default-thanks.js';
@@ -127,7 +127,7 @@ export function buildElementSnippet(
 ): string {
   return (
     `<script src="${baseUrl}/widget.js" async></script>\n` +
-    `<appreciator-button data-key="${publicKey}"${countAttribute(countPosition)}></appreciator-button>`
+    `<appreciate-button data-key="${publicKey}"${countAttribute(countPosition)}></appreciate-button>`
   );
 }
 

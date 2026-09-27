@@ -99,7 +99,7 @@ test('every page linked from the home page is whole, distinct and says where it 
     expect(facts.status, where).toBe(200);
     expect(facts.problems, where).toEqual([]);
     expect(facts.h1s, where).toBe(1);
-    expect(facts.title, where).toMatch(/Appreciator/);
+    expect(facts.title, where).toMatch(/Appreciate Button/);
     expect(facts.description?.length ?? 0, where).toBeGreaterThan(50);
     expect(facts.canonical, where).toBe(`${SITE_ORIGIN}${where}`);
     expect(facts.ogImage, where).toBe(`${SITE_ORIGIN}/img/og.png`);
@@ -142,7 +142,7 @@ test('a keyword page runs its live demo, and counts a click', async ({ page }) =
   const problems = await watchProblems(page);
   await page.goto(`${API_ORIGIN}/clap-button`);
 
-  const demo = page.locator('[data-demo-slot="clap-button"] appreciator-button');
+  const demo = page.locator('[data-demo-slot="clap-button"] appreciate-button');
   await expect(demo).toHaveAttribute('data-state', 'default');
   const count = demo.locator('[part="count"]');
   const before = Number(await count.textContent());

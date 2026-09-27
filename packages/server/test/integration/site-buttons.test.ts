@@ -3,7 +3,7 @@ import type {
   ButtonListResponse,
   CreateButtonResponse,
   CreateSiteResponse,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { execute } from '../../src/db/pool.js';

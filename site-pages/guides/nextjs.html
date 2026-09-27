@@ -1,6 +1,6 @@
 <!--
-title: Add a like or clap button to Next.js and React — Appreciator
-description: Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciator-button element in JSX. Counts follow client-side navigation.
+title: Add a like or clap button to Next.js and React — Appreciate Button
+description: Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciate-button element in JSX. Counts follow client-side navigation.
 crumb: Next.js and React
 -->
 <h1>Add a like button to Next.js and React</h1>
@@ -41,18 +41,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   <div class="code-block">
     <pre><code id="next-element">&lt;article&gt;
   {/* the post */}
-  &lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY" /&gt;
+  &lt;appreciate-button data-key="pk_YOUR_BUTTON_KEY" /&gt;
 &lt;/article&gt;</code></pre>
     <button class="copy" type="button" data-copy="#next-element">Copy</button>
   </div>
-  <p>With TypeScript, declare the element once, for example in <code>appreciator.d.ts</code>:</p>
+  <p>
+    With TypeScript, declare the element once, for example in <code>appreciate-button.d.ts</code>:
+  </p>
   <div class="code-block">
     <pre><code id="next-types">import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'appreciator-button': DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;;
+      'appreciate-button': DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;;
     }
   }
 }</code></pre>
@@ -72,7 +74,7 @@ declare module 'react' {
       never differ from what the server rendered.
     </li>
     <li>
-      Listen for <code>appreciator:change</code> and the other events on the element to react to
+      Listen for <code>appreciate:change</code> and the other events on the element to react to
       clicks in your own code.
     </li>
     <li>Allow <code>http://localhost:3000</code> to try it with <code>next dev</code>.</li>

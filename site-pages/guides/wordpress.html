@@ -1,5 +1,5 @@
 <!--
-title: Add a like or clap button to WordPress posts — Appreciator
+title: Add a like or clap button to WordPress posts — Appreciate Button
 description: Add a like or clap button under every WordPress post: with a Custom HTML block in the Site Editor for block themes, or a few lines in a child theme for any theme.
 crumb: WordPress
 -->
@@ -41,7 +41,7 @@ crumb: WordPress
     <pre><code data-instance-snippet id="wp-php">add_action( 'wp_enqueue_scripts', function () {
 	if ( is_singular( 'post' ) ) {
 		wp_enqueue_script(
-			'appreciator',
+			'appreciate-button',
 			'https://appreciate-button.com/widget.js',
 			array(),
 			null,
@@ -52,7 +52,7 @@ crumb: WordPress
 
 add_filter( 'the_content', function ( $content ) {
 	if ( is_singular( 'post' ) &amp;&amp; in_the_loop() &amp;&amp; is_main_query() ) {
-		$content .= '&lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY"&gt;&lt;/appreciator-button&gt;';
+		$content .= '&lt;appreciate-button data-key="pk_YOUR_BUTTON_KEY"&gt;&lt;/appreciate-button&gt;';
 	}
 	return $content;
 } );</code></pre>

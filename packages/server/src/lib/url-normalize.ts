@@ -1,4 +1,4 @@
-import type { UrlNormalization } from '@appreciator/shared';
+import type { UrlNormalization } from '@appreciate-button/shared';
 
 /**
  * Longest item key we store, matching `items.item_key` / `visitor_clicks.item_key`.

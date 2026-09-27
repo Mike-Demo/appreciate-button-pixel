@@ -80,7 +80,7 @@ export async function widgetRoutes(app: FastifyInstance): Promise<void> {
         statusCode: 404,
         error: 'widget_bundle_not_found',
         message:
-          'The widget bundle has not been built. Build @appreciator/widget, or set WIDGET_BUNDLE_PATH.',
+          'The widget bundle has not been built. Build @appreciate-button/widget, or set WIDGET_BUNDLE_PATH.',
         requestId: request.id,
       });
     }

@@ -1,5 +1,5 @@
 {
-  "name": "@appreciator/server",
+  "name": "@appreciate-button/server",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -17,7 +17,7 @@
     "site:og-image": "tsx scripts/og-image.ts"
   },
   "dependencies": {
-    "@appreciator/shared": "*",
+    "@appreciate-button/shared": "*",
     "@fastify/cookie": "^11.1.2",
     "@fastify/cors": "^11.3.0",
     "@fastify/rate-limit": "^11.2.0",

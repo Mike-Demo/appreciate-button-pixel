@@ -14,7 +14,7 @@ const config = {
   githubClientSecret: 'client-secret',
   githubOAuthUrl: 'https://github.test',
   githubApiUrl: 'https://api.github.test',
-  publicBaseUrl: 'https://appreciator.test',
+  publicBaseUrl: 'https://appreciate-button.test',
 };
 
 interface Call {
@@ -40,7 +40,7 @@ describe('buildAuthorizeUrl', () => {
     expect(`${url.origin}${url.pathname}`).toBe('https://github.test/login/oauth/authorize');
     expect(Object.fromEntries(url.searchParams)).toEqual({
       client_id: 'Iv1.client',
-      redirect_uri: 'https://appreciator.test/auth/github/callback',
+      redirect_uri: 'https://appreciate-button.test/auth/github/callback',
       scope: 'read:user',
       state: 'the-state',
     });
@@ -62,7 +62,7 @@ describe('exchangeCode', () => {
       client_id: 'Iv1.client',
       client_secret: 'client-secret',
       code: 'the-code',
-      redirect_uri: 'https://appreciator.test/auth/github/callback',
+      redirect_uri: 'https://appreciate-button.test/auth/github/callback',
     });
   });
 

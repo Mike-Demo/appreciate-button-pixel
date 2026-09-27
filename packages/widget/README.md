@@ -1,6 +1,6 @@
-# @appreciator/widget
+# @appreciate-button/widget
 
-The embeddable `<appreciator-button>` web component. Framework-agnostic: it
+The embeddable `<appreciate-button>` web component. Framework-agnostic: it
 works from a plain `<script>` tag or as an ES module, and isolates its styling
 in a shadow root. It needs no `'unsafe-inline'` from the host page's
 Content-Security-Policy: its own styles are a constructed stylesheet, and an
@@ -11,7 +11,7 @@ icon's `style` attributes are applied through the CSSOM.
 The server generates this snippet when a button is created:
 
 ```html
-<script src="https://appreciator.example.com/widget.js" data-key="pk_..." async></script>
+<script src="https://appreciate-button.example.com/widget.js" data-key="pk_..." async></script>
 ```
 
 That is the whole embed. The bundle reads its own `src` to learn which server
@@ -38,19 +38,19 @@ A tag without `data-key` only registers the element, for pages that want to
 place buttons themselves — several on one page, or inside a template:
 
 ```html
-<script src="https://appreciator.example.com/widget.js" async></script>
+<script src="https://appreciate-button.example.com/widget.js" async></script>
 ...
-<appreciator-button data-key="pk_..." data-item="post-1"></appreciator-button>
-<appreciator-button data-key="pk_..." data-item="post-2"></appreciator-button>
+<appreciate-button data-key="pk_..." data-item="post-1"></appreciate-button>
+<appreciate-button data-key="pk_..." data-item="post-2"></appreciate-button>
 ```
 
 Or from a bundler:
 
 ```ts
-import { mount } from '@appreciator/widget';
+import { mount } from '@appreciate-button/widget';
 
 mount(document.querySelector('#appreciate'), {
-  api: 'https://appreciator.example.com',
+  api: 'https://appreciate-button.example.com',
   key: 'pk_...',
 });
 ```
@@ -60,7 +60,7 @@ creating one programmatically.
 
 The element takes `data-key`, `data-item`, `data-label`, `data-count` and
 `data-readonly` as above, plus `data-api`, which is required when the bundle
-was **not** loaded from the appreciator server (a bundler build, or a copy
+was **not** loaded from the Appreciate Button server (a bundler build, or a copy
 hosted elsewhere). `mount()` takes `readonly: true` for the same.
 
 ### Read-only
@@ -113,7 +113,7 @@ And `data-ring` when the button draws a circle around its icon (`iconRing`):
 a 1px round border on `::part(icon)`, set off from the icon by 0.3 of its
 size, in the `default` colour at rest, `hover` under the pointer, `clicked`
 during the pulse and `full` once full, each overridable with the same
-`--appreciator-*` variables. The burst starts and ends further out so it
+`--appreciate-*` variables. The burst starts and ends further out so it
 clears the ring.
 
 And `data-icons`, which says how the icon is drawn:
@@ -139,11 +139,11 @@ straight away from the count, so the count sits in the widest gap between them
 on whichever side `data-count` puts it. The button's `burstStyle` chooses what
 they are: small copies of the icon (`icons`, the default), plain `dashes`
 turned to point along their flight, or `none`, where nothing flies while the
-click still counts, sounds, sets `data-burst` and fires `appreciator:burst`.
+click still counts, sounds, sets `data-burst` and fires `appreciate:burst`.
 Each particle's near end appears just outside the icon's edge, or the ring's
 when there is one, and it flies 0.35 icon widths further out at a constant
 size as it fades, over about 0.4 s. A click on a spent button plays no burst
-and counts nothing; it still thanks the visitor and fires `appreciator:burst`.
+and counts nothing; it still thanks the visitor and fires `appreciate:burst`.
 A button that loads does not burst on its own. The particles live in `::part(burst)`; `prefers-reduced-motion` hides
 them.
 
@@ -173,7 +173,7 @@ If loading fails the element gets `data-error` (e.g. `network_error`,
 ### Theming
 
 Colours come from the button's server-side config. A page can override them,
-and the size, with CSS custom properties on the element. `--appreciator-size`
+and the size, with CSS custom properties on the element. `--appreciate-size`
 sizes the whole button: the count is 65% of it, a step below the icon, and
 the gap half of it (a quarter when stacked), or with a ring three quarters (a
 half when stacked). With no size set the icon is `1.5em`, so the count is
@@ -181,12 +181,12 @@ about 0.98× the page's font. Size the count on its own with
 `::part(count) { font-size: … }`:
 
 ```css
-appreciator-button {
-  --appreciator-size: 2rem;
-  --appreciator-default: #9ca3af; /* the unfilled silhouette */
-  --appreciator-hover: #6b7280; /* the silhouette while hovered */
-  --appreciator-clicked: orange; /* the filled part during the pulse */
-  --appreciator-full: gold; /* the filled part */
+appreciate-button {
+  --appreciate-size: 2rem;
+  --appreciate-default: #9ca3af; /* the unfilled silhouette */
+  --appreciate-hover: #6b7280; /* the silhouette while hovered */
+  --appreciate-clicked: orange; /* the filled part during the pulse */
+  --appreciate-full: gold; /* the filled part */
 }
 ```
 
@@ -197,7 +197,7 @@ the message in the page's flow instead of over it.
 
 A button configured with four SVGs draws each state with its own complete
 document, so the colour variables have nothing to recolour unless those
-documents reference them themselves; `--appreciator-size` still sizes every
+documents reference them themselves; `--appreciate-size` still sizes every
 icon. Package the four files with `svg-gen generate --explicit`.
 
 ### Events
@@ -205,19 +205,19 @@ icon. Package the four files with `svg-gen generate --explicit`.
 All bubble and cross the shadow boundary, and all are optional: the button
 works the same whether anything listens.
 
-| Event                | Fires                                                                   | `event.detail`                         |
-| -------------------- | ----------------------------------------------------------------------- | -------------------------------------- |
-| `appreciator:ready`  | Once the button has loaded and shows its count.                         | counts                                 |
-| `appreciator:burst`  | On every click, counted or not; a spent button plays no burst.          | counts, as shown right after the click |
-| `appreciator:change` | When the server confirms a counted click.                               | counts                                 |
-| `appreciator:maxed`  | Once, when the click that uses up the visitor's allowance is confirmed. | counts                                 |
-| `appreciator:error`  | When loading or a click fails.                                          | `{ code, message }`                    |
+| Event               | Fires                                                                   | `event.detail`                         |
+| ------------------- | ----------------------------------------------------------------------- | -------------------------------------- |
+| `appreciate:ready`  | Once the button has loaded and shows its count.                         | counts                                 |
+| `appreciate:burst`  | On every click, counted or not; a spent button plays no burst.          | counts, as shown right after the click |
+| `appreciate:change` | When the server confirms a counted click.                               | counts                                 |
+| `appreciate:maxed`  | Once, when the click that uses up the visitor's allowance is confirmed. | counts                                 |
+| `appreciate:error`  | When loading or a click fails.                                          | `{ code, message }`                    |
 
 The counts are `{ totalCount, maxClicks, visitorCount, visitorRemaining, maxed }`.
 `event.target` is the button, so one listener on `document` hears every button:
 
 ```js
-document.addEventListener('appreciator:burst', (event) => {
+document.addEventListener('appreciate:burst', (event) => {
   console.log('clicked', event.target, event.detail.totalCount);
 });
 ```
@@ -240,7 +240,7 @@ document.addEventListener('appreciator:burst', (event) => {
 The bundle also exports `stateIcon(config, state)`, which returns the icon as
 it looks in one state (`default`, `hover`, `clicked`, `full`) as a standalone
 SVG element, painted as the button paints it. The dashboard draws its colour
-table with it (`Appreciator.stateIcon` from the script tag).
+table with it (`Appreciate Button.stateIcon` from the script tag).
 
 ## How it behaves
 
@@ -280,12 +280,12 @@ the server README for what that does and does not guarantee.
 ## Tests
 
 ```bash
-npm run test:unit -w @appreciator/widget    # vitest + jsdom, fake fetch
-npm run test:e2e -w @appreciator/widget     # Playwright against the real server + MySQL
+npm run test:unit -w @appreciate-button/widget    # vitest + jsdom, fake fetch
+npm run test:e2e -w @appreciate-button/widget     # Playwright against the real server + MySQL
 ```
 
 The e2e run needs `docker compose up -d mysql` and a one-time
 `npx playwright install chromium`. It builds the bundle, migrates a dedicated
-`appreciator_e2e` schema, creates a tenant through the real CLI, registers a
+`appreciate_button_e2e` schema, creates a tenant through the real CLI, registers a
 button with the example icon, and drives `examples/plain-html` in Chromium on a
 separate origin so the origin allowlist is exercised for real.

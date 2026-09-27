@@ -1,4 +1,4 @@
-import type { CreateSiteResponse, Site } from '@appreciator/shared';
+import type { CreateSiteResponse, Site } from '@appreciate-button/shared';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { execute, queryOne, queryRows } from '../../src/db/pool.js';

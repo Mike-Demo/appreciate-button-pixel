@@ -1,6 +1,6 @@
 # Landing page
 
-Static and framework-free, served by every Appreciator instance at `/`,
+Static and framework-free, served by every Appreciate Button instance at `/`,
 `/leaderboard` and the pages' clean URLs. The server answers `config.json`
 from its own settings, so the live demo just works.
 
@@ -49,14 +49,14 @@ results.
 ## `config.json`
 
 The shape `GET /config.json` answers on an instance (`WebConfig` in
-`@appreciator/shared`):
+`@appreciate-button/shared`):
 
 ```json
 {
-  "apiUrl": "https://appreciator.example.com",
+  "apiUrl": "https://appreciate-button.example.com",
   "demoKey": "pk_…",
   "signInEnabled": true,
-  "repoUrl": "https://github.com/medhatdawoud/appreciator",
+  "repoUrl": "https://github.com/medhatdawoud/appreciate-button",
   "leaderboardEnabled": true
 }
 ```

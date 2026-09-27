@@ -5,7 +5,7 @@ import type {
   ButtonListResponse,
   ButtonSvgSources,
   CreateButtonResponse,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { execute, queryOne } from '../../src/db/pool.js';
@@ -292,7 +292,7 @@ describe('management routes', () => {
 
       expect(created.elementSnippet).toBe(
         `<script src="${context.config.publicBaseUrl}/widget.js" async></script>\n` +
-          `<appreciator-button data-key="${created.publicKey}"></appreciator-button>`,
+          `<appreciate-button data-key="${created.publicKey}"></appreciate-button>`,
       );
     });
 
@@ -710,7 +710,7 @@ describe('management routes', () => {
         `data-key="${created.publicKey}" data-count="left" async>`,
       );
       expect(created.elementSnippet).toContain(
-        `<appreciator-button data-key="${created.publicKey}" data-count="left">`,
+        `<appreciate-button data-key="${created.publicKey}" data-count="left">`,
       );
       const [listed] = await listButtons();
       expect(listed).toMatchObject({

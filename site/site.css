@@ -275,8 +275,8 @@ h1 em {
   min-height: 3rem;
 }
 
-.demo-slot appreciator-button {
-  --appreciator-size: 3rem;
+.demo-slot appreciate-button {
+  --appreciate-size: 3rem;
 }
 
 /* Room under the main demo for the thank-you message it shows when full. */
@@ -365,21 +365,21 @@ pre code {
   font-size: 0.8rem;
 }
 
-.variant-gold appreciator-button {
-  --appreciator-size: 2.5rem;
-  --appreciator-full: gold;
-  --appreciator-clicked: orange;
+.variant-gold appreciate-button {
+  --appreciate-size: 2.5rem;
+  --appreciate-full: gold;
+  --appreciate-clicked: orange;
 }
 
-.variant-mono appreciator-button {
-  --appreciator-default: currentColor;
-  --appreciator-hover: currentColor;
-  --appreciator-clicked: currentColor;
-  --appreciator-full: currentColor;
+.variant-mono appreciate-button {
+  --appreciate-default: currentColor;
+  --appreciate-hover: currentColor;
+  --appreciate-clicked: currentColor;
+  --appreciate-full: currentColor;
 }
 
-.variant-big appreciator-button {
-  --appreciator-size: 3rem;
+.variant-big appreciate-button {
+  --appreciate-size: 3rem;
 }
 
 .section h3 {
@@ -409,8 +409,8 @@ pre code {
   align-items: center;
 }
 
-.position appreciator-button {
-  --appreciator-size: 2rem;
+.position appreciate-button {
+  --appreciate-size: 2rem;
 }
 
 .position figcaption code {
@@ -577,8 +577,8 @@ pre.prompt {
   border-top: 1px solid var(--line);
 }
 
-.post-foot .demo-slot appreciator-button {
-  --appreciator-size: 1.1rem;
+.post-foot .demo-slot appreciate-button {
+  --appreciate-size: 1.1rem;
   font-size: 0.85rem;
 }
 

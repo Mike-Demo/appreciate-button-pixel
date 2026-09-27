@@ -1,6 +1,6 @@
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 
-import type { Account } from '@appreciator/shared';
+import type { Account } from '@appreciate-button/shared';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
 import { toAccount, upsertAccount } from '../db/accounts.js';
@@ -20,7 +20,7 @@ import {
   verifyToken,
 } from '../lib/session.js';
 
-export const OAUTH_STATE_COOKIE = 'appreciator_oauth_state';
+export const OAUTH_STATE_COOKIE = 'appreciate_button_oauth_state';
 
 /** Long enough to read GitHub's consent screen, short enough that a stale tab cannot finish. */
 const OAUTH_STATE_TTL_SECONDS = 10 * 60;

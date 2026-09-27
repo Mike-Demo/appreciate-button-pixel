@@ -1,4 +1,4 @@
-# Appreciator
+# Appreciate Button
 
 An open-source clap, applause and like button for any website, Medium-style:
 try it at **[appreciate-button.com](https://appreciate-button.com)**, with
@@ -12,7 +12,7 @@ have used their allowance (10 clicks by default, configurable per button). Count
 in MySQL, and the whole embed is one tag:
 
 ```html
-<script src="https://appreciator.example.com/widget.js" data-key="pk_..." async></script>
+<script src="https://appreciate-button.example.com/widget.js" data-key="pk_..." async></script>
 ```
 
 ## Contents
@@ -37,7 +37,7 @@ in MySQL, and the whole embed is one tag:
 
 ## Who this is for
 
-Appreciator is a tool you **run yourself**. One deployment (an "instance")
+Appreciate Button is a tool you **run yourself**. One deployment (an "instance")
 serves as many websites as you like. Sign-in is by GitHub, restricted to the
 GitHub logins you list in the configuration — there is no open signup — and
 every signed-in person can create **sites** and **buttons** from the
@@ -91,7 +91,7 @@ the person running an instance, or deploys their own in about ten minutes.
 
 1. Deploy the image with a MySQL database and a GitHub OAuth app
    ([Hosting guide](#hosting-guide)).
-2. Open `https://appreciator.example.com/` — the landing page, with a live
+2. Open `https://appreciate-button.example.com/` — the landing page, with a live
    demo button. Click **Sign in with GitHub**.
 3. The dashboard opens on **Step 1: name your site**. Type a name, press
    Create. You get an API key (shown once; the dashboard itself never needs
@@ -114,7 +114,7 @@ the person running an instance, or deploys their own in about ten minutes.
 flowchart LR
     subgraph Visitor["Visitor's browser (any allowed site)"]
         Page["Host page<br/>&lt;script src=…/widget.js data-key=pk_…&gt;"]
-        Widget["&lt;appreciator-button&gt;<br/>shadow DOM · state machine"]
+        Widget["&lt;appreciate-button&gt;<br/>shadow DOM · state machine"]
         LS[("localStorage<br/>cached counts")]
         Page --> Widget
         Widget <--> LS
@@ -147,7 +147,7 @@ flowchart LR
 | Component     | Package / folder          | Role                                                                                                                                                                                      |
 | ------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | API server    | `packages/server`         | Fastify + TypeScript. Public button routes, bearer-key management API, GitHub sign-in, sites API, dashboard mirror routes, leaderboard, serves the pages and the widget, runs migrations. |
-| Widget        | `packages/widget`         | The `<appreciator-button>` web component, ~10 KB minified; IIFE for `<script>` tags, ES module for bundlers.                                                                              |
+| Widget        | `packages/widget`         | The `<appreciate-button>` web component, ~10 KB minified; IIFE for `<script>` tags, ES module for bundlers.                                                                               |
 | Landing pages | `site/`                   | Static landing, leaderboard, guide and comparison pages, served by the API at `/`.                                                                                                        |
 | Dashboard     | `packages/server/src/web` | Static HTML + vanilla JS, served at `/dashboard`, same origin as the API (its session cookie is first-party there).                                                                       |
 | svg-gen       | `packages/svg-gen`        | CLI that prepares icons: one SVG → recolourable form + colours, or four SVGs → a ready-to-post `svgSources.json`.                                                                         |
@@ -158,11 +158,11 @@ flowchart LR
 ### Repository layout
 
 ```
-appreciator/
+appreciate-button/
 ├── site/                      landing page, leaderboard, guides (static, relative paths)
 ├── packages/
 │   ├── server/                API, migrations, sign-in, sites, dashboard files (src/web), widget serving
-│   ├── widget/                <appreciator-button> and the Playwright e2e suite for the whole system
+│   ├── widget/                <appreciate-button> and the Playwright e2e suite for the whole system
 │   ├── svg-gen/               icon CLI
 │   └── shared/                API contract types
 ├── examples/
@@ -322,12 +322,12 @@ erDiagram
 - A MySQL 8 database (a Coolify resource, a managed database, or a container).
 - Somewhere to run a container: Coolify is the documented path; any Docker
   host works.
-- A domain with TLS, e.g. `appreciator.example.com`. The widget is loaded
+- A domain with TLS, e.g. `appreciate-button.example.com`. The widget is loaded
   cross-origin from HTTPS pages, so the instance must be HTTPS too.
 - A **GitHub OAuth app** for sign-in: GitHub → Settings → Developer settings →
   OAuth Apps → New OAuth App, with
-  - Homepage URL: `https://appreciator.example.com`
-  - Authorization callback URL: `https://appreciator.example.com/auth/github/callback`
+  - Homepage URL: `https://appreciate-button.example.com`
+  - Authorization callback URL: `https://appreciate-button.example.com/auth/github/callback`
 
   Keep its client id and generate a client secret.
 
@@ -338,21 +338,21 @@ erDiagram
 
 1. **Database.** Resources → New → **MySQL 8**. Once it is running, open its
    terminal (or connect with any client) and run
-   `CREATE DATABASE appreciator;`. Copy the internal connection URL and put
+   `CREATE DATABASE appreciate_button;`. Copy the internal connection URL and put
    the database name at the end:
-   `mysql://mysql:<password>@<service-name>:3306/appreciator`.
+   `mysql://mysql:<password>@<service-name>:3306/appreciate_button`.
 2. **Source.** Coolify clones over SSH. Either add Coolify's public key to the
    repository (GitHub → repo Settings → Deploy keys, read-only) or connect a
    **GitHub App** under Sources, which also gives deploy-on-push.
 3. **Application.** Resources → New → Application → this repository, branch
    `main`, build pack **Dockerfile**, exposed port `3000`.
-4. **Domain.** Set `https://appreciator.example.com` on the application;
+4. **Domain.** Set `https://appreciate-button.example.com` on the application;
    Coolify provisions the certificate.
 5. **Environment variables** (Coolify → application → Environment):
 
    ```
-   DATABASE_URL=mysql://mysql:<password>@<service-name>:3306/appreciator
-   PUBLIC_BASE_URL=https://appreciator.example.com
+   DATABASE_URL=mysql://mysql:<password>@<service-name>:3306/appreciate_button
+   PUBLIC_BASE_URL=https://appreciate-button.example.com
    TRUST_PROXY=true
 
    VISITOR_HASH_SECRET=<openssl rand -hex 32>
@@ -364,7 +364,7 @@ erDiagram
 
    # optional
    MANAGEMENT_SECRET=<openssl rand -hex 32>   # bearer key for scripts and curl
-   DEMO_ALLOWED_ORIGINS=https://appreciator.example.com
+   DEMO_ALLOWED_ORIGINS=https://appreciate-button.example.com
    ```
 
    `TRUST_PROXY=true` is required behind Coolify's proxy: visitor identity
@@ -373,7 +373,7 @@ erDiagram
 
 6. **Deploy.** The container runs pending migrations, provisions the demo
    button (and the `MANAGEMENT_SECRET` tenant if set), then serves.
-7. **Verify.** `https://appreciator.example.com/healthz` answers `200`;
+7. **Verify.** `https://appreciate-button.example.com/healthz` answers `200`;
    `/` shows the landing page with a working demo button; `/dashboard`
    offers "Sign in with GitHub". Sign in, create a site and a button, paste
    the snippet into a page whose origin you listed.
@@ -404,13 +404,13 @@ deploy twice, and before CI has finished.
 ### Docker anywhere
 
 ```bash
-docker build -t appreciator .
-docker run -d --name appreciator -p 3000:3000 --restart unless-stopped \
-  -e DATABASE_URL='mysql://user:pass@db-host:3306/appreciator' \
-  -e PUBLIC_BASE_URL='https://appreciator.example.com' -e TRUST_PROXY=true \
+docker build -t appreciate-button .
+docker run -d --name appreciate-button -p 3000:3000 --restart unless-stopped \
+  -e DATABASE_URL='mysql://user:pass@db-host:3306/appreciate_button' \
+  -e PUBLIC_BASE_URL='https://appreciate-button.example.com' -e TRUST_PROXY=true \
   -e VISITOR_HASH_SECRET="$(openssl rand -hex 32)" -e SESSION_SECRET="$(openssl rand -hex 32)" \
   -e GITHUB_CLIENT_ID=… -e GITHUB_CLIENT_SECRET=… -e GITHUB_ALLOWED_LOGINS=you \
-  appreciator
+  appreciate-button
 ```
 
 Put a TLS-terminating proxy in front (Caddy: `reverse_proxy 127.0.0.1:3000`).
@@ -421,7 +421,7 @@ on `/healthz`.
 ### Bare Node
 
 ```bash
-git clone https://github.com/medhatdawoud/appreciator.git && cd appreciator
+git clone https://github.com/medhatdawoud/appreciate-button.git && cd appreciate-button
 npm ci && npm run build
 export DATABASE_URL=… PUBLIC_BASE_URL=… TRUST_PROXY=true VISITOR_HASH_SECRET=… SESSION_SECRET=… \
        GITHUB_CLIENT_ID=… GITHUB_CLIENT_SECRET=… GITHUB_ALLOWED_LOGINS=…
@@ -480,7 +480,7 @@ in `GITHUB_ALLOWED_LOGINS`).
 - **The button list.** Each row shows its button as saved, clickable in the
   same way (nothing counted), and two snippets with Copy buttons: the one tag
   that renders the button where it is pasted, and the script plus an
-  `<appreciator-button data-key="…">` element to place anywhere. Under them,
+  `<appreciate-button data-key="…">` element to place anywhere. Under them,
   "Prompt for your coding agent" opens a short prompt to paste into Claude
   Code, Cursor or another agent, filled in with the button's key: it puts the
   tag at the end of the post template (or the element, where a script tag
@@ -497,7 +497,7 @@ in `GITHUB_ALLOWED_LOGINS`).
   paste it anywhere, linked to the leaderboard:
 
   ```markdown
-  [![My blog: appreciations](https://appreciator.example.com/v1/sites/<site-id>/badge.svg)](https://appreciator.example.com/leaderboard)
+  [![My blog: appreciations](https://appreciate-button.example.com/v1/sites/<site-id>/badge.svg)](https://appreciate-button.example.com/leaderboard)
   ```
 
   It counts every button on the site and catches up within five minutes.
@@ -520,7 +520,7 @@ Install section (with a placeholder key) or from the button's row in the
 dashboard (filled in). Both come from `site/agent-prompt.js`.
 
 ```html
-<script src="https://appreciator.example.com/widget.js" data-key="pk_..." async></script>
+<script src="https://appreciate-button.example.com/widget.js" data-key="pk_..." async></script>
 ```
 
 The button renders directly after the tag. Options are `data-*` attributes on
@@ -545,18 +545,18 @@ layout the router keeps.
 ### Several buttons on one page
 
 ```html
-<script src="https://appreciator.example.com/widget.js" async></script>
+<script src="https://appreciate-button.example.com/widget.js" async></script>
 …
-<appreciator-button data-key="pk_..." data-item="post-1"></appreciator-button>
-<appreciator-button data-key="pk_..." data-item="post-2"></appreciator-button>
+<appreciate-button data-key="pk_..." data-item="post-1"></appreciate-button>
+<appreciate-button data-key="pk_..." data-item="post-2"></appreciate-button>
 ```
 
 ### From a bundler
 
 ```ts
-import { mount } from '@appreciator/widget';
+import { mount } from '@appreciate-button/widget';
 mount(document.querySelector('#appreciate'), {
-  api: 'https://appreciator.example.com',
+  api: 'https://appreciate-button.example.com',
   key: 'pk_...',
   readonly: false, // true shows the count without taking clicks
 });
@@ -568,17 +568,17 @@ The package is not published to npm yet; use a git dependency or copy
 ### Theming from the host page
 
 ```css
-appreciator-button {
-  --appreciator-size: 2rem; /* icon size, default 1.5em; the count and gap scale with it */
-  --appreciator-default: #9ca3af; /* the unfilled silhouette, and the ring */
-  --appreciator-hover: #374151; /* both while hovered */
-  --appreciator-clicked: #f43f5e; /* the filled part during the pulse */
-  --appreciator-full: #e11d48; /* the filled part */
+appreciate-button {
+  --appreciate-size: 2rem; /* icon size, default 1.5em; the count and gap scale with it */
+  --appreciate-default: #9ca3af; /* the unfilled silhouette, and the ring */
+  --appreciate-hover: #374151; /* both while hovered */
+  --appreciate-clicked: #f43f5e; /* the filled part during the pulse */
+  --appreciate-full: #e11d48; /* the filled part */
 }
-appreciator-button::part(count) {
+appreciate-button::part(count) {
   font-weight: 600;
 } /* also ::part(button), ::part(icon) */
-appreciator-button[data-state='full'] {
+appreciate-button[data-state='full'] {
   opacity: 0.85;
 }
 ```
@@ -591,19 +591,19 @@ themselves change per state. `prefers-reduced-motion` disables the pulse.
 All bubble and cross the shadow boundary, and all are optional; the landing
 page lists them with a live log under "Listen to it".
 
-| Event                | Fires                                                                   | `event.detail`                         |
-| -------------------- | ----------------------------------------------------------------------- | -------------------------------------- |
-| `appreciator:ready`  | Once the button has loaded and shows its count.                         | counts                                 |
-| `appreciator:burst`  | On every click, counted or not; a spent button plays no burst.          | counts, as shown right after the click |
-| `appreciator:change` | When the server confirms a counted click.                               | counts                                 |
-| `appreciator:maxed`  | Once, when the click that uses up the visitor's allowance is confirmed. | counts                                 |
-| `appreciator:error`  | When loading or a click fails.                                          | `{ code, message }`                    |
+| Event               | Fires                                                                   | `event.detail`                         |
+| ------------------- | ----------------------------------------------------------------------- | -------------------------------------- |
+| `appreciate:ready`  | Once the button has loaded and shows its count.                         | counts                                 |
+| `appreciate:burst`  | On every click, counted or not; a spent button plays no burst.          | counts, as shown right after the click |
+| `appreciate:change` | When the server confirms a counted click.                               | counts                                 |
+| `appreciate:maxed`  | Once, when the click that uses up the visitor's allowance is confirmed. | counts                                 |
+| `appreciate:error`  | When loading or a click fails.                                          | `{ code, message }`                    |
 
 The counts are `{ totalCount, maxClicks, visitorCount, visitorRemaining, maxed }`.
 `event.target` is the button, so one listener on `document` hears every button:
 
 ```js
-document.addEventListener('appreciator:burst', (event) => {
+document.addEventListener('appreciate:burst', (event) => {
   console.log('clicked', event.target, event.detail.totalCount);
 });
 ```
@@ -652,7 +652,7 @@ npx tsx packages/svg-gen/src/cli.ts generate my-icon.svg --out ./my-button \
 
 ```bash
 npx tsx packages/svg-gen/src/cli.ts generate --explicit default.svg hover.svg clicked.svg full.svg --out ./stars
-curl -s https://appreciator.example.com/v1/buttons -H "Authorization: Bearer $SECRET" \
+curl -s https://appreciate-button.example.com/v1/buttons -H "Authorization: Bearer $SECRET" \
   -H 'Content-Type: application/json' \
   -d "$(jq '. + {allowedOrigins: ["https://myblog.com"], name: "Stars"}' stars/svgSources.json)"
 ```
@@ -693,7 +693,7 @@ Every error has the same JSON shape:
 The same five routes exist under `/v1/sites/:siteId/buttons…` for the
 dashboard, authenticated by the session cookie instead of a bearer key.
 
-### Sign-in and sites (session cookie; writes need `X-Requested-With: appreciator`)
+### Sign-in and sites (session cookie; writes need `X-Requested-With: appreciate-button`)
 
 | Method   | Path                       |                                                                  |
 | -------- | -------------------------- | ---------------------------------------------------------------- |
@@ -721,30 +721,30 @@ dashboard, authenticated by the session cookie instead of a bearer key.
 
 ## Configuration reference
 
-| Variable                              | Required    | Default                                       | Description                                                                                                   |
-| ------------------------------------- | ----------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`                        | yes         | —                                             | MySQL connection string.                                                                                      |
-| `VISITOR_HASH_SECRET`                 | yes         | —                                             | HMAC key for visitor identity, ≥32 chars. Rotating it resets all allowances.                                  |
-| `PUBLIC_BASE_URL`                     | production  | `http://localhost:$PORT`                      | The instance's public `https://` URL: embed snippet, OAuth callback, and the only origin accepted for writes. |
-| `TRUST_PROXY`                         | production  | `false`                                       | `true` behind a proxy you control (Coolify), `false` when directly reachable.                                 |
-| `GITHUB_CLIENT_ID`                    | for sign-in | —                                             | OAuth app client id.                                                                                          |
-| `GITHUB_CLIENT_SECRET`                | for sign-in | —                                             | OAuth app client secret.                                                                                      |
-| `GITHUB_ALLOWED_LOGINS`               | for sign-in | —                                             | Comma-separated GitHub logins that may sign in. `*` means anyone; empty means nobody.                         |
-| `SESSION_SECRET`                      | for sign-in | —                                             | HMAC key for session cookies, ≥32 chars.                                                                      |
-| `MANAGEMENT_SECRET`                   | no          | —                                             | Bearer key for scripts; a tenant named `default` is provisioned for it on start.                              |
-| `DEMO_BUTTON`                         | no          | `true`                                        | Provision the landing page's demo button.                                                                     |
-| `DEMO_ALLOWED_ORIGINS`                | no          | origin of `PUBLIC_BASE_URL`                   | Origins that may embed the demo button.                                                                       |
-| `LEADERBOARD`                         | no          | `true`                                        | Serve `/v1/leaderboard` (makes site names and totals public).                                                 |
-| `REPO_URL`                            | no          | `https://github.com/medhatdawoud/appreciator` | Repository linked from the pages.                                                                             |
-| `DEFAULT_MAX_CLICKS`                  | no          | `10`                                          | Cap for buttons created without `maxClicks`.                                                                  |
-| `RATE_LIMIT_MAX`                      | no          | `60`                                          | Writes (clicks, resets) per IP per window; also the auth and leaderboard budgets (separate counters).         |
-| `RATE_LIMIT_READ_MAX`                 | no          | `600`                                         | Public reads (`/config`, `/state`) per IP per window, counted apart from writes.                              |
-| `WIDGET_RATE_LIMIT_MAX`               | no          | `300`                                         | `/widget.js` requests per IP per window.                                                                      |
-| `RATE_LIMIT_WINDOW`                   | no          | `1 minute`                                    | Window for the limits above.                                                                                  |
-| `PORT` / `HOST`                       | no          | `3000` / `0.0.0.0`                            | Listen address.                                                                                               |
-| `LOG_LEVEL`                           | no          | `info`                                        | Pino level; JSON lines on stdout.                                                                             |
-| `GITHUB_OAUTH_URL` / `GITHUB_API_URL` | no          | github.com / api.github.com                   | GitHub Enterprise endpoints.                                                                                  |
-| `WIDGET_BUNDLE_PATH`                  | no          | `../widget/dist/widget.js`                    | Bundle served at `/widget.js`.                                                                                |
+| Variable                              | Required    | Default                                             | Description                                                                                                   |
+| ------------------------------------- | ----------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`                        | yes         | —                                                   | MySQL connection string.                                                                                      |
+| `VISITOR_HASH_SECRET`                 | yes         | —                                                   | HMAC key for visitor identity, ≥32 chars. Rotating it resets all allowances.                                  |
+| `PUBLIC_BASE_URL`                     | production  | `http://localhost:$PORT`                            | The instance's public `https://` URL: embed snippet, OAuth callback, and the only origin accepted for writes. |
+| `TRUST_PROXY`                         | production  | `false`                                             | `true` behind a proxy you control (Coolify), `false` when directly reachable.                                 |
+| `GITHUB_CLIENT_ID`                    | for sign-in | —                                                   | OAuth app client id.                                                                                          |
+| `GITHUB_CLIENT_SECRET`                | for sign-in | —                                                   | OAuth app client secret.                                                                                      |
+| `GITHUB_ALLOWED_LOGINS`               | for sign-in | —                                                   | Comma-separated GitHub logins that may sign in. `*` means anyone; empty means nobody.                         |
+| `SESSION_SECRET`                      | for sign-in | —                                                   | HMAC key for session cookies, ≥32 chars.                                                                      |
+| `MANAGEMENT_SECRET`                   | no          | —                                                   | Bearer key for scripts; a tenant named `default` is provisioned for it on start.                              |
+| `DEMO_BUTTON`                         | no          | `true`                                              | Provision the landing page's demo button.                                                                     |
+| `DEMO_ALLOWED_ORIGINS`                | no          | origin of `PUBLIC_BASE_URL`                         | Origins that may embed the demo button.                                                                       |
+| `LEADERBOARD`                         | no          | `true`                                              | Serve `/v1/leaderboard` (makes site names and totals public).                                                 |
+| `REPO_URL`                            | no          | `https://github.com/medhatdawoud/appreciate-button` | Repository linked from the pages.                                                                             |
+| `DEFAULT_MAX_CLICKS`                  | no          | `10`                                                | Cap for buttons created without `maxClicks`.                                                                  |
+| `RATE_LIMIT_MAX`                      | no          | `60`                                                | Writes (clicks, resets) per IP per window; also the auth and leaderboard budgets (separate counters).         |
+| `RATE_LIMIT_READ_MAX`                 | no          | `600`                                               | Public reads (`/config`, `/state`) per IP per window, counted apart from writes.                              |
+| `WIDGET_RATE_LIMIT_MAX`               | no          | `300`                                               | `/widget.js` requests per IP per window.                                                                      |
+| `RATE_LIMIT_WINDOW`                   | no          | `1 minute`                                          | Window for the limits above.                                                                                  |
+| `PORT` / `HOST`                       | no          | `3000` / `0.0.0.0`                                  | Listen address.                                                                                               |
+| `LOG_LEVEL`                           | no          | `info`                                              | Pino level; JSON lines on stdout.                                                                             |
+| `GITHUB_OAUTH_URL` / `GITHUB_API_URL` | no          | github.com / api.github.com                         | GitHub Enterprise endpoints.                                                                                  |
+| `WIDGET_BUNDLE_PATH`                  | no          | `../widget/dist/widget.js`                          | Bundle served at `/widget.js`.                                                                                |
 
 This repository deliberately does not commit an example env file.
 
@@ -754,7 +754,7 @@ This repository deliberately does not commit an example env file.
   after reading the id, login and avatar. Only allowlisted logins get an
   account. The OAuth `state` is bound to a short-lived signed cookie.
 - **Sessions** are stateless signed cookies (`HttpOnly`, `SameSite=Lax`,
-  `Secure` on HTTPS, 7 days). Writes require `X-Requested-With: appreciator`
+  `Secure` on HTTPS, 7 days). Writes require `X-Requested-With: appreciate-button`
   and an `Origin`/`Referer` equal to `PUBLIC_BASE_URL`, which is why the
   dashboard is served from the API origin.
 - **Site keys** are 256-bit random tokens; only their SHA-256 is stored.
@@ -796,13 +796,13 @@ Requires Node 20+ and Docker.
 
 ```bash
 npm install
-npm run build -w @appreciator/shared
+npm run build -w @appreciate-button/shared
 docker compose up -d mysql
 export DATABASE_URL='mysql://appreciator:appreciator@127.0.0.1:3306/appreciator'
 export VISITOR_HASH_SECRET="$(openssl rand -hex 32)" MANAGEMENT_SECRET="$(openssl rand -hex 32)"
-npm run migrate -w @appreciator/server
-npm run build -w @appreciator/widget
-npm run dev -w @appreciator/server        # http://localhost:3000 — landing, /dashboard, /leaderboard
+npm run migrate -w @appreciate-button/server
+npm run build -w @appreciate-button/widget
+npm run dev -w @appreciate-button/server        # http://localhost:3000 — landing, /dashboard, /leaderboard
 ```
 
 For sign-in locally, create a second GitHub OAuth app with callback

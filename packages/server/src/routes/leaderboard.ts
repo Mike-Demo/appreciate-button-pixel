@@ -2,7 +2,7 @@ import type {
   LeaderboardEntry,
   LeaderboardMineResponse,
   LeaderboardResponse,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import type { FastifyInstance } from 'fastify';
 
 import { queryRows } from '../db/pool.js';

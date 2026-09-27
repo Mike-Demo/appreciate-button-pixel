@@ -1,4 +1,4 @@
-import type { ButtonPublicConfig, ClickCounts } from '@appreciator/shared';
+import type { ButtonPublicConfig, ClickCounts } from '@appreciate-button/shared';
 
 export class ApiError extends Error {
   readonly status: number;

@@ -167,10 +167,10 @@ describe('sign-in configuration', () => {
 
 describe('demo button and web settings', () => {
   it('enables the demo button for the public base URL origin by default', () => {
-    const config = loadAppConfig({ ...baseEnv, PUBLIC_BASE_URL: 'https://appreciator.dev/' });
+    const config = loadAppConfig({ ...baseEnv, PUBLIC_BASE_URL: 'https://appreciate-button.dev/' });
 
     expect(config.demoButton).toBe(true);
-    expect(config.demoAllowedOrigins).toEqual(['https://appreciator.dev']);
+    expect(config.demoAllowedOrigins).toEqual(['https://appreciate-button.dev']);
   });
 
   it('can be turned off', () => {
@@ -193,7 +193,7 @@ describe('demo button and web settings', () => {
   });
 
   it('refuses a PUBLIC_BASE_URL that is not an http(s) URL', () => {
-    expect(() => loadAppConfig({ ...baseEnv, PUBLIC_BASE_URL: 'appreciator.dev' })).toThrow(
+    expect(() => loadAppConfig({ ...baseEnv, PUBLIC_BASE_URL: 'appreciate-button.dev' })).toThrow(
       EnvError,
     );
   });
@@ -204,7 +204,9 @@ describe('demo button and web settings', () => {
   });
 
   it('defaults REPO_URL to the project repository', () => {
-    expect(loadAppConfig(baseEnv).repoUrl).toBe('https://github.com/medhatdawoud/appreciator');
+    expect(loadAppConfig(baseEnv).repoUrl).toBe(
+      'https://github.com/medhatdawoud/appreciate-button',
+    );
     expect(loadAppConfig({ ...baseEnv, REPO_URL: 'https://example.com/fork' }).repoUrl).toBe(
       'https://example.com/fork',
     );

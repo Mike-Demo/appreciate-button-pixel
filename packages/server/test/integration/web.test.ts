@@ -214,10 +214,10 @@ describe('web pages', () => {
     expect(root.headers['cache-control']).toBe('no-store');
     expect(root.json()).toEqual(web.json());
     expect(root.json()).toEqual({
-      apiUrl: 'https://appreciator.test',
+      apiUrl: 'https://appreciate-button.test',
       demoKey: null,
       signInEnabled: true,
-      repoUrl: 'https://github.com/medhatdawoud/appreciator',
+      repoUrl: 'https://github.com/medhatdawoud/appreciate-button',
       leaderboardEnabled: false,
       defaultIcon: { svgSource: DEFAULT_SVG_SOURCE, colors: DEFAULT_COLORS },
       defaultThanksMessage: DEFAULT_THANKS_MESSAGE,

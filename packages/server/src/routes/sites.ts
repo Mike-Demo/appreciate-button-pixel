@@ -6,7 +6,7 @@ import type {
   Site,
   SiteListResponse,
   UpdateSiteBody,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import type { FastifyInstance } from 'fastify';
 
 import { execute, queryOne, withTransaction } from '../db/pool.js';

@@ -4,27 +4,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Add a like or clap button to Next.js and React — Appreciator</title>
+    <title>Add a like or clap button to Next.js and React — Appreciate Button</title>
     <meta
       name="description"
-      content="Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciator-button element in JSX. Counts follow client-side navigation."
+      content="Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciate-button element in JSX. Counts follow client-side navigation."
     />
     <link rel="canonical" href="https://appreciate-button.com/guides/nextjs" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Appreciator" />
+    <meta property="og:site_name" content="Appreciate Button" />
     <meta
       property="og:title"
-      content="Add a like or clap button to Next.js and React — Appreciator"
+      content="Add a like or clap button to Next.js and React — Appreciate Button"
     />
     <meta
       property="og:description"
-      content="Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciator-button element in JSX. Counts follow client-side navigation."
+      content="Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciate-button element in JSX. Counts follow client-side navigation."
     />
     <meta property="og:url" content="https://appreciate-button.com/guides/nextjs" />
     <meta property="og:image" content="https://appreciate-button.com/img/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Appreciator: an open-source clap and like button" />
+    <meta
+      property="og:image:alt"
+      content="Appreciate Button: an open-source clap and like button"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="../img/heart.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../site.css" />
@@ -36,8 +39,8 @@
             "@type": "WebPage",
             "@id": "https://appreciate-button.com/guides/nextjs",
             "url": "https://appreciate-button.com/guides/nextjs",
-            "name": "Add a like or clap button to Next.js and React — Appreciator",
-            "description": "Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciator-button element in JSX. Counts follow client-side navigation.",
+            "name": "Add a like or clap button to Next.js and React — Appreciate Button",
+            "description": "Add a like or clap button to a Next.js or React app: load the script once with next/script and render the appreciate-button element in JSX. Counts follow client-side navigation.",
             "isPartOf": { "@id": "https://appreciate-button.com/#website" },
             "about": { "@id": "https://appreciate-button.com/#software" },
             "breadcrumb": { "@id": "https://appreciate-button.com/guides/nextjs#breadcrumb" }
@@ -49,7 +52,7 @@
               {
                 "@type": "ListItem",
                 "position": 1,
-                "name": "Appreciator",
+                "name": "Appreciate Button",
                 "item": "https://appreciate-button.com/"
               },
               {
@@ -74,13 +77,17 @@
     <header class="top">
       <a class="brand" href="../">
         <img src="../img/heart.svg" alt="" width="24" height="24" />
-        <span>Appreciator</span>
+        <span>Appreciate Button</span>
       </a>
       <nav class="nav">
         <a href="../guides/">Guides</a>
         <a href="../alternatives/">Compare</a>
         <a href="../leaderboard" data-leaderboard-link>Most appreciated</a>
-        <a class="nav-github" data-repo-link href="https://github.com/medhatdawoud/appreciator">
+        <a
+          class="nav-github"
+          data-repo-link
+          href="https://github.com/medhatdawoud/appreciate-button"
+        >
           <img src="../img/github.svg" alt="" width="18" height="18" />
           GitHub
         </a>
@@ -90,7 +97,7 @@
     <main class="page">
       <nav class="crumbs" aria-label="Breadcrumb">
         <ol>
-          <li><a href="../">Appreciator</a></li>
+          <li><a href="../">Appreciate Button</a></li>
           <li><a href="../guides/">Guides</a></li>
           <li aria-current="page">Next.js and React</li>
         </ol>
@@ -153,12 +160,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div class="code-block">
           <pre><code id="next-element">&lt;article&gt;
   {/* the post */}
-  &lt;appreciator-button data-key="pk_YOUR_BUTTON_KEY" /&gt;
+  &lt;appreciate-button data-key="pk_YOUR_BUTTON_KEY" /&gt;
 &lt;/article&gt;</code></pre>
           <button class="copy" type="button" data-copy="#next-element">Copy</button>
         </div>
         <p>
-          With TypeScript, declare the element once, for example in <code>appreciator.d.ts</code>:
+          With TypeScript, declare the element once, for example in
+          <code>appreciate-button.d.ts</code>:
         </p>
         <div class="code-block">
           <pre><code id="next-types">import type { DetailedHTMLProps, HTMLAttributes } from 'react';
@@ -166,7 +174,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'appreciator-button': DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;;
+      'appreciate-button': DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;;
     }
   }
 }</code></pre>
@@ -186,7 +194,7 @@ declare module 'react' {
             attributes never differ from what the server rendered.
           </li>
           <li>
-            Listen for <code>appreciator:change</code> and the other events on the element to react
+            Listen for <code>appreciate:change</code> and the other events on the element to react
             to clicks in your own code.
           </li>
           <li>Allow <code>http://localhost:3000</code> to try it with <code>next dev</code>.</li>
@@ -229,12 +237,14 @@ declare module 'react' {
         <p class="foot-title">Project</p>
         <ul>
           <li>
-            <a data-repo-link href="https://github.com/medhatdawoud/appreciator"
+            <a data-repo-link href="https://github.com/medhatdawoud/appreciate-button"
               >Source on GitHub</a
             >
           </li>
           <li>
-            <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+            <a
+              data-selfhost-link
+              href="https://github.com/medhatdawoud/appreciate-button#hosting-guide"
               >Self-host it</a
             >
           </li>

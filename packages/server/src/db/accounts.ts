@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-import type { Account } from '@appreciator/shared';
+import type { Account } from '@appreciate-button/shared';
 
 import type { Executor } from './pool.js';
 import { execute, queryOne } from './pool.js';

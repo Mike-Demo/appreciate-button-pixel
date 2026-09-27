@@ -1,7 +1,7 @@
 /**
  * Boots everything the e2e specs need, with nothing faked:
  *
- * - the real MySQL from docker-compose (a dedicated `appreciator_e2e` schema),
+ * - the real MySQL from docker-compose (a dedicated `appreciate_button_e2e` schema),
  * - the real migrations and the real `create-tenant` CLI,
  * - the real Fastify app serving the API and the built widget bundle,
  * - a plain static server for the example page, on a *different* origin so
@@ -22,7 +22,7 @@ import type {
   ButtonConfigInput,
   ButtonSvgSources,
   CreateButtonResponse,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 
 import { buildApp } from '../../../server/src/app.js';
 import { runMigrations } from '../../../server/src/db/migrate.js';
@@ -43,14 +43,14 @@ import {
 const WIDGET_DIR = resolve(fileURLToPath(new URL('../..', import.meta.url)));
 const ROOT = resolve(WIDGET_DIR, '../..');
 const EXAMPLE_DIR = resolve(ROOT, 'examples/plain-html');
-const ICON_DIR = resolve(EXAMPLE_DIR, 'appreciator-out');
-const EXPLICIT_ICON_DIR = resolve(EXAMPLE_DIR, 'appreciator-out-explicit');
+const ICON_DIR = resolve(EXAMPLE_DIR, 'appreciate-button-out');
+const EXPLICIT_ICON_DIR = resolve(EXAMPLE_DIR, 'appreciate-button-out-explicit');
 
 const TENANT_NAME = 'e2e';
 const ACCOUNT_LOGIN = 'e2e';
 
 const DATABASE_URL =
-  process.env.E2E_DATABASE_URL ?? 'mysql://root:appreciator@127.0.0.1:3306/appreciator_e2e';
+  process.env.E2E_DATABASE_URL ?? 'mysql://root:appreciator@127.0.0.1:3306/appreciate_button_e2e';
 
 const ENV = {
   DATABASE_URL,
@@ -104,7 +104,16 @@ async function ensureDatabase(): Promise<void> {
 async function createTenant(): Promise<string> {
   const { stdout } = await execFileAsync(
     'npm',
-    ['run', '--silent', 'create-tenant', '-w', '@appreciator/server', '--', '--name', TENANT_NAME],
+    [
+      'run',
+      '--silent',
+      'create-tenant',
+      '-w',
+      '@appreciate-button/server',
+      '--',
+      '--name',
+      TENANT_NAME,
+    ],
     { cwd: ROOT, env: { ...process.env, ...ENV } },
   );
   const secret = /secret:\s+(\S+)/.exec(stdout)?.[1];

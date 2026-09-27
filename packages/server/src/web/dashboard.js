@@ -57,7 +57,7 @@
   }
 
   async function api(path, { method = 'GET', body } = {}) {
-    const headers = { 'x-requested-with': 'appreciator' };
+    const headers = { 'x-requested-with': 'appreciate-button' };
     if (body !== undefined) headers['content-type'] = 'application/json';
     const response = await fetch(path, {
       method,
@@ -302,7 +302,7 @@
         $('[data-button-row-edit]', row).href = `#/sites/${siteId}/buttons/${button.id}/edit`;
         wireCopy($('[data-copy-snippet]', row), () => button.embedSnippet);
         wireCopy($('[data-copy-element]', row), () => button.elementSnippet);
-        const prompt = window.appreciatorAgentPrompt?.({
+        const prompt = window.appreciateButtonAgentPrompt?.({
           apiUrl: state.config?.apiUrl || location.origin,
           publicKey: button.publicKey,
           embedSnippet: button.embedSnippet,
@@ -448,7 +448,7 @@
   function renderSwatches() {
     const config = formConfig();
     for (const cell of form.querySelectorAll('[data-swatch]')) {
-      const icon = config && window.Appreciator?.stateIcon(config, cell.dataset.swatch);
+      const icon = config && window.AppreciateButton?.stateIcon(config, cell.dataset.swatch);
       cell.replaceChildren(...(icon ? [icon] : []));
     }
   }

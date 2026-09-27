@@ -52,7 +52,7 @@ export interface ButtonConfig {
   createdAt: string;
   /** The one-tag embed for this button, the same one `CreateButtonResponse` returns. */
   embedSnippet: string;
-  /** The script plus an `<appreciator-button>` element, for placing the button anywhere. */
+  /** The script plus an `<appreciate-button>` element, for placing the button anywhere. */
   elementSnippet: string;
 }
 

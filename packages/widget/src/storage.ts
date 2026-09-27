@@ -1,6 +1,6 @@
-import type { ButtonPublicConfig, ClickCounts } from '@appreciator/shared';
+import type { ButtonPublicConfig, ClickCounts } from '@appreciate-button/shared';
 
-const PREFIX = 'appreciator:counts:';
+const PREFIX = 'appreciate-button:counts:';
 
 /**
  * localStorage can throw on access (disabled storage, some private modes) as
@@ -61,7 +61,7 @@ export function writeCachedCounts(
   }
 }
 
-const CONFIG_PREFIX = 'appreciator:config:';
+const CONFIG_PREFIX = 'appreciate-button:config:';
 
 export function configCacheKey(publicKey: string): string {
   return `${CONFIG_PREFIX}${publicKey}`;

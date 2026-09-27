@@ -1,4 +1,4 @@
-import type { ClickCounts } from '@appreciator/shared';
+import type { ClickCounts } from '@appreciate-button/shared';
 
 import type { Executor, Pool } from '../db/pool.js';
 import { execute, queryOne } from '../db/pool.js';

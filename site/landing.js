@@ -4,7 +4,7 @@
  * inline scripts: the server sends a CSP that forbids them.
  */
 (() => {
-  const DEFAULT_REPO = 'https://github.com/medhatdawoud/appreciator';
+  const DEFAULT_REPO = 'https://github.com/medhatdawoud/appreciate-button';
 
   /**
    * The instance the site's pages show in their snippets. Served by another
@@ -70,8 +70,8 @@
    */
   function fillAgentPrompt(config) {
     const target = document.querySelector('[data-agent-prompt]');
-    if (!target || typeof window.appreciatorAgentPrompt !== 'function') return;
-    target.textContent = window.appreciatorAgentPrompt({
+    if (!target || typeof window.appreciateButtonAgentPrompt !== 'function') return;
+    target.textContent = window.appreciateButtonAgentPrompt({
       apiUrl: trimSlash(config.apiUrl || 'https://your-instance.example'),
     });
   }
@@ -114,7 +114,7 @@
 
     const api = trimSlash(config.apiUrl);
     for (const slot of document.querySelectorAll('[data-demo-slot]')) {
-      const element = document.createElement('appreciator-button');
+      const element = document.createElement('appreciate-button');
       element.dataset.api = api;
       element.dataset.key = config.demoKey;
       element.dataset.item = slot.dataset.item || `landing-${slot.dataset.demoSlot}`;
@@ -127,9 +127,9 @@
     // The read-only demo shows the hero's counter; it re-reads it whenever a
     // click on the hero settles, so it follows along.
     const hero = document.querySelector('[data-demo-slot="hero"]');
-    const mirror = document.querySelector('[data-demo-slot="readonly"] appreciator-button');
+    const mirror = document.querySelector('[data-demo-slot="readonly"] appreciate-button');
     if (hero && mirror) {
-      hero.addEventListener('appreciator:change', () => {
+      hero.addEventListener('appreciate:change', () => {
         mirror.refresh?.();
       });
     }
@@ -157,7 +157,7 @@
       if (!hero || !hero.contains(event.target) || !event.detail) return;
       button.toggleAttribute('data-offered', event.detail.maxed === true);
     };
-    for (const name of ['appreciator:ready', 'appreciator:change']) {
+    for (const name of ['appreciate:ready', 'appreciate:change']) {
       document.addEventListener(name, follow);
     }
 
@@ -176,7 +176,7 @@
         );
         if (!response.ok) throw new Error(`status ${response.status}`);
         await Promise.all(
-          Array.from(document.querySelectorAll('appreciator-button'), (element) =>
+          Array.from(document.querySelectorAll('appreciate-button'), (element) =>
             typeof element.refresh === 'function' ? element.refresh() : undefined,
           ),
         );
@@ -209,11 +209,11 @@
     const hero = document.querySelector('[data-demo-slot="hero"]');
     if (!log || !hero) return;
     const names = [
-      'appreciator:ready',
-      'appreciator:burst',
-      'appreciator:change',
-      'appreciator:maxed',
-      'appreciator:error',
+      'appreciate:ready',
+      'appreciate:burst',
+      'appreciate:change',
+      'appreciate:maxed',
+      'appreciate:error',
     ];
     for (const name of names) {
       document.addEventListener(name, (event) => {
@@ -223,7 +223,7 @@
         const label = document.createElement('code');
         label.textContent = name;
         const data =
-          name === 'appreciator:error'
+          name === 'appreciate:error'
             ? ` ${detail.code}`
             : ` total ${detail.totalCount}, ${detail.visitorRemaining} left`;
         entry.append(label, data);

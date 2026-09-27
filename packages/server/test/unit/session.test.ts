@@ -13,7 +13,7 @@ import {
 } from '../../src/lib/session.js';
 
 const SECRET = 'session-secret-0123456789abcdef0123';
-const config = { sessionSecret: SECRET, publicBaseUrl: 'https://appreciator.test' };
+const config = { sessionSecret: SECRET, publicBaseUrl: 'https://appreciate-button.test' };
 const ACCOUNT_ID = '11111111-2222-3333-4444-555555555555';
 
 /** The cookie's value out of a Set-Cookie header value. */
@@ -139,7 +139,7 @@ describe('verifyToken', () => {
 });
 
 describe('isCsrfSafe', () => {
-  const ORIGIN = 'https://appreciator.test';
+  const ORIGIN = 'https://appreciate-button.test';
   const header = { [CSRF_HEADER]: CSRF_HEADER_VALUE };
 
   it('lets reads through without any header', () => {
@@ -172,11 +172,11 @@ describe('isCsrfSafe', () => {
 
   it('refuses a write from another origin', () => {
     expect(isCsrfSafe('POST', { ...header, origin: 'https://evil.test' }, ORIGIN)).toBe(false);
-    expect(isCsrfSafe('POST', { ...header, origin: 'http://appreciator.test' }, ORIGIN)).toBe(
+    expect(isCsrfSafe('POST', { ...header, origin: 'http://appreciate-button.test' }, ORIGIN)).toBe(
       false,
     );
     expect(
-      isCsrfSafe('POST', { ...header, origin: 'https://appreciator.test.evil.test' }, ORIGIN),
+      isCsrfSafe('POST', { ...header, origin: 'https://appreciate-button.test.evil.test' }, ORIGIN),
     ).toBe(false);
   });
 

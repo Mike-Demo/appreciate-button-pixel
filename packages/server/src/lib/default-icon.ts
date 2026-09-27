@@ -1,4 +1,4 @@
-import type { ButtonColors } from '@appreciator/shared';
+import type { ButtonColors } from '@appreciate-button/shared';
 
 /**
  * The icon a button gets when it is created without `svgSource`/`colors`.

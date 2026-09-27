@@ -29,7 +29,7 @@ program
     '<inputs...>',
     '1 input SVG file, or with --explicit exactly 4: <default.svg> <hover.svg> <clicked.svg> <full.svg>',
   )
-  .option('--out <dir>', 'output directory', './appreciator-out')
+  .option('--out <dir>', 'output directory', './appreciate-button-out')
   .option('--explicit', 'skip normalization; copy 4 explicit per-state SVGs instead')
   .option('--default <color>', 'CSS color for the default state')
   .option('--hover <color>', 'CSS color for the hover state')
@@ -41,10 +41,10 @@ program
 With --explicit the output also holds svgSources.json, the four documents inline in the shape
 POST /v1/buttons takes. Register a button with it:
 
-  curl -s -X POST https://appreciator.example.com/v1/buttons \\
+  curl -s -X POST https://appreciate-button.example.com/v1/buttons \\
     -H "Authorization: Bearer $MANAGEMENT_SECRET" -H 'Content-Type: application/json' \\
     -d "$(jq '. + {allowedOrigins: ["https://example.com"], name: "Stars"}' \\
-          ./appreciator-out/svgSources.json)"
+          ./appreciate-button-out/svgSources.json)"
 `,
   )
   .action(async (inputs: string[], options: GenerateCliOptions) => {

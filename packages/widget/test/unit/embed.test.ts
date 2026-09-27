@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { apiBaseFromScriptSrc, autoMount } from '../../src/embed.js';
-import { AppreciatorButton, define, setDefaultApi } from '../../src/index.js';
+import { AppreciateButton, define, setDefaultApi } from '../../src/index.js';
 import { installFakeServer, type FakeServer } from './fake-server.js';
 
 const KEY = `pk_${'c'.repeat(32)}`;
@@ -16,14 +16,14 @@ function scriptTag(attributes: Record<string, string>, parent: Element = documen
 
 describe('apiBaseFromScriptSrc', () => {
   it('is the origin when the bundle sits at the root', () => {
-    expect(apiBaseFromScriptSrc('https://appreciator.test/widget.js')).toBe(
-      'https://appreciator.test',
+    expect(apiBaseFromScriptSrc('https://appreciate-button.test/widget.js')).toBe(
+      'https://appreciate-button.test',
     );
   });
 
   it('keeps a path prefix and drops the query string', () => {
-    expect(apiBaseFromScriptSrc('https://x.test/appreciator/widget.js?v=3')).toBe(
-      'https://x.test/appreciator',
+    expect(apiBaseFromScriptSrc('https://x.test/appreciate-button/widget.js?v=3')).toBe(
+      'https://x.test/appreciate-button',
     );
   });
 
@@ -64,7 +64,7 @@ describe('autoMount', () => {
     expect(autoMount(scriptTag({ src: 'https://api.test/widget.js' }))).toBeUndefined();
     expect(autoMount(null)).toBeUndefined();
     expect(autoMount(document.createElement('div'))).toBeUndefined();
-    expect(document.querySelector('appreciator-button')).toBeNull();
+    expect(document.querySelector('appreciate-button')).toBeNull();
   });
 
   it('places a button right after the tag and copies the options onto it', async () => {
@@ -79,7 +79,7 @@ describe('autoMount', () => {
 
     const element = autoMount(script);
 
-    expect(element).toBeInstanceOf(AppreciatorButton);
+    expect(element).toBeInstanceOf(AppreciateButton);
     expect(script.nextElementSibling).toBe(element);
     expect(element?.dataset).toMatchObject({
       key: KEY,
@@ -121,7 +121,7 @@ describe('autoMount', () => {
 
     const element = autoMount(scriptTag({ 'data-key': KEY, 'data-target': '#missing' }));
 
-    expect(element).toBeInstanceOf(AppreciatorButton);
+    expect(element).toBeInstanceOf(AppreciateButton);
     expect(element?.isConnected).toBe(false);
     expect(warn).toHaveBeenCalledOnce();
   });
@@ -132,7 +132,7 @@ describe('autoMount', () => {
     const element = autoMount(script);
 
     expect(element?.parentElement).toBe(document.body);
-    expect(document.head.querySelector('appreciator-button')).toBeNull();
+    expect(document.head.querySelector('appreciate-button')).toBeNull();
   });
 
   it('waits for the document to be parsed before looking for the target', () => {

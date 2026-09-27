@@ -1,4 +1,4 @@
-import type { ButtonPublicConfig, ButtonSvgSources, ClickCounts } from '@appreciator/shared';
+import type { ButtonPublicConfig, ButtonSvgSources, ClickCounts } from '@appreciate-button/shared';
 import { vi } from 'vitest';
 
 export const SAMPLE_SVG =

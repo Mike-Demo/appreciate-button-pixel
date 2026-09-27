@@ -1,4 +1,4 @@
-import type { ResetResponse } from '@appreciator/shared';
+import type { ResetResponse } from '@appreciate-button/shared';
 
 import type { Pool } from '../db/pool.js';
 import { execute, queryRows, withTransaction } from '../db/pool.js';

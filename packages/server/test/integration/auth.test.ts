@@ -67,7 +67,7 @@ describe('auth routes', () => {
       expect(location.searchParams.get('client_id')).toBe('Iv1.test-client');
       expect(location.searchParams.get('scope')).toBe('read:user');
       expect(location.searchParams.get('redirect_uri')).toBe(
-        'https://appreciator.test/auth/github/callback',
+        'https://appreciate-button.test/auth/github/callback',
       );
 
       const stateCookie = cookieNamed(response.headers, OAUTH_STATE_COOKIE);
@@ -241,7 +241,7 @@ describe('auth routes', () => {
 
       expect(response.statusCode).toBe(204);
       const cleared = cookieNamed(response.headers, SESSION_COOKIE);
-      expect(cleared).toMatch(/^appreciator_session=;/);
+      expect(cleared).toMatch(/^appreciate_button_session=;/);
       expect(cleared).toMatch(/Max-Age=0/);
     });
 

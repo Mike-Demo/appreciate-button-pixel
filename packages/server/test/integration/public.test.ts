@@ -3,7 +3,7 @@ import type {
   ButtonSvgSources,
   ClickCounts,
   CreateButtonResponse,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { queryOne } from '../../src/db/pool.js';

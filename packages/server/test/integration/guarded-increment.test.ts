@@ -1,4 +1,4 @@
-import type { ButtonConfigInput, CreateButtonResponse } from '@appreciator/shared';
+import type { ButtonConfigInput, CreateButtonResponse } from '@appreciate-button/shared';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { queryOne } from '../../src/db/pool.js';

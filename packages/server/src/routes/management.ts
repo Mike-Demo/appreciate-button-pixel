@@ -6,7 +6,7 @@ import type {
   ItemsOrder,
   ItemsPage,
   ItemsSort,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import type { FastifyInstance, FastifyRequest, onRequestHookHandler } from 'fastify';
 
 import {

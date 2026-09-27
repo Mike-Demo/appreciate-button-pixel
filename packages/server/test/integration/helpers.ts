@@ -25,7 +25,7 @@ import {
  * the compose file only grants the `appreciator` user its own database.
  */
 export const TEST_DATABASE_URL =
-  process.env.TEST_DATABASE_URL ?? 'mysql://root:appreciator@127.0.0.1:3306/appreciator_test';
+  process.env.TEST_DATABASE_URL ?? 'mysql://root:appreciator@127.0.0.1:3306/appreciate_button_test';
 
 export const TEST_VISITOR_SECRET = 'integration-test-secret-0123456789ab';
 
@@ -38,7 +38,7 @@ export function testConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     visitorHashSecret: TEST_VISITOR_SECRET,
     managementSecret: undefined,
     defaultMaxClicks: 10,
-    publicBaseUrl: 'https://appreciator.test',
+    publicBaseUrl: 'https://appreciate-button.test',
     // Effectively disabled by default so unrelated tests are not throttled.
     // The rate limit has its own test that sets a real value.
     rateLimitMax: 100_000,
@@ -50,7 +50,7 @@ export function testConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     // Points at nothing by default, so /widget.js answers its missing-bundle
     // 404 unless a test supplies a fixture. The widget package is not a
     // dependency of these tests.
-    widgetBundlePath: '/nonexistent/appreciator-widget-bundle.js',
+    widgetBundlePath: '/nonexistent/appreciate-button-widget-bundle.js',
     // Sign-in is off unless a test turns it on, as in a deployment that has
     // not registered an OAuth app.
     githubClientId: undefined,
@@ -61,8 +61,8 @@ export function testConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     githubApiUrl: 'https://api.github.test',
     signInEnabled: false,
     demoButton: false,
-    demoAllowedOrigins: ['https://appreciator.test'],
-    repoUrl: 'https://github.com/medhatdawoud/appreciator',
+    demoAllowedOrigins: ['https://appreciate-button.test'],
+    repoUrl: 'https://github.com/medhatdawoud/appreciate-button',
     leaderboardEnabled: true,
     ...overrides,
   };

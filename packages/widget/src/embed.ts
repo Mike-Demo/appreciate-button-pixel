@@ -1,9 +1,9 @@
-import { AppreciatorButton } from './element.js';
+import { AppreciateButton } from './element.js';
 
 /**
  * Single-tag embedding.
  *
- *   <script src="https://appreciator.example.com/widget.js" data-key="pk_…" async></script>
+ *   <script src="https://appreciate-button.example.com/widget.js" data-key="pk_…" async></script>
  *
  * When the bundle is loaded from a script tag that carries `data-key`, a
  * button is created for it right where the tag sits (or inside `data-target`),
@@ -30,8 +30,8 @@ const PASSTHROUGH = ['api', 'key', 'item', 'label', 'count', 'readonly', 'sound'
 /**
  * Derives the API base URL from the bundle's own URL: the origin plus any path
  * prefix in front of the file name, so `https://x.test/widget.js` gives
- * `https://x.test` and `https://x.test/appreciator/widget.js` gives
- * `https://x.test/appreciator`. Anything that is not an http(s) URL yields
+ * `https://x.test` and `https://x.test/appreciate-button/widget.js` gives
+ * `https://x.test/appreciate-button`. Anything that is not an http(s) URL yields
  * `undefined` rather than a guess.
  */
 export function apiBaseFromScriptSrc(src: string): string | undefined {
@@ -64,12 +64,12 @@ function whenParsed(callback: () => void): void {
  * body); when a `data-target` is named, or the tag sits in `<head>`, placement
  * waits until the document has been parsed so the target can exist.
  */
-export function autoMount(script: Element | null | undefined): AppreciatorButton | undefined {
+export function autoMount(script: Element | null | undefined): AppreciateButton | undefined {
   if (!(script instanceof HTMLScriptElement)) return undefined;
   const key = script.dataset.key;
   if (key === undefined || key.length === 0) return undefined;
 
-  const element = new AppreciatorButton();
+  const element = new AppreciateButton();
   for (const name of PASSTHROUGH) {
     const value = script.dataset[name];
     if (value !== undefined) element.dataset[name] = value;
@@ -84,7 +84,7 @@ export function autoMount(script: Element | null | undefined): AppreciatorButton
   whenParsed(() => {
     const host = target === undefined ? document.body : document.querySelector(target);
     if (host === null) {
-      console.warn(`appreciator: no element matches data-target="${target}"`);
+      console.warn(`appreciate-button: no element matches data-target="${target}"`);
       return;
     }
     host.append(element);

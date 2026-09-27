@@ -119,7 +119,7 @@ export async function fetchUser(
       accept: 'application/vnd.github+json',
       authorization: `Bearer ${token}`,
       // GitHub's API refuses requests without a User-Agent.
-      'user-agent': 'appreciator',
+      'user-agent': 'appreciate-button',
       'x-github-api-version': '2022-11-28',
     },
     signal: AbortSignal.timeout(GITHUB_TIMEOUT_MS),

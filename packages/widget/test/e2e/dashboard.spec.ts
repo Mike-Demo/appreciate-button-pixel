@@ -48,7 +48,7 @@ async function dashboardApi<T>(page: Page, path: string, method = 'GET', body?: 
       const response = await fetch(path, {
         method,
         headers: {
-          'x-requested-with': 'appreciator',
+          'x-requested-with': 'appreciate-button',
           ...(body === undefined ? {} : { 'content-type': 'application/json' }),
         },
         body: body === undefined ? undefined : JSON.stringify(body),
@@ -137,13 +137,13 @@ test('walks a new account from its first site to a counted click and back to not
   const visitor = await context.newPage();
   const params = new URLSearchParams({ api: API_ORIGIN, key: publicKey });
   await visitor.goto(`${PAGE_ORIGIN}/?${params.toString()}`);
-  const widget = visitor.locator('appreciator-button');
+  const widget = visitor.locator('appreciate-button');
   await expect(widget).toHaveAttribute('data-state', 'default');
   await widget.locator('button').click();
   await expect(widget.locator('[part="count"]')).toHaveText('1');
   await visitor.evaluate(() =>
     (
-      document.querySelector('appreciator-button') as unknown as { whenIdle(): Promise<void> }
+      document.querySelector('appreciate-button') as unknown as { whenIdle(): Promise<void> }
     ).whenIdle(),
   );
   await visitor.close();
@@ -414,7 +414,7 @@ test('designs a button from its own SVG, tries it without counting, and saves it
   );
   await expect(row.locator('[data-button-row-element]')).toHaveText(
     `<script src="${API_ORIGIN}/widget.js" async></script>\n` +
-      `<appreciator-button data-key="${publicKey}" data-count="left"></appreciator-button>`,
+      `<appreciate-button data-key="${publicKey}" data-count="left"></appreciate-button>`,
   );
   // On a narrow screen each snippet scrolls inside its block rather than
   // widening the row or the page.
@@ -458,7 +458,7 @@ test('designs a button from its own SVG, tries it without counting, and saves it
   await row.locator('[data-copy-element]').click();
   await expect(row.locator('[data-copy-element]')).toHaveText('Copied');
   expect(await page.evaluate(() => navigator.clipboard.readText())).toContain(
-    `<appreciator-button data-key="${publicKey}" data-count="left">`,
+    `<appreciate-button data-key="${publicKey}" data-count="left">`,
   );
   expect(counted).toEqual([]);
   const { buttons } = await dashboardApi<{
@@ -517,7 +517,7 @@ test("sorts a button's counts by last update, or by total", async ({ page, conte
     await visitor.goto(
       `${PAGE_ORIGIN}/?${new URLSearchParams({ api: API_ORIGIN, key: button.publicKey, item })}`,
     );
-    const widget = visitor.locator('appreciator-button');
+    const widget = visitor.locator('appreciate-button');
     await expect(widget.locator('button')).toBeEnabled();
     for (let i = 0; i < times; i += 1) await widget.locator('button').click();
     await widget.evaluate((element) =>

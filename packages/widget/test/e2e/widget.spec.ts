@@ -50,7 +50,7 @@ interface Widget {
 }
 
 function widget(page: Page): Widget {
-  const host = page.locator('appreciator-button');
+  const host = page.locator('appreciate-button');
   return {
     host,
     button: host.locator('button'),
@@ -329,7 +329,7 @@ test('fills up at the cap and stays full even after localStorage is cleared', as
   await ui.host.evaluate((element) => {
     const drawn: boolean[] = [];
     (window as unknown as { drawn: boolean[] }).drawn = drawn;
-    element.addEventListener('appreciator:burst', () =>
+    element.addEventListener('appreciate:burst', () =>
       drawn.push(element.hasAttribute('data-burst')),
     );
   });
@@ -414,7 +414,7 @@ test('the count rolls up to the new number on a counted click', async ({ page })
 
   await expect(arriving).toHaveText('1');
   expect(await arriving.evaluate((element) => getComputedStyle(element).animationName)).toBe(
-    'appreciator-roll-in',
+    'appreciate-roll-in',
   );
   // The old number leaves upwards, and is gone once the roll finishes.
   await expect(leaving).toHaveCount(0);
@@ -532,7 +532,7 @@ test("a page's button follows a single-page app's router to each page's own coun
   await expect(ui.count).toHaveText('1');
 });
 
-test('--appreciator-size scales the count and the gap with the icon', async ({ page }) => {
+test('--appreciate-size scales the count and the gap with the icon', async ({ page }) => {
   const ui = await open(page);
   const icon = ui.host.locator('[part="icon"]');
   const measure = async () => {
@@ -545,18 +545,18 @@ test('--appreciator-size scales the count and the gap with the icon', async ({ p
 
   // The count is 65% of the size: a step below the icon. With no size set
   // (the example page sets one, so unset it), that is 65% of 1.5em.
-  await ui.host.evaluate((element) => element.style.setProperty('--appreciator-size', 'initial'));
+  await ui.host.evaluate((element) => element.style.setProperty('--appreciate-size', 'initial'));
   const pageFont = await ui.host.evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).fontSize),
   );
   expect(Number.parseFloat((await measure()).fontSize)).toBeCloseTo(pageFont * 0.975, 1);
 
-  await ui.host.evaluate((element) => element.style.setProperty('--appreciator-size', '60px'));
+  await ui.host.evaluate((element) => element.style.setProperty('--appreciate-size', '60px'));
   const sized = await measure();
   expect(sized.fontSize).toBe('39px');
   expect(Math.round(sized.gap)).toBe(30);
 
-  await ui.host.evaluate((element) => element.style.setProperty('--appreciator-size', '40px'));
+  await ui.host.evaluate((element) => element.style.setProperty('--appreciate-size', '40px'));
   expect((await measure()).fontSize).toBe('26px');
 });
 
@@ -601,7 +601,7 @@ test('bursts as dashes when the button asks, and not at all when it asks for non
     const seen: string[] = [];
     (window as unknown as { seen: string[] }).seen = seen;
     // Recorded as it fires: data-burst is cleared again a moment later.
-    element.addEventListener('appreciator:burst', () =>
+    element.addEventListener('appreciate:burst', () =>
       seen.push(element.hasAttribute('data-burst') ? 'burst marked' : 'burst'),
     );
   });

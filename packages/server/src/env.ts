@@ -27,7 +27,7 @@ const MIN_MANAGEMENT_SECRET_LENGTH = 32;
  */
 const MIN_SESSION_SECRET_LENGTH = 32;
 
-const DEFAULT_REPO_URL = 'https://github.com/medhatdawoud/appreciator';
+const DEFAULT_REPO_URL = 'https://github.com/medhatdawoud/appreciate-button';
 
 /**
  * Where the built widget bundle lives by default: the sibling widget package's
@@ -51,7 +51,7 @@ export interface AppConfig {
   managementSecret: string | undefined;
   /** Per-visitor click cap applied to buttons created without an explicit one. */
   defaultMaxClicks: number;
-  /** Origin the embed snippet points at, e.g. https://appreciator.example.com. */
+  /** Origin the embed snippet points at, e.g. https://appreciate-button.example.com. */
   publicBaseUrl: string;
   /**
    * Max requests per IP per window that change something: clicks and resets

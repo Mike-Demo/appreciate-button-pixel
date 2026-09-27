@@ -20,7 +20,7 @@ const UNSAFE_URL = /^\s*(javascript:|data:\s*text\/html)/i;
  * declarations through the CSSOM is outside that policy, so the attributes
  * are renamed before parsing and moved back onto `element.style` after.
  */
-const HELD_STYLE_ATTRIBUTE = 'data-appreciator-style';
+const HELD_STYLE_ATTRIBUTE = 'data-appreciate-button-style';
 
 function holdStyleAttributes(source: string): string {
   return source.replace(/<[^>]+>/g, (tag) =>

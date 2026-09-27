@@ -1,4 +1,4 @@
-import type { ButtonPublicConfig, ButtonState, ClickCounts } from '@appreciator/shared';
+import type { ButtonPublicConfig, ButtonState, ClickCounts } from '@appreciate-button/shared';
 
 import { ApiClient, ApiError } from './api.js';
 import { clipInsetTop, drawingBounds, type DrawingBounds } from './fill.js';
@@ -71,8 +71,8 @@ const RING_PADDING = 0.3;
 
 /**
  * Colours come from the button config as `--_c-<state>` on the inner button;
- * a host page can override any of them with `--appreciator-<state>` on the
- * element, and size it with `--appreciator-size`.
+ * a host page can override any of them with `--appreciate-<state>` on the
+ * element, and size it with `--appreciate-size`.
  *
  * A single icon is drawn twice, stacked: a gray `base` silhouette painted with
  * the `default` (or, hovered, `hover`) colour, and a `fill` copy painted with
@@ -95,7 +95,7 @@ const RING_PADDING = 0.3;
  * state, tagged `data-for`, and these rules show exactly one of them. Hover
  * stays a CSS-only state in both modes.
  *
- * The count and the gap scale with `--appreciator-size`: the count is 65% of
+ * The count and the gap scale with `--appreciate-size`: the count is 65% of
  * it, a step below the icon so the two do not compete, and the gap half of it
  * (three quarters with a ring, so the count stands clear of it).
  * Once the allowance is spent the count takes the `full` colour too.
@@ -134,7 +134,7 @@ button {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  gap: calc(var(--appreciator-size, 1.5em) / 2);
+  gap: calc(var(--appreciate-size, 1.5em) / 2);
   cursor: pointer;
   font: inherit;
   color: inherit;
@@ -155,34 +155,34 @@ button:disabled { cursor: default; }
 :host([data-count="left"]) button { flex-direction: row-reverse; }
 :host([data-count="top"]) button {
   flex-direction: column-reverse;
-  gap: calc(var(--appreciator-size, 1.5em) / 4);
+  gap: calc(var(--appreciate-size, 1.5em) / 4);
 }
 :host([data-count="bottom"]) button {
   flex-direction: column;
-  gap: calc(var(--appreciator-size, 1.5em) / 4);
+  gap: calc(var(--appreciate-size, 1.5em) / 4);
 }
-:host([data-ring]) button { gap: calc(var(--appreciator-size, 1.5em) * 0.75); }
+:host([data-ring]) button { gap: calc(var(--appreciate-size, 1.5em) * 0.75); }
 :host([data-ring][data-count="top"]) button,
 :host([data-ring][data-count="bottom"]) button {
-  gap: calc(var(--appreciator-size, 1.5em) / 2);
+  gap: calc(var(--appreciate-size, 1.5em) / 2);
 }
 [part="count"] {
-  font-size: calc(var(--appreciator-size, 1.5em) * 0.65);
+  font-size: calc(var(--appreciate-size, 1.5em) * 0.65);
   transition: color 300ms ease;
   display: inline-grid;
   overflow: hidden;
   justify-items: start;
 }
 :host([data-count="left"]) [part="count"] { justify-items: end; }
-:host([data-state="full"]) [part="count"] { color: var(--appreciator-full, var(--_c-full)); }
+:host([data-state="full"]) [part="count"] { color: var(--appreciate-full, var(--_c-full)); }
 :host([data-count="top"]) [part="count"],
 :host([data-count="bottom"]) [part="count"] { justify-items: center; }
 [part="count"] > span { grid-area: 1 / 1; }
 [part="count"] > .roll-out {
-  animation: appreciator-roll-out ${ROLL_MS}ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: appreciate-roll-out ${ROLL_MS}ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 [part="count"] > .roll-in {
-  animation: appreciator-roll-in ${ROLL_MS}ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: appreciate-roll-in ${ROLL_MS}ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 /* Holds the icon and, beside it rather than inside, the burst: the icon's
    pulse and hover scale must not carry the flying copies with them. */
@@ -196,34 +196,34 @@ button:disabled { cursor: default; }
 }
 :host(:not([data-state="full"])) button:not(:disabled):hover [part="icon"] { transform: scale(1.08); }
 :host([data-state="clicked"]) [part="icon"] {
-  animation: appreciator-pulse ${PULSE_MS}ms ease-out;
+  animation: appreciate-pulse ${PULSE_MS}ms ease-out;
 }
 [part="icon"] > svg {
   grid-area: 1 / 1;
-  width: var(--appreciator-size, 1.5em);
-  height: var(--appreciator-size, 1.5em);
+  width: var(--appreciate-size, 1.5em);
+  height: var(--appreciate-size, 1.5em);
 }
 svg[data-layer="base"] {
-  --appr-fill: var(--appreciator-default, var(--_c-default));
-  --appr-stroke: var(--appreciator-default, var(--_c-default));
+  --appr-fill: var(--appreciate-default, var(--_c-default));
+  --appr-stroke: var(--appreciate-default, var(--_c-default));
   opacity: ${REST_OPACITY.default};
   transition: opacity 150ms ease;
 }
 :host([data-own-colors]) svg[data-layer="base"] { filter: grayscale(1); }
 :host(:not([data-state="full"])) button:not(:disabled):hover svg[data-layer="base"] {
-  --appr-fill: var(--appreciator-hover, var(--_c-hover));
-  --appr-stroke: var(--appreciator-hover, var(--_c-hover));
+  --appr-fill: var(--appreciate-hover, var(--_c-hover));
+  --appr-stroke: var(--appreciate-hover, var(--_c-hover));
   opacity: ${REST_OPACITY.hover};
 }
 svg[data-layer="fill"] {
-  --appr-fill: var(--appreciator-full, var(--_c-full));
-  --appr-stroke: var(--appreciator-full, var(--_c-full));
+  --appr-fill: var(--appreciate-full, var(--_c-full));
+  --appr-stroke: var(--appreciate-full, var(--_c-full));
   clip-path: inset(100% 0 0 0);
   transition: clip-path 800ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 :host([data-state="clicked"]) svg[data-layer="fill"] {
-  --appr-fill: var(--appreciator-clicked, var(--_c-clicked));
-  --appr-stroke: var(--appreciator-clicked, var(--_c-clicked));
+  --appr-fill: var(--appreciate-clicked, var(--_c-clicked));
+  --appr-stroke: var(--appreciate-clicked, var(--_c-clicked));
 }
 :host([data-icons="states"]) [part="icon"] > svg { display: none; }
 :host([data-icons="single"]:not([data-own-colors])) svg[data-layer] :not(${PAINT_EXEMPT}),
@@ -243,20 +243,20 @@ svg[data-layer="fill"] {
   display: block;
 }
 :host([data-ring]) [part="icon"] {
-  --_ring: var(--appreciator-default, var(--_c-default));
+  --_ring: var(--appreciate-default, var(--_c-default));
   border: 1px solid var(--_ring);
   border-radius: 50%;
-  padding: calc(var(--appreciator-size, 1.5em) * ${RING_PADDING});
+  padding: calc(var(--appreciate-size, 1.5em) * ${RING_PADDING});
   transition: transform 150ms ease, border-color 300ms ease;
 }
 :host([data-ring][data-state="default"]) button:not(:disabled):hover [part="icon"] {
-  --_ring: var(--appreciator-hover, var(--_c-hover));
+  --_ring: var(--appreciate-hover, var(--_c-hover));
 }
 :host([data-ring][data-state="clicked"]) [part="icon"] {
-  --_ring: var(--appreciator-clicked, var(--_c-clicked));
+  --_ring: var(--appreciate-clicked, var(--_c-clicked));
 }
 :host([data-ring][data-state="full"]) [part="icon"] {
-  --_ring: var(--appreciator-full, var(--_c-full));
+  --_ring: var(--appreciate-full, var(--_c-full));
 }
 [part="burst"] {
   position: absolute;
@@ -272,36 +272,36 @@ svg[data-layer="fill"] {
   visibility: hidden;
 }
 [part="burst"] svg {
-  --appr-fill: var(--appreciator-clicked, var(--_c-clicked));
-  --appr-stroke: var(--appreciator-clicked, var(--_c-clicked));
-  width: calc(var(--appreciator-size, 1.5em) * ${COPY_SIZE});
-  height: calc(var(--appreciator-size, 1.5em) * ${COPY_SIZE});
-  margin: calc(var(--appreciator-size, 1.5em) * ${-COPY_SIZE / 2}) 0 0 calc(var(--appreciator-size, 1.5em) * ${-COPY_SIZE / 2});
+  --appr-fill: var(--appreciate-clicked, var(--_c-clicked));
+  --appr-stroke: var(--appreciate-clicked, var(--_c-clicked));
+  width: calc(var(--appreciate-size, 1.5em) * ${COPY_SIZE});
+  height: calc(var(--appreciate-size, 1.5em) * ${COPY_SIZE});
+  margin: calc(var(--appreciate-size, 1.5em) * ${-COPY_SIZE / 2}) 0 0 calc(var(--appreciate-size, 1.5em) * ${-COPY_SIZE / 2});
 }
 [part="burst"] > .dash {
-  width: calc(var(--appreciator-size, 1.5em) * 0.08);
-  height: calc(var(--appreciator-size, 1.5em) * ${DASH_LENGTH});
-  margin: calc(var(--appreciator-size, 1.5em) * ${-DASH_LENGTH / 2}) 0 0 calc(var(--appreciator-size, 1.5em) * -0.04);
+  width: calc(var(--appreciate-size, 1.5em) * 0.08);
+  height: calc(var(--appreciate-size, 1.5em) * ${DASH_LENGTH});
+  margin: calc(var(--appreciate-size, 1.5em) * ${-DASH_LENGTH / 2}) 0 0 calc(var(--appreciate-size, 1.5em) * -0.04);
   border-radius: 999px;
-  background: var(--appreciator-clicked, var(--_c-clicked));
+  background: var(--appreciate-clicked, var(--_c-clicked));
 }
 :host([data-burst]) [part="burst"] > * {
   visibility: visible;
-  animation: appreciator-burst 380ms cubic-bezier(0.33, 1, 0.68, 1) var(--delay, 0ms) both;
+  animation: appreciate-burst 380ms cubic-bezier(0.33, 1, 0.68, 1) var(--delay, 0ms) both;
 }
-@keyframes appreciator-burst {
+@keyframes appreciate-burst {
   0% { transform: translate(var(--sx), var(--sy)) rotate(var(--turn, 0deg)) scale(${BURST_SCALE}); opacity: 0; }
   10% { opacity: 1; }
   65% { opacity: 1; }
   100% { transform: translate(var(--dx), var(--dy)) rotate(var(--turn, 0deg)) scale(${BURST_SCALE}); opacity: 0; }
 }
-@keyframes appreciator-roll-out {
+@keyframes appreciate-roll-out {
   to { transform: translateY(-100%); opacity: 0; }
 }
-@keyframes appreciator-roll-in {
+@keyframes appreciate-roll-in {
   from { transform: translateY(100%); opacity: 0; }
 }
-@keyframes appreciator-pulse {
+@keyframes appreciate-pulse {
   0% { transform: scale(1); }
   40% { transform: scale(1.3); }
   100% { transform: scale(1); }
@@ -387,7 +387,7 @@ export function getDefaultApi(): string | undefined {
 
 export interface MountOptions {
   /**
-   * Base URL of the appreciator server, e.g. https://appreciator.example.com.
+   * Base URL of the Appreciate Button server, e.g. https://appreciate-button.example.com.
    * Optional when the bundle was loaded from that server.
    */
   api?: string;
@@ -405,7 +405,7 @@ export interface ErrorDetail {
 }
 
 /**
- * `<appreciator-button data-key [data-api] [data-item] [data-label] [data-readonly]>`
+ * `<appreciate-button data-key [data-api] [data-item] [data-label] [data-readonly]>`
  *
  * `data-api` is only needed when the bundle was not loaded from the server it
  * should talk to; otherwise the element uses the URL the bundle came from.
@@ -418,11 +418,11 @@ export interface ErrorDetail {
  * it takes effect at once, with no reload.
  *
  * Reflects `data-state` (`default` | `clicked` | `full`), `data-icons`
- * (`single` | `states`), `data-ring` and `data-error` on itself, and dispatches `appreciator:ready`, `appreciator:change`,
- * `appreciator:maxed` (detail: ClickCounts) and `appreciator:error`
+ * (`single` | `states`), `data-ring` and `data-error` on itself, and dispatches `appreciate:ready`, `appreciate:change`,
+ * `appreciate:maxed` (detail: ClickCounts) and `appreciate:error`
  * (detail: ErrorDetail). All events bubble and cross the shadow boundary.
  */
-export class AppreciatorButton extends HTMLElement {
+export class AppreciateButton extends HTMLElement {
   static readonly observedAttributes = ['data-api', 'data-key', 'data-item', 'data-readonly'];
 
   private readonly button: HTMLButtonElement;
@@ -620,7 +620,7 @@ export class AppreciatorButton extends HTMLElement {
     if (!api || !key) {
       this.fail(
         'missing_attributes',
-        'data-key is required, and data-api unless the widget was loaded from the appreciator server',
+        'data-key is required, and data-api unless the widget was loaded from the Appreciate Button server',
       );
       return;
     }
@@ -677,7 +677,7 @@ export class AppreciatorButton extends HTMLElement {
     this.counts = counts;
     writeCachedCounts(key, this.item, counts);
     this.render();
-    this.emit('appreciator:ready', counts);
+    this.emit('appreciate:ready', counts);
   }
 
   private startPreview(config: ButtonPublicConfig): void {
@@ -696,7 +696,7 @@ export class AppreciatorButton extends HTMLElement {
       maxed: config.maxClicks <= 0,
     };
     this.render();
-    this.emit('appreciator:ready', this.counts);
+    this.emit('appreciate:ready', this.counts);
   }
 
   /**
@@ -733,19 +733,19 @@ export class AppreciatorButton extends HTMLElement {
     this.config = null;
     this.setAttribute('data-error', code);
     this.render();
-    this.emit('appreciator:error', { code, message } satisfies ErrorDetail);
+    this.emit('appreciate:error', { code, message } satisfies ErrorDetail);
   }
 
   /**
    * A click with allowance left counts and bursts. A click once it is spent
    * counts nothing and plays no burst, but a full button still answers: it
-   * thanks the visitor again, and still fires `appreciator:burst`.
+   * thanks the visitor again, and still fires `appreciate:burst`.
    */
   private handleClick(): void {
     const counts = this.displayedCounts();
     if (this.config === null || counts === null || this.readonly) return;
     if (!canClick(counts)) {
-      this.emit('appreciator:burst', counts);
+      this.emit('appreciate:burst', counts);
       this.thank();
       if (this.sounds) playSpent();
       return;
@@ -791,7 +791,7 @@ export class AppreciatorButton extends HTMLElement {
         } catch (error) {
           if (generation !== this.generation) return;
           this.pending = 0;
-          this.emit('appreciator:error', {
+          this.emit('appreciate:error', {
             code: errorCode(error),
             message: errorMessage(error),
           } satisfies ErrorDetail);
@@ -806,8 +806,8 @@ export class AppreciatorButton extends HTMLElement {
       this.pending = settled.maxed ? 0 : Math.max(this.pending - 1, 0);
       if (api !== null) writeCachedCounts(this.key, this.item, settled);
       this.render();
-      this.emit('appreciator:change', settled);
-      if (settled.maxed && before?.maxed !== true) this.emit('appreciator:maxed', settled);
+      this.emit('appreciate:change', settled);
+      if (settled.maxed && before?.maxed !== true) this.emit('appreciate:maxed', settled);
     }
   }
 
@@ -862,7 +862,7 @@ export class AppreciatorButton extends HTMLElement {
       this.burstTimer = undefined;
       this.removeAttribute('data-burst');
     }, BURST_MS);
-    this.emit('appreciator:burst', this.displayedCounts());
+    this.emit('appreciate:burst', this.displayedCounts());
   }
 
   /**
@@ -1106,7 +1106,7 @@ function aimParticles(particles: Iterable<Element>, countPosition: string | unde
     // Past the edge (half a size out for the icon, which is one size across,
     // or the ring's) by the particle's half and the gap, then further out.
     const at = (beyondEdge: number, trig: (value: number) => number): string =>
-      `calc(var(--appreciator-size, 1.5em) * (var(--_edge, 0.5) + ${round(beyondEdge)}) * ${round(trig(angle))})`;
+      `calc(var(--appreciate-size, 1.5em) * (var(--_edge, 0.5) + ${round(beyondEdge)}) * ${round(trig(angle))})`;
     style.setProperty('--sx', at(half + BURST_GAP, Math.cos));
     style.setProperty('--sy', at(half + BURST_GAP, Math.sin));
     style.setProperty('--dx', at(half + BURST_GAP + BURST_TRAVEL, Math.cos));

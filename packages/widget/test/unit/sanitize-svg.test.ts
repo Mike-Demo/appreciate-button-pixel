@@ -49,7 +49,7 @@ describe('parseSafeSvg', () => {
       'var(--appr-stroke, currentColor)',
     );
     expect((path as SVGElement).style.getPropertyValue('stroke-width')).toBe('3');
-    expect(svg?.outerHTML).not.toContain('data-appreciator-style');
+    expect(svg?.outerHTML).not.toContain('data-appreciate-button-style');
     expect(svg?.querySelector('title')?.textContent).toBe('not a style= attribute');
   });
 

@@ -1,5 +1,5 @@
 {
-  "name": "appreciator",
+  "name": "appreciate-button",
   "private": true,
   "description": "Self-hostable, multi-tenant embeddable appreciation/like button widget and API",
   "license": "MIT",
@@ -17,9 +17,9 @@
     "test:unit": "npm run test:unit --workspaces --if-present",
     "test:integration": "npm run test:integration --workspaces --if-present",
     "test:e2e": "npm run test:e2e --workspaces --if-present",
-    "migrate": "npm run migrate -w @appreciator/server",
-    "site:pages": "npm run site:pages -w @appreciator/server --",
-    "site:og-image": "npm run site:og-image -w @appreciator/server"
+    "migrate": "npm run migrate -w @appreciate-button/server",
+    "site:pages": "npm run site:pages -w @appreciate-button/server --",
+    "site:og-image": "npm run site:og-image -w @appreciate-button/server"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

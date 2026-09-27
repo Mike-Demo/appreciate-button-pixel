@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { WebConfig } from '@appreciator/shared';
+import type { WebConfig } from '@appreciate-button/shared';
 import type { FastifyInstance, FastifyReply } from 'fastify';
 
 import { DEFAULT_COLORS, DEFAULT_SVG_SOURCE } from '../lib/default-icon.js';

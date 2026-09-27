@@ -3,6 +3,29 @@
 A running record of the significant changes to this repository, newest first.
 Each entry is written so it can seed a PR description.
 
+## 2026-09-27 — Appreciator is now Appreciate Button
+
+A clean rename, with no aliases for the old names. Pages that embed the
+button must switch before this is deployed, or their button stops rendering:
+
+| Before                                                       | After                                          |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| `<appreciator-button>`                                       | `<appreciate-button>`                          |
+| `appreciator:ready`, `:burst`, `:change`, `:maxed`, `:error` | `appreciate:ready`, …                          |
+| `--appreciator-size`, `--appreciator-default`, …             | `--appreciate-size`, `--appreciate-default`, … |
+| global `Appreciator` (bundle)                                | `AppreciateButton`                             |
+
+- The display name is "Appreciate Button" in every page, doc and the
+  link-preview image. The packages are `@appreciate-button/*`, and the
+  repository links point to `medhatdawoud/appreciate-button`.
+- Also renamed: the dashboard's CSRF header value (`X-Requested-With:
+appreciate-button`), the session and OAuth-state cookies (everyone signs in
+  once more), the widget's `localStorage` keys (a count cache, rebuilt on its
+  own), the test databases (`appreciate_button_test`, `_e2e`, created on
+  first run) and `svg-gen`'s default output folder.
+- Unchanged: the docker-compose development database and its credentials, so
+  local data keeps working, and the earlier entries below.
+
 ## 2026-09-27 — Move to appreciate-button.com, and drop GitHub Pages
 
 - The site's home is now `https://appreciate-button.com`: every canonical

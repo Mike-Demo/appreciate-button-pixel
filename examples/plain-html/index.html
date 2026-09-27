@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Appreciator example</title>
+    <title>Appreciate Button example</title>
     <style>
       body {
         font:
@@ -14,8 +14,8 @@
         padding: 0 1rem;
         color: #1f2937;
       }
-      appreciator-button {
-        --appreciator-size: 2rem;
+      appreciate-button {
+        --appreciate-size: 2rem;
         font-size: 1.25rem;
         vertical-align: middle;
       }
@@ -30,7 +30,7 @@
     </style>
   </head>
   <body>
-    <h1>Appreciator example</h1>
+    <h1>Appreciate Button example</h1>
     <p>
       Open this page with <code>?api=&lt;server base url&gt;&amp;key=&lt;public key&gt;</code>. Add
       <code>&amp;item=&lt;id&gt;</code> to count against an explicit id instead of this page's URL.
@@ -42,7 +42,7 @@
     <script>
       // A real page would paste the one tag the server hands out:
       //
-      //   <script src="https://appreciator.example.com/widget.js" data-key="pk_…" async><\/script>
+      //   <script src="https://appreciate-button.example.com/widget.js" data-key="pk_…" async><\/script>
       //
       // This page builds the same tag from its query string so one file can
       // point at any server. The bundle finds the server from its own `src`

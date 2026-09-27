@@ -5,7 +5,7 @@ import type {
   ClickRequest,
   ResetResponse,
   StateQuery,
-} from '@appreciator/shared';
+} from '@appreciate-button/shared';
 import type { FastifyInstance, FastifyRequest } from 'fastify';
 
 import type { ButtonRow } from '../db/buttons.js';

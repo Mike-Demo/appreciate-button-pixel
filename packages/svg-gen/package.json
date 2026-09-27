@@ -1,5 +1,5 @@
 {
-  "name": "@appreciator/svg-gen",
+  "name": "@appreciate-button/svg-gen",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
-    "@appreciator/shared": "*",
+    "@appreciate-button/shared": "*",
     "@xmldom/xmldom": "^0.9.8",
     "commander": "^13.1.0"
   },

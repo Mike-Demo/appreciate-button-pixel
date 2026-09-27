@@ -16,9 +16,9 @@ COPY site site
 COPY packages/shared packages/shared
 COPY packages/widget packages/widget
 COPY packages/server packages/server
-RUN npm run build -w @appreciator/shared \
- && npm run build -w @appreciator/widget \
- && npm run build -w @appreciator/server
+RUN npm run build -w @appreciate-button/shared \
+ && npm run build -w @appreciate-button/widget \
+ && npm run build -w @appreciate-button/server
 
 
 FROM node:22-alpine
@@ -30,7 +30,7 @@ COPY packages/shared/package.json packages/shared/
 COPY packages/server/package.json packages/server/
 COPY packages/widget/package.json packages/widget/
 COPY packages/svg-gen/package.json packages/svg-gen/
-RUN npm ci --omit=dev -w @appreciator/server && npm cache clean --force
+RUN npm ci --omit=dev -w @appreciate-button/server && npm cache clean --force
 
 COPY --from=build /app/packages/shared/dist packages/shared/dist
 COPY --from=build /app/packages/widget/dist packages/widget/dist

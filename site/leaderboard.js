@@ -8,7 +8,7 @@
   }
 
   function setRepoLinks(config) {
-    const repo = config.repoUrl || 'https://github.com/medhatdawoud/appreciator';
+    const repo = config.repoUrl || 'https://github.com/medhatdawoud/appreciate-button';
     for (const link of document.querySelectorAll('[data-repo-link]')) link.href = repo;
   }
 

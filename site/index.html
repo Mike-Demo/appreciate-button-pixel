@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Appreciator — open-source clap &amp; like button for any website</title>
+    <title>Appreciate Button — open-source clap &amp; like button for any website</title>
     <meta
       name="description"
       content="Add a Medium-style clap, applause or like button to any website with one script tag. Counts per page, several claps per reader, no cookies. Free, open source and self-hostable."
     />
     <link rel="canonical" href="https://appreciate-button.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Appreciator" />
+    <meta property="og:site_name" content="Appreciate Button" />
     <meta
       property="og:title"
-      content="Appreciator — open-source clap &amp; like button for any website"
+      content="Appreciate Button — open-source clap &amp; like button for any website"
     />
     <meta
       property="og:description"
@@ -23,7 +23,10 @@
     <meta property="og:image" content="https://appreciate-button.com/img/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Appreciator: an open-source clap and like button" />
+    <meta
+      property="og:image:alt"
+      content="Appreciate Button: an open-source clap and like button"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="img/heart.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="site.css" />
@@ -35,19 +38,19 @@
             "@type": "WebSite",
             "@id": "https://appreciate-button.com/#website",
             "url": "https://appreciate-button.com/",
-            "name": "Appreciator"
+            "name": "Appreciate Button"
           },
           {
             "@type": "SoftwareApplication",
             "@id": "https://appreciate-button.com/#software",
-            "name": "Appreciator",
+            "name": "Appreciate Button",
             "description": "An embeddable clap, applause and like button for any website: one script tag, counts per page, several claps per reader, no cookies. Hosted or self-hosted.",
             "url": "https://appreciate-button.com/",
             "applicationCategory": "DeveloperApplication",
             "operatingSystem": "Any",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
             "license": "https://opensource.org/licenses/MIT",
-            "sameAs": ["https://github.com/medhatdawoud/appreciator"]
+            "sameAs": ["https://github.com/medhatdawoud/appreciate-button"]
           }
         ]
       }
@@ -57,7 +60,7 @@
     <header class="top">
       <a class="brand" href="./">
         <img src="img/heart.svg" alt="" width="24" height="24" />
-        <span>Appreciator</span>
+        <span>Appreciate Button</span>
       </a>
       <nav class="nav">
         <a href="#install">Install</a>
@@ -67,7 +70,11 @@
         <a href="#multiple">Multiple buttons</a>
         <a href="#events">Events</a>
         <a href="./leaderboard" data-leaderboard-link>Most appreciated</a>
-        <a class="nav-github" data-repo-link href="https://github.com/medhatdawoud/appreciator">
+        <a
+          class="nav-github"
+          data-repo-link
+          href="https://github.com/medhatdawoud/appreciate-button"
+        >
           <img src="img/github.svg" alt="" width="18" height="18" />
           GitHub
         </a>
@@ -88,7 +95,7 @@
             <a
               class="btn btn-primary"
               data-repo-link
-              href="https://github.com/medhatdawoud/appreciator"
+              href="https://github.com/medhatdawoud/appreciate-button"
             >
               <img src="img/github.svg" alt="" width="18" height="18" />
               View on GitHub
@@ -97,7 +104,7 @@
             <a
               class="btn btn-secondary"
               data-selfhost-link
-              href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+              href="https://github.com/medhatdawoud/appreciate-button#hosting-guide"
             >
               Self-host in ten minutes
             </a>
@@ -123,7 +130,7 @@
         <div class="hero-demo card" data-demo-missing hidden>
           <p class="demo-label">No instance connected</p>
           <p class="demo-hint">
-            This copy of the page is not pointed at an Appreciator server, so the live demo is
+            This copy of the page is not pointed at an Appreciate Button server, so the live demo is
             switched off. Everything else below still applies.
           </p>
         </div>
@@ -189,19 +196,19 @@
         <div class="variants" data-variants>
           <article class="card variant">
             <div class="demo-slot variant-gold" data-demo-slot="variant-gold"></div>
-            <pre><code>appreciator-button {
-  --appreciator-size: 2.5rem;
-  --appreciator-full: gold;
-  --appreciator-clicked: orange;
+            <pre><code>appreciate-button {
+  --appreciate-size: 2.5rem;
+  --appreciate-full: gold;
+  --appreciate-clicked: orange;
 }</code></pre>
           </article>
           <article class="card variant">
             <div class="demo-slot variant-mono" data-demo-slot="variant-mono"></div>
-            <pre><code>appreciator-button {
-  --appreciator-default: currentColor;
-  --appreciator-hover: currentColor;
-  --appreciator-clicked: currentColor;
-  --appreciator-full: currentColor;
+            <pre><code>appreciate-button {
+  --appreciate-default: currentColor;
+  --appreciate-hover: currentColor;
+  --appreciate-clicked: currentColor;
+  --appreciate-full: currentColor;
 }</code></pre>
           </article>
           <article class="card variant">
@@ -210,11 +217,11 @@
               data-demo-slot="variant-big"
               data-label="Clap for this"
             ></div>
-            <pre><code>&lt;appreciator-button
+            <pre><code>&lt;appreciate-button
   data-key="pk_…"
   data-label="Clap for this"&gt;
-appreciator-button {
-  --appreciator-size: 3rem;
+appreciate-button {
+  --appreciate-size: 3rem;
 }</code></pre>
           </article>
         </div>
@@ -289,27 +296,27 @@ appreciator-button {
             </thead>
             <tbody>
               <tr>
-                <td><code>appreciator:ready</code></td>
+                <td><code>appreciate:ready</code></td>
                 <td>Once the button has loaded and shows its count.</td>
                 <td>counts</td>
               </tr>
               <tr>
-                <td><code>appreciator:burst</code></td>
+                <td><code>appreciate:burst</code></td>
                 <td>On every click, counted or not; a spent button plays no burst.</td>
                 <td>counts, as shown right after the click</td>
               </tr>
               <tr>
-                <td><code>appreciator:change</code></td>
+                <td><code>appreciate:change</code></td>
                 <td>When the server confirms a counted click.</td>
                 <td>counts</td>
               </tr>
               <tr>
-                <td><code>appreciator:maxed</code></td>
+                <td><code>appreciate:maxed</code></td>
                 <td>Once, when the click that uses up the visitor's allowance is confirmed.</td>
                 <td>counts</td>
               </tr>
               <tr>
-                <td><code>appreciator:error</code></td>
+                <td><code>appreciate:error</code></td>
                 <td>When loading or a click fails.</td>
                 <td><code>{ code, message }</code></td>
               </tr>
@@ -325,16 +332,16 @@ appreciator-button {
         <div class="events-demo">
           <div class="code-block">
             <pre><code data-events-snippet>&lt;script&gt;
-  document.addEventListener('appreciator:ready', (event) =&gt; {
+  document.addEventListener('appreciate:ready', (event) =&gt; {
     console.log('loaded with', event.detail.totalCount);
   });
-  document.addEventListener('appreciator:burst', (event) =&gt; {
+  document.addEventListener('appreciate:burst', (event) =&gt; {
     console.log('clicked', event.target, event.detail.totalCount);
   });
-  document.addEventListener('appreciator:maxed', () =&gt; {
+  document.addEventListener('appreciate:maxed', () =&gt; {
     console.log('all clicks used, say thanks');
   });
-  document.addEventListener('appreciator:error', (event) =&gt; {
+  document.addEventListener('appreciate:error', (event) =&gt; {
     console.warn(event.detail.code, event.detail.message);
   });
 &lt;/script&gt;</code></pre>
@@ -352,7 +359,7 @@ appreciator-button {
         <ol class="steps">
           <li>
             <strong>The tag loads the bundle</strong> from your instance and renders a
-            <code>&lt;appreciator-button&gt;</code> in a shadow root, isolated from the page's CSS.
+            <code>&lt;appreciate-button&gt;</code> in a shadow root, isolated from the page's CSS.
           </li>
           <li>
             <strong>It fetches the button config and the page's counts</strong> in parallel,
@@ -380,8 +387,8 @@ appreciator-button {
         <div class="code-block">
           <pre><code>&lt;script src="https://your-instance.example/widget.js" async&gt;&lt;/script&gt;
 …
-&lt;appreciator-button data-key="pk_…" data-item="post-1" data-count="left"&gt;&lt;/appreciator-button&gt;
-&lt;appreciator-button data-key="pk_…" data-item="post-2" data-count="left"&gt;&lt;/appreciator-button&gt;</code></pre>
+&lt;appreciate-button data-key="pk_…" data-item="post-1" data-count="left"&gt;&lt;/appreciate-button&gt;
+&lt;appreciate-button data-key="pk_…" data-item="post-2" data-count="left"&gt;&lt;/appreciate-button&gt;</code></pre>
         </div>
         <div class="posts" data-multi>
           <article class="card post">
@@ -450,8 +457,8 @@ appreciator-button {
           </p>
           <h3>I used the Applause Button. Can I switch?</h3>
           <p>
-            Its free hosted service no longer runs. Replacing its tags with one Appreciator tag is
-            most of the move. <a href="alternatives/applause-button">How to switch</a>.
+            Its free hosted service no longer runs. Replacing its tags with one Appreciate Button
+            tag is most of the move. <a href="alternatives/applause-button">How to switch</a>.
           </p>
           <h3>Does it work with single-page apps?</h3>
           <p>
@@ -466,7 +473,8 @@ appreciator-button {
       <div>
         <p>
           Open source under the MIT licence —
-          <a data-repo-link href="https://github.com/medhatdawoud/appreciator">star it on GitHub</a
+          <a data-repo-link href="https://github.com/medhatdawoud/appreciate-button"
+            >star it on GitHub</a
           >.
         </p>
         <p class="credit">
@@ -476,11 +484,13 @@ appreciator-button {
       </div>
       <div class="foot-end">
         <p>
-          <a data-selfhost-link href="https://github.com/medhatdawoud/appreciator#hosting-guide"
+          <a
+            data-selfhost-link
+            href="https://github.com/medhatdawoud/appreciate-button#hosting-guide"
             >Self-host in ten minutes</a
           >
           ·
-          <a data-readme-link href="https://github.com/medhatdawoud/appreciator#readme"
+          <a data-readme-link href="https://github.com/medhatdawoud/appreciate-button#readme"
             >Read the docs</a
           >
         </p>

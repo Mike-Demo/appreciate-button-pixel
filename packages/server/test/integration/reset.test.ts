@@ -1,4 +1,4 @@
-import type { ClickCounts, CreateButtonResponse, ResetResponse } from '@appreciator/shared';
+import type { ClickCounts, CreateButtonResponse, ResetResponse } from '@appreciate-button/shared';
 import type { FastifyInstance } from 'fastify';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
@@ -9,7 +9,7 @@ import type { AppConfig } from '../../src/env.js';
 import { ensureDemoButton } from '../../src/lib/bootstrap.js';
 import { ensureSchema, seedTenant, testConfig, truncateAll } from './helpers.js';
 
-const DEMO_ORIGIN = 'https://appreciator.test';
+const DEMO_ORIGIN = 'https://appreciate-button.test';
 
 interface Caller {
   ip?: string;

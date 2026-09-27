@@ -1,4 +1,4 @@
-import type { ClickCounts } from '@appreciator/shared';
+import type { ClickCounts } from '@appreciate-button/shared';
 
 /** The JS-driven visual states. `hover` is handled purely in CSS. */
 export type VisualState = 'default' | 'clicked' | 'full';

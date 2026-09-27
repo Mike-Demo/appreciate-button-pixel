@@ -22,10 +22,10 @@ test('renders the live demo under the server CSP with nothing refused', async ({
 
   await page.goto(`${API_ORIGIN}/`);
 
-  const hero = page.locator('[data-demo-slot="hero"] appreciator-button');
+  const hero = page.locator('[data-demo-slot="hero"] appreciate-button');
   await expect(hero).toHaveAttribute('data-state', 'default');
   await expect(hero).toHaveAttribute('data-key', fixture.demoKey);
-  await expect(page.locator('appreciator-button[data-state="default"]')).toHaveCount(DEMO_SLOTS);
+  await expect(page.locator('appreciate-button[data-state="default"]')).toHaveCount(DEMO_SLOTS);
 
   const count = hero.locator('[part="count"]');
   const before = Number(await count.textContent());
@@ -56,7 +56,7 @@ test('bursts until the demo is used up, then stops, and resets for another try',
     if (request.method() === 'POST' && request.url().endsWith('/click')) clicks.push(request.url());
   });
   await page.goto(`${API_ORIGIN}/`);
-  const hero = page.locator('[data-demo-slot="hero"] appreciator-button');
+  const hero = page.locator('[data-demo-slot="hero"] appreciate-button');
   const button = hero.locator('button');
   const count = hero.locator('[part="count"]');
   const particles = hero.locator('[part="burst"] > svg');
@@ -68,7 +68,7 @@ test('bursts until the demo is used up, then stops, and resets for another try',
   await hero.evaluate((element) => {
     const drawn: boolean[] = [];
     (window as unknown as { drawn: boolean[] }).drawn = drawn;
-    element.addEventListener('appreciator:burst', () =>
+    element.addEventListener('appreciate:burst', () =>
       drawn.push(element.hasAttribute('data-burst')),
     );
   });
@@ -130,10 +130,10 @@ test('shows the count on every side, and on the left in the multi-button example
   page,
 }) => {
   await page.goto(`${API_ORIGIN}/`);
-  await expect(page.locator('appreciator-button[data-state="default"]')).toHaveCount(DEMO_SLOTS);
+  await expect(page.locator('appreciate-button[data-state="default"]')).toHaveCount(DEMO_SLOTS);
 
   async function side(slot: string): Promise<string> {
-    const host = page.locator(`[data-demo-slot="${slot}"] appreciator-button`);
+    const host = page.locator(`[data-demo-slot="${slot}"] appreciate-button`);
     const icon = await host.locator('[part="icon"]').boundingBox();
     const count = await host.locator('[part="count"]').boundingBox();
     if (icon === null || count === null) throw new Error(`${slot} is not laid out`);
@@ -158,8 +158,8 @@ test('the read-only example shows the main demo count and follows it, untouchabl
   page,
 }) => {
   await page.goto(`${API_ORIGIN}/`);
-  const hero = page.locator('[data-demo-slot="hero"] appreciator-button');
-  const mirror = page.locator('[data-demo-slot="readonly"] appreciator-button');
+  const hero = page.locator('[data-demo-slot="hero"] appreciate-button');
+  const mirror = page.locator('[data-demo-slot="readonly"] appreciate-button');
   await expect(hero.locator('button')).toBeEnabled();
   await expect(mirror).toHaveAttribute('data-readonly', '');
   await expect(mirror.locator('button')).toHaveAttribute('data-readonly', '');
@@ -179,22 +179,22 @@ test("documents the button's events, and logs the demo's as they happen", async 
   await page.goto(`${API_ORIGIN}/`);
   const section = page.locator('#events');
   for (const name of ['ready', 'burst', 'change', 'maxed', 'error']) {
-    await expect(section.locator('tbody code', { hasText: `appreciator:${name}` })).toHaveCount(1);
+    await expect(section.locator('tbody code', { hasText: `appreciate:${name}` })).toHaveCount(1);
   }
   await expect(section.locator('[data-events-snippet]')).toContainText(
-    "document.addEventListener('appreciator:burst'",
+    "document.addEventListener('appreciate:burst'",
   );
 
   const log = section.locator('[data-event-log] li');
-  const hero = page.locator('[data-demo-slot="hero"] appreciator-button');
-  await expect(log.first()).toContainText('appreciator:ready');
+  const hero = page.locator('[data-demo-slot="hero"] appreciate-button');
+  await expect(log.first()).toContainText('appreciate:ready');
   await expect(hero.locator('button')).toBeEnabled();
 
   await hero.locator('button').click({ force: true });
   // Newest first: the server's confirmation, then the click itself.
-  await expect(log.nth(0)).toContainText('appreciator:change');
-  await expect(log.nth(1)).toContainText('appreciator:burst');
-  await expect(log.nth(2)).toContainText('appreciator:ready');
+  await expect(log.nth(0)).toContainText('appreciate:change');
+  await expect(log.nth(1)).toContainText('appreciate:burst');
+  await expect(log.nth(2)).toContainText('appreciate:ready');
 });
 
 test('offers a short prompt for coding agents that asks only for the key', async ({

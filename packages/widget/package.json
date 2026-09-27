@@ -1,7 +1,7 @@
 {
-  "name": "@appreciator/widget",
+  "name": "@appreciate-button/widget",
   "version": "0.0.0",
-  "description": "Embeddable <appreciator-button> web component for the appreciator API",
+  "description": "Embeddable <appreciate-button> web component for the Appreciate Button API",
   "license": "MIT",
   "type": "module",
   "main": "./dist/widget.mjs",
@@ -26,7 +26,7 @@
     "test:e2e": "playwright test"
   },
   "devDependencies": {
-    "@appreciator/shared": "*",
+    "@appreciate-button/shared": "*",
     "@playwright/test": "^1.52.0",
     "@types/node": "^24.9.2",
     "jsdom": "^26.1.0",
