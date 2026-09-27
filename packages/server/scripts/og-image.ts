@@ -47,7 +47,7 @@ const card = `<!doctype html>
     <div>
       <h1>Appreciator</h1>
       <p>Open-source clap, applause and like button for any website.</p>
-      <p class="url">appreciator.medhat.dev</p>
+      <p class="url">appreciate-button.com</p>
     </div>
   </body>
 </html>`;

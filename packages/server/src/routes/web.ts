@@ -17,9 +17,9 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const WEB_DIR = resolve(HERE, '..', 'web');
 
 /**
- * The landing page's files. They live at the repository root because the same
- * folder is deployed on its own to GitHub Pages, so under tsx they are four
- * levels up from here; a build copies them to `dist/site`, next to `dist/web`.
+ * The landing page's files. They live at the repository root, outside this
+ * package, so under tsx they are four levels up from here; a build copies them
+ * to `dist/site`, next to `dist/web`.
  */
 const SITE_DIR =
   [resolve(HERE, '..', 'site'), resolve(HERE, '..', '..', '..', '..', 'site')].find((dir) =>
@@ -112,8 +112,7 @@ interface FileParams {
 }
 
 /**
- * The file behind a clean URL, resolved the way GitHub Pages resolves it, so
- * the same relative links work on both: `guides/` is `guides/index.html`,
+ * The file behind a clean URL: `guides/` is `guides/index.html`,
  * `clap-button` is `clap-button.html`, and a path with an extension is that
  * file.
  */
@@ -173,9 +172,8 @@ async function sendFile(
  * with no auth: the dashboard's page is public and only its API calls need
  * the session.
  *
- * The landing page is written with relative links because it is also
- * deployed to GitHub Pages under a path prefix, so when it is served at `/`
- * its assets resolve to the root (`/site.css`, `/img/heart.svg`): the
+ * The landing page is written with relative links, so when it is served at
+ * `/` its assets resolve to the root (`/site.css`, `/img/heart.svg`): the
  * catch-all serves anything in `site/` from there. The same files are also
  * under `/site/` for the dashboard to share the stylesheet and images.
  */
@@ -190,8 +188,8 @@ export async function webRoutes(app: FastifyInstance): Promise<void> {
   /**
    * `no-store` because it changes with the environment (sign-in switched on,
    * a new demo key after a fresh database) and is too small to be worth
-   * caching. At both paths: the landing page fetches `./config.json` so the
-   * same file works on GitHub Pages, where the workflow writes one.
+   * caching. At both paths: the site's pages fetch the `config.json` beside
+   * their shared script, at the root, and the dashboard its own.
    */
   for (const path of ['/config.json', '/web/config.json']) {
     app.get(
@@ -224,8 +222,8 @@ export async function webRoutes(app: FastifyInstance): Promise<void> {
   );
   // Last resort for GET: every other route is matched first, and a path that
   // names no file in `site/` gets the same 404 as any unknown route. A folder
-  // of pages asked for without its slash is sent to it with one, as GitHub
-  // Pages does, so its relative links resolve inside it.
+  // of pages asked for without its slash is sent to it with one, so its
+  // relative links resolve inside it.
   app.get<{ Params: FileParams }>('/*', (request, reply) => {
     const requested = request.params['*'];
     if (

@@ -4,7 +4,7 @@ import { API_ORIGIN } from './constants.js';
 import { watchProblems } from './problems.js';
 
 /** Where the site says it lives: every canonical URL starts with it. */
-const SITE_ORIGIN = 'https://appreciator.medhat.dev';
+const SITE_ORIGIN = 'https://appreciate-button.com';
 
 /** Paths that are not pages for search results, and are not crawled. */
 const NOT_PAGES = /^\/(dashboard|auth\/|v1\/)/;

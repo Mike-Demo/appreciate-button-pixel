@@ -57,11 +57,10 @@ export interface WebConfig {
   leaderboardEnabled: boolean;
   /**
    * The icon and colours a button gets without its own, so the dashboard can
-   * preview it. Only the server's copy carries it: the dashboard is served by
-   * the server alone, and the GitHub Pages copy has no use for it.
+   * preview it. Only the dashboard reads it.
    */
   defaultIcon?: { svgSource: string; colors: ButtonColors };
-  /** The thank-you message a new button starts with. Server copy only, as above. */
+  /** The thank-you message a new button starts with. Only the dashboard reads it. */
   defaultThanksMessage?: string;
 }
 

@@ -3,6 +3,18 @@
 A running record of the significant changes to this repository, newest first.
 Each entry is written so it can seed a PR description.
 
+## 2026-09-27 — Move to appreciate-button.com, and drop GitHub Pages
+
+- The site's home is now `https://appreciate-button.com`: every canonical
+  URL, the sitemap, `robots.txt`, the link-preview image (re-rendered), the
+  structured data, the guides' snippets and the README point there instead
+  of appreciator.medhat.dev. Earlier entries below keep the old name, as it
+  was then.
+- The landing page is no longer deployed to GitHub Pages: the workflow is
+  removed, and so are its setup docs and the comments that explained code
+  by it. The relative links, clean URLs and `config.json` beside the pages'
+  script stay, since the server relies on them too.
+
 ## 2026-09-27 — Credit the author in every footer
 
 - "Built with ♥ by Medhat Dawoud", linking to https://medhat.dev, in the

@@ -3,8 +3,8 @@
  * the comparisons) from `site-pages/` into `site/`, all from one layout, and
  * writes `site/sitemap.xml` listing every page by its canonical URL.
  *
- * The output is committed: GitHub Pages publishes `site/` as it is, and the
- * dev server serves it straight from the repository. So:
+ * The output is committed: the server serves `site/` as it is, straight from
+ * the repository in development and copied into the build. So:
  *
  *   npm run site:pages              writes the pages
  *   npm run site:pages -- --check   fails if any of them is out of date
@@ -22,7 +22,7 @@
  * `site-pages/guides/index.html` at `/guides/`.
  *
  * In the fragment and the layout, `{{root}}` is the relative way back to the
- * site root, so links work under the GitHub Pages path prefix too, and
+ * site root, so every link is relative like the rest of the site's, and
  * `{{origin}}` is the site's canonical origin. Any other `_name.html` at the
  * top of `site-pages/` is a partial: `{{name}}` in a page is replaced by it.
  */
@@ -33,7 +33,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { format, resolveConfig } from 'prettier';
 
 /** Where the site lives, so what every canonical URL and the sitemap start with. */
-export const SITE_ORIGIN = 'https://appreciator.medhat.dev';
+export const SITE_ORIGIN = 'https://appreciate-button.com';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const SOURCE_DIR = join(REPO_ROOT, 'site-pages');

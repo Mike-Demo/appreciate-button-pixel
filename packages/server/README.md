@@ -501,11 +501,10 @@ page and dashboard read to boot:
 
 `demoKey` is the demo button's public key, or `null` with `DEMO_BUTTON=false`.
 `defaultIcon` is the built-in heart and its colours, which the dashboard
-draws in its colour table and "Try it" preview. The GitHub Pages copy of
-`config.json` leaves it out, since only the dashboard reads it.
+draws in its colour table and "Try it" preview.
 
-`GET /config.json` answers the same body: the landing page fetches
-`./config.json` so that one file works both here and on GitHub Pages.
+`GET /config.json` answers the same body: the site's pages fetch the
+`config.json` next to their shared script, at the site root.
 
 ## Web pages
 
@@ -522,12 +521,11 @@ dashboard page is public and only its API calls carry the session cookie.
 | `GET /web/<file>`  | anything under `src/web/`                                        |
 | `GET /<file>`      | anything under `site/`, and its pages by clean URL               |
 
-The last one exists because the landing page links its assets relatively (it
-is also deployed to GitHub Pages under a path prefix), so served at `/` they
-resolve to `/site.css` and `/img/heart.svg`. It resolves clean URLs the way
-GitHub Pages does, so the site's other pages work at the same addresses on
-both: `/clap-button` is `site/clap-button.html`, `/guides/` is
-`site/guides/index.html`, and `/guides` redirects to `/guides/` (301).
+The last one exists because the landing page links its assets relatively, so
+served at `/` they resolve to `/site.css` and `/img/heart.svg`. It also
+serves the site's pages at clean URLs: `/clap-button` is
+`site/clap-button.html`, `/guides/` is `site/guides/index.html`, and
+`/guides` redirects to `/guides/` (301).
 
 Only `.html`, `.css`, `.js`, `.svg`, `.png`, `.txt` (for `robots.txt`) and
 `.xml` (for the sitemap) files are served, paths are resolved

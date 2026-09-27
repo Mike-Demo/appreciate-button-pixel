@@ -1,8 +1,8 @@
 # Appreciator
 
 An open-source clap, applause and like button for any website, Medium-style:
-try it at **[appreciator.medhat.dev](https://appreciator.medhat.dev)**, with
-[guides for WordPress, Ghost, Hugo, Jekyll, Eleventy, Astro and Next.js](https://appreciator.medhat.dev/guides/).
+try it at **[appreciate-button.com](https://appreciate-button.com)**, with
+[guides for WordPress, Ghost, Hugo, Jekyll, Eleventy, Astro and Next.js](https://appreciate-button.com/guides/).
 
 A self-hostable "appreciate" button for any website, with a landing page, a
 GitHub-sign-in dashboard for creating buttons, and a public leaderboard of the
@@ -51,8 +51,7 @@ the person running an instance, or deploys their own in about ten minutes.
 - **Landing page, dashboard and leaderboard included.** The server serves a
   landing page with live demo buttons at `/`, a dashboard at `/dashboard`
   (sign in → name a site → create a button → paste the snippet) and a public
-  "Most appreciated" ranking at `/leaderboard`. The landing page can also be
-  hosted on GitHub Pages.
+  "Most appreciated" ranking at `/leaderboard`.
 - **A badge to show off.** Every site gets a small SVG badge with its total
   appreciations across all its buttons, like the build badges on GitHub
   READMEs, ready to paste into a README, a footer or a portfolio.
@@ -135,14 +134,12 @@ flowchart LR
     end
 
     GitHub["GitHub OAuth<br/>(read:user)"]
-    Pages["GitHub Pages<br/>(optional copy of the landing page)"]
 
     Page -- "GET /widget.js" --> Proxy
     Widget -- "GET /config, /state · POST /click<br/>(public key, CORS)" --> Proxy
     Landing -- "GET /config.json, /v1/leaderboard" --> Proxy
     Dash -- "/auth/*, /v1/sites/**" --> Proxy
     Server -- "code exchange" --> GitHub
-    Pages -. "demo button, leaderboard<br/>(cross-origin, allowlisted)" .-> Proxy
 ```
 
 ### Components
@@ -151,7 +148,7 @@ flowchart LR
 | ------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | API server    | `packages/server`         | Fastify + TypeScript. Public button routes, bearer-key management API, GitHub sign-in, sites API, dashboard mirror routes, leaderboard, serves the pages and the widget, runs migrations. |
 | Widget        | `packages/widget`         | The `<appreciator-button>` web component, ~10 KB minified; IIFE for `<script>` tags, ES module for bundlers.                                                                              |
-| Landing pages | `site/`                   | Static landing and leaderboard pages. Served by the API at `/` and deployable to GitHub Pages unchanged.                                                                                  |
+| Landing pages | `site/`                   | Static landing, leaderboard, guide and comparison pages, served by the API at `/`.                                                                                                        |
 | Dashboard     | `packages/server/src/web` | Static HTML + vanilla JS, served at `/dashboard`, same origin as the API (its session cookie is first-party there).                                                                       |
 | svg-gen       | `packages/svg-gen`        | CLI that prepares icons: one SVG → recolourable form + colours, or four SVGs → a ready-to-post `svgSources.json`.                                                                         |
 | shared        | `packages/shared`         | TypeScript types for every request and response.                                                                                                                                          |
@@ -162,7 +159,7 @@ flowchart LR
 
 ```
 appreciator/
-├── site/                      landing page + leaderboard (static, relative paths; also GitHub Pages)
+├── site/                      landing page, leaderboard, guides (static, relative paths)
 ├── packages/
 │   ├── server/                API, migrations, sign-in, sites, dashboard files (src/web), widget serving
 │   ├── widget/                <appreciator-button> and the Playwright e2e suite for the whole system
@@ -173,7 +170,7 @@ appreciator/
 │   └── plain-html/            a page using the one-tag embed; the e2e fixture
 ├── Dockerfile                 production image
 ├── docker-compose.yml         MySQL for local development and tests
-└── .github/workflows/         ci.yml (tests) · pages.yml (landing page to GitHub Pages)
+└── .github/workflows/         ci.yml (tests and deploy)
 ```
 
 ## How a click works
@@ -367,7 +364,7 @@ erDiagram
 
    # optional
    MANAGEMENT_SECRET=<openssl rand -hex 32>   # bearer key for scripts and curl
-   DEMO_ALLOWED_ORIGINS=https://appreciator.example.com,https://<user>.github.io
+   DEMO_ALLOWED_ORIGINS=https://appreciator.example.com
    ```
 
    `TRUST_PROXY=true` is required behind Coolify's proxy: visitor identity
@@ -431,20 +428,6 @@ export DATABASE_URL=… PUBLIC_BASE_URL=… TRUST_PROXY=true VISITOR_HASH_SECRET
 node packages/server/dist/db/migrate.js
 node packages/server/dist/server.js     # under systemd or pm2
 ```
-
-### The landing page on GitHub Pages (optional)
-
-The same `site/` folder can be published at
-`https://<user>.github.io/appreciator/` with the demo button and leaderboard
-pointing at your instance:
-
-1. Repo → Settings → Pages → Source: **GitHub Actions**.
-2. Repo → Settings → Secrets and variables → Actions → **Variables**:
-   `SITE_API_URL` = `https://appreciator.example.com`,
-   `SITE_DEMO_KEY` = the demo key from `https://appreciator.example.com/config.json`.
-3. On the instance, add `https://<user>.github.io` to `DEMO_ALLOWED_ORIGINS`.
-4. Push to `main` (or run the "Landing page" workflow). Pages on a private
-   repository needs a paid GitHub plan; public repositories are free.
 
 ### After deploying
 
@@ -750,7 +733,7 @@ dashboard, authenticated by the session cookie instead of a bearer key.
 | `SESSION_SECRET`                      | for sign-in | —                                             | HMAC key for session cookies, ≥32 chars.                                                                      |
 | `MANAGEMENT_SECRET`                   | no          | —                                             | Bearer key for scripts; a tenant named `default` is provisioned for it on start.                              |
 | `DEMO_BUTTON`                         | no          | `true`                                        | Provision the landing page's demo button.                                                                     |
-| `DEMO_ALLOWED_ORIGINS`                | no          | origin of `PUBLIC_BASE_URL`                   | Origins that may embed the demo button (add your GitHub Pages origin).                                        |
+| `DEMO_ALLOWED_ORIGINS`                | no          | origin of `PUBLIC_BASE_URL`                   | Origins that may embed the demo button.                                                                       |
 | `LEADERBOARD`                         | no          | `true`                                        | Serve `/v1/leaderboard` (makes site names and totals public).                                                 |
 | `REPO_URL`                            | no          | `https://github.com/medhatdawoud/appreciator` | Repository linked from the pages.                                                                             |
 | `DEFAULT_MAX_CLICKS`                  | no          | `10`                                          | Cap for buttons created without `maxClicks`.                                                                  |

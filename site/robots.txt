@@ -5,4 +5,4 @@ Disallow: /dashboard
 Disallow: /auth/
 Disallow: /v1/
 
-Sitemap: https://appreciator.medhat.dev/sitemap.xml
+Sitemap: https://appreciate-button.com/sitemap.xml

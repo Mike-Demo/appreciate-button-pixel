@@ -110,7 +110,7 @@ describe('web pages', () => {
     expect(response.body.length).toBeGreaterThan(0);
   });
 
-  it('serves a page by its clean URL, without .html, as GitHub Pages does', async () => {
+  it('serves a page by its clean URL, without .html', async () => {
     const { app } = await context();
 
     const clean = await get(app, '/index');
@@ -133,7 +133,7 @@ describe('web pages', () => {
       expect(response.headers['cache-control']).toBe('no-store');
       expectSecurityHeaders(response.headers);
       expect(response.body).toContain(
-        `<link rel="canonical" href="https://appreciator.medhat.dev${url}" />`,
+        `<link rel="canonical" href="https://appreciate-button.com${url}" />`,
       );
       expectNoInlineCode(response.body);
     },

@@ -1,7 +1,6 @@
 /**
  * Public leaderboard: sites on the instance ranked by total appreciation.
- * Reads `./config.json` for the API base, so it works both when served by
- * the instance and on GitHub Pages.
+ * Reads `./config.json` for the API base.
  */
 (() => {
   function trimSlash(url) {
