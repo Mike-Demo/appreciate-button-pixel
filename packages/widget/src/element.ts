@@ -2,6 +2,7 @@ import type { ButtonPublicConfig, ButtonState, ClickCounts } from '@appreciate-b
 
 import { ApiClient, ApiError } from './api.js';
 import { clipInsetTop, drawingBounds, type DrawingBounds } from './fill.js';
+import { pixelClipInsetTop, pixelHeartSvg } from './pixel.js';
 import { parseSafeSvg } from './sanitize-svg.js';
 import { canClick, fillPercent, optimisticClick, progressPercent, visualState } from './state.js';
 import { onNavigate } from './navigation.js';
@@ -225,6 +226,17 @@ svg[data-layer="fill"] {
   --appr-fill: var(--appreciate-clicked, var(--_c-clicked));
   --appr-stroke: var(--appreciate-clicked, var(--_c-clicked));
 }
+/* Pixel mode (`data-pixel`): the fill layer's pixels take the rainbow flag's
+   stripes, row by row, instead of the button's fill colour; the base layer
+   keeps the standard gray silhouette. The fill clip snaps to whole pixel
+   rows (see pixel.ts), so stripes pop in discretely rather than wiping. */
+:host([data-pixel]) svg[data-layer="fill"] { transition: none; }
+:host([data-pixel]) svg[data-layer="fill"] rect.px[data-row="0"] { fill: #E40303 !important; }
+:host([data-pixel]) svg[data-layer="fill"] rect.px[data-row="1"] { fill: #FF8C00 !important; }
+:host([data-pixel]) svg[data-layer="fill"] rect.px[data-row="2"] { fill: #FFED00 !important; }
+:host([data-pixel]) svg[data-layer="fill"] rect.px[data-row="3"] { fill: #008026 !important; }
+:host([data-pixel]) svg[data-layer="fill"] rect.px[data-row="4"] { fill: #24408E !important; }
+:host([data-pixel]) svg[data-layer="fill"] rect.px[data-row="5"] { fill: #732982 !important; }
 :host([data-icons="states"]) [part="icon"] > svg { display: none; }
 :host([data-icons="single"]:not([data-own-colors])) svg[data-layer] :not(${PAINT_EXEMPT}),
 :host([data-icons="single"]:not([data-own-colors])) [part="burst"] svg :not(${PAINT_EXEMPT}) {
@@ -423,7 +435,7 @@ export interface ErrorDetail {
  * (detail: ErrorDetail). All events bubble and cross the shadow boundary.
  */
 export class AppreciateButton extends HTMLElement {
-  static readonly observedAttributes = ['data-api', 'data-key', 'data-item', 'data-readonly'];
+  static readonly observedAttributes = ['data-api', 'data-key', 'data-item', 'data-readonly', 'data-pixel'];
 
   private readonly button: HTMLButtonElement;
   private readonly icon: HTMLSpanElement;
@@ -707,7 +719,8 @@ export class AppreciateButton extends HTMLElement {
   private applyConfig(config: ButtonPublicConfig): boolean {
     const signature = JSON.stringify(config);
     if (signature === this.painted) return true;
-    const icons = parseIcons(config);
+    const pixel = this.hasAttribute('data-pixel');
+    const icons = parseIcons(config, pixel);
     if (icons === null) return false;
 
     this.icon.replaceChildren(...icons);
@@ -927,8 +940,9 @@ export class AppreciateButton extends HTMLElement {
     this.style.setProperty('--appr-progress', `${fill}%`);
     const fillLayer = this.icon.querySelector<SVGSVGElement>('svg[data-layer="fill"]');
     if (fillLayer !== null) {
-      this.bounds ??= measureDrawing(fillLayer);
-      fillLayer.style.setProperty('clip-path', `inset(${clipInsetTop(fill, this.bounds)}% 0 0 0)`);
+      const pixel = this.hasAttribute('data-pixel');
+      const insetTop = pixel ? pixelClipInsetTop(fill) : clipInsetTop(fill, (this.bounds ??= measureDrawing(fillLayer)));
+      fillLayer.style.setProperty('clip-path', `inset(${insetTop}% 0 0 0)`);
     }
 
     const total = counts?.totalCount ?? 0;
@@ -1037,7 +1051,17 @@ export class AppreciateButton extends HTMLElement {
  * tagged with `data-for` when the config carries `svgSources`. Null if any of
  * them fails to parse, so a button never renders with parts missing.
  */
-function parseIcons(config: ButtonPublicConfig): Element[] | null {
+function parseIcons(config: ButtonPublicConfig, pixel: boolean): Element[] | null {
+  if (pixel) {
+    // The pixel heart is drawn twice, stacked, like any other icon: the
+    // styles paint the base layer gray and the fill layer rainbow.
+    const base = parseSafeSvg(pixelHeartSvg());
+    const fill = parseSafeSvg(pixelHeartSvg());
+    if (base === null || fill === null) return null;
+    base.setAttribute('data-layer', 'base');
+    fill.setAttribute('data-layer', 'fill');
+    return [base, fill];
+  }
   const { svgSources } = config;
   if (svgSources === undefined) {
     // Parsed twice rather than cloned: a clone copies `style` attributes as
