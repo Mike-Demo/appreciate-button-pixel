@@ -1,4 +1,6 @@
-# Appreciate Button
+# Appreciate Button — pixel fork
+
+> A pixel-art fork of [medhatdawoud/appreciate-button](https://github.com/medhatdawoud/appreciate-button) (MIT). Adds a `data-pixel` widget mode that draws a rainbow pixel heart. Everything below is the upstream documentation.
 
 An open-source clap, applause and like button for any website, Medium-style:
 try it at **[appreciate-button.com](https://appreciate-button.com)**, with
@@ -536,11 +538,26 @@ the same tag:
 | `data-readonly` | off                              | Show the count and fill without taking clicks, e.g. in a list of posts.             |
 | `data-sound`    | on                               | `off` silences the click sounds on this page.                                       |
 | `data-api`      | where the bundle was loaded from | Only needed when serving the bundle from somewhere other than your instance.        |
+| `data-pixel`    | off                              | Draw the rainbow pixel heart instead of the configured icon.                        |
 
 Without `data-item`, a button counts the page it is on, and follows a
 single-page app's router: when the address changes to another page without a
 page load, the button reloads that page's count, even when it sits in a
 layout the router keeps.
+
+### Pixel version
+
+This fork adds a pixel-art mode. Add `data-pixel` to the embed tag (or to an
+`<appreciate-button>` element) and the widget draws a rainbow pixel heart
+instead of the configured SVG icon:
+
+```html
+<script src="https://appreciate-button.example.com/widget.js" data-key="pk_..." data-pixel async></script>
+```
+
+The heart fills bottom-up in whole pixel rows, stripe by stripe in rainbow
+flag order, as the visitor spends their allowance. Everything else — counts,
+allowance, sounds, burst, events, theming — works exactly as usual.
 
 ### Several buttons on one page
 
