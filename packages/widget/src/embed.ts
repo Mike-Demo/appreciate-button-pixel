@@ -21,11 +21,12 @@ import { AppreciateButton } from './element.js';
  * | `data-readonly` | Show the count without taking clicks.                              |
  * | `data-sound`  | `off` silences the click sounds on this page.                        |
  * | `data-target` | CSS selector of the element to render into. Defaults to after the tag. |
+ * | `data-pixel`  | Draw the rainbow pixel heart instead of the configured icon. |
  * | `data-api`    | Server base URL. Defaults to where the bundle was loaded from.       |
  */
 
 /** The `data-*` attributes copied from the script tag onto the element. */
-const PASSTHROUGH = ['api', 'key', 'item', 'label', 'count', 'readonly', 'sound'] as const;
+const PASSTHROUGH = ['api', 'key', 'item', 'label', 'count', 'readonly', 'sound', 'pixel'] as const;
 
 /**
  * Derives the API base URL from the bundle's own URL: the origin plus any path
